@@ -13,7 +13,7 @@ image_alt: Bedsure GentleSoft Sherpa Fleece Throw
 image_rights_confirmed: true
 reviewed_at: 2026-11-20
 featured: false
-status: approved
+status: draft
 published: true
 ---
 LEGACY RESEARCH LINK (not verified): [https://www.amazon.com/dp/B0158EQJSY](https://www.amazon.com/dp/B0158EQJSY)
