@@ -7,7 +7,7 @@ summary: A reversible, non-heated polyester sherpa-and-fleece throw to compare
 best_for: Cozy sofas, reading corners
 considerations: Verify Amazon listing specifications and photo rights before approving.
 affiliate_url: https://amzn.to/4AKrkah
-link_verified: false
+link_verified: true
 image: /uploads/91-vcvxpxelacsl1500.avif
 image_alt: BedsureGentleSoftSherpaFleeceThrow
 image_rights_confirmed: true
