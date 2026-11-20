@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { validAffiliateLink, publishableProduct } from '../src/lib/affiliate-rules.js';
+const base={status:'approved',published:true,link_verified:true,affiliate_url:'https://www.amazon.com/dp/B0158EQJSY?tag=testaccount-20',image_rights_confirmed:false};
+test('Amazon direct tagged product is allowed',()=>assert.equal(validAffiliateLink(base.affiliate_url),true));
+test('manually verified short links can be used',()=>assert.equal(validAffiliateLink('https://amzn.to/4ABCxyz'),true));
+test('untagged Amazon link is blocked',()=>assert.equal(validAffiliateLink('https://www.amazon.com/dp/B0158EQJSY'),false));
+test('malicious/lookalike hosts are blocked',()=>{for(const url of ['http://www.amazon.com/dp/B0158EQJSY?tag=x-20','https://amazon.com.evil.test/dp/B0158EQJSY?tag=x-20','https://evil.test/','javascript:alert(1)','https://www.amazon.com@bad.test/dp/B0158EQJSY?tag=x-20'])assert.equal(validAffiliateLink(url),false,url)});
+test('draft, hidden, unreviewed products remain private',()=>{for(const change of [{status:'draft'},{status:'hidden'},{published:false},{link_verified:false}])assert.equal(publishableProduct({...base,...change}),false)});
+test('published product with no image is okay',()=>assert.equal(publishableProduct(base),true));
+test('unlicensed image blocks public release',()=>assert.equal(publishableProduct({...base,image:'/uploads/product.png'}),false));
+test('image with confirmed rights is allowed',()=>assert.equal(publishableProduct({...base,image:'/uploads/product.png',image_rights_confirmed:true}),true));
+test('unsafe image path blocks public release',()=>assert.equal(publishableProduct({...base,image:'/uploads/../../etc/secret.png',image_rights_confirmed:true}),false));

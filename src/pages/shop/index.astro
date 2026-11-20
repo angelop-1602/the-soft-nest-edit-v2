@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getPublishedProducts } from '../../lib/catalog';
+import { categories } from '../../data/categories';
+const products=await getPublishedProducts();
+---
+<Base title="Shop the Edit | Curated Home Decor Finds | The Soft Nest Edit" description="Explore original home decor recommendations for bedrooms, living rooms and small spaces. Compare our notes, then view verified Amazon listings.">
+  <section class="page-hero"><div class="shell"><span class="eyebrow">THE SOFT NEST EDIT / SHOP</span><h1>Find your next<br/><em>favorite detail.</em></h1><p>Handpicked decor ideas to help your space feel warmer, calmer, and uniquely you. Every published recommendation is reviewed by our editors.</p></div></section>
+  <section class="section shell">
+    <p class="affiliate-note"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. We may receive a commission from qualifying purchases through the links here, at no additional cost to you. Check current prices and availability on Amazon.</p>
+    <div class="filter-bar"><div class="filter-controls"><label class="field">Find something lovely<input data-search type="search" placeholder="Search our finds..." autocomplete="off"/></label><label class="field">Room or category<select data-category-filter><option value="all">All collections</option>{categories.map(c=><option value={c.name}>{c.name}</option>)}</select></label></div><span class="count" data-filter-count>{products.length} finds</span></div>
+    {products.length ? <div class="product-grid" data-product-search-list>{products.map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>The edit is coming together.</h3><p>We're reviewing links and licensing before publishing our first finds. Explore our styling guides in the meantime.</p><a class="button secondary" href="/journal/">Read the Journal ↗</a></div>}
+    <div class="empty-state" data-no-matches hidden><h3>Nothing quite like that yet.</h3><p>Try another search or a different room.</p></div>
+    <div class="note-panel"><strong>How we choose:</strong> We prioritize usefulness, fit for real homes, and clear specifications. Our recommendations are editorial selections, not claims of firsthand testing or Amazon customer review scores. Purchases are completed on Amazon, not on this website.</div>
+  </section>
+</Base>

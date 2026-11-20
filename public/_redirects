@@ -1,0 +1,8 @@
+/blog /journal/ 301
+/blog/ /journal/ 301
+/shop/category/lighting-lamps/ /shop/category/bedroom/ 301
+/shop/category/decorative-furniture/ /shop/category/living-room/ 301
+/shop/category/rugs-carpets/ /shop/category/living-room/ 301
+/shop/cart-preview/ /shop/ 302
+/shop/catalog-preview/ /shop/ 302
+/shop/checkout-test/ /shop/ 302

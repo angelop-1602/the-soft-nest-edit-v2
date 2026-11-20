@@ -1,0 +1,16 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { categories } from '../../../data/categories';
+import { getPublishedProducts } from '../../../lib/catalog';
+export async function getStaticPaths(){return categories.map(cat=>({params:{slug:cat.slug},props:{cat}}));}
+const {cat}=Astro.props;
+const products=(await getPublishedProducts()).filter(p=>p.data.category===cat.name);
+---
+<Base title={`${cat.name} Decor Finds | The Soft Nest Edit`} description={`Original ${cat.name.toLowerCase()} home decor recommendations and buying notes. Browse curated picks and confirm all details on Amazon.`} noindex={products.length===0}>
+  <section class="page-hero"><div class="shell"><span class="eyebrow">SHOP / {cat.name}</span><h1>{cat.name} <em>finds.</em></h1><p>{cat.subtitle}. Thoughtful recommendations for spaces worth coming home to.</p></div></section>
+  <section class="section shell"><div class="affiliate-note">As an Amazon Associate I earn from qualifying purchases. Prices and availability are shown on Amazon.</div>
+  <div class="shop-category-links"><a href="/shop/">All finds ↗</a>{categories.filter(c=>c.slug!==cat.slug).map(c=><a href={`/shop/category/${c.slug}/`}>{c.name}</a>)}</div>
+  {products.length ? <div class="product-grid">{products.map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol">✳</div><h3>We're still curating this space.</h3><p>Read room-specific styling advice until we publish verified recommendations here.</p><a class="button secondary" href={`/category/${cat.slug}/`}>Read styling ideas ↗</a></div>}
+  </section>
+</Base>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /shop/saved/
+Sitemap: https://thesoftnestedit.online/sitemap.xml

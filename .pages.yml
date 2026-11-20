@@ -1,0 +1,176 @@
+# Content is stored in GitHub. Pages CMS accesses it using the GitHub App.
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  categories: [image]
+content:
+  - name: posts
+    label: Journal articles
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, date, category, published]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Published date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: updated
+        label: Last substantive update (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: description
+        label: Meta description
+        type: text
+        required: true
+      - name: category
+        label: Room / category
+        type: select
+        required: true
+        options:
+          values: [Living Room, Bedroom, Small Spaces, Home Organization, Lifestyle]
+      - name: image
+        label: Featured image (must have rights)
+        type: image
+      - name: image_alt
+        label: Image description
+        type: string
+      - name: featured
+        label: Featured article
+        type: boolean
+      - name: published
+        label: Publish article
+        type: boolean
+      - name: related_products
+        label: Related affiliate products
+        type: reference
+        options:
+          collection: products
+          multiple: true
+          max: 8
+          search: "title,category"
+          value: "{path}"
+          label: "{primary}"
+      - name: body
+        label: Article body
+        type: rich-text
+        required: true
+  - name: products
+    label: Amazon affiliate products
+    type: collection
+    path: src/content/products
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, category, status, published, link_verified]
+    fields:
+      - name: title
+        label: Product title
+        type: string
+        required: true
+      - name: category
+        label: Room / category
+        type: select
+        required: true
+        options:
+          values: [Living Room, Bedroom, Small Spaces, Home Organization, Lifestyle]
+      - name: retailer
+        label: Retailer
+        type: string
+        default: Amazon US
+      - name: summary
+        label: Original editorial summary
+        type: text
+        required: true
+      - name: best_for
+        label: Best suited for
+        type: text
+      - name: highlights
+        label: Original highlights
+        type: string
+        list: true
+      - name: considerations
+        label: What to check before buying
+        type: text
+      - name: affiliate_url
+        label: Approved Amazon Associates Special Link
+        type: string
+        description: Use a SiteStripe amzn.to link or full Amazon.com product URL with your tag; no ordinary product links
+      - name: link_verified
+        label: I personally verified the live Special Link and tracking
+        type: boolean
+        default: false
+      - name: image
+        label: Approved uploaded image (optional)
+        type: image
+        description: Use only images you own or are licensed to show; Amazon product images have specific program restrictions
+      - name: image_alt
+        label: Image description
+        type: string
+      - name: image_rights_confirmed
+        label: I have rights to display this image
+        type: boolean
+        default: false
+      - name: reviewed_at
+        label: Editorial review date (optional)
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: featured
+        label: Feature in first collection
+        type: boolean
+      - name: status
+        label: Editorial approval state
+        type: select
+        required: true
+        options:
+          values: [draft, approved, hidden]
+      - name: published
+        label: Publish to the website
+        type: boolean
+        default: false
+      - name: body
+        label: Editorial research notes (publicly rendered only on article page? No; internal only)
+        type: rich-text
+  - name: site
+    label: Website settings
+    type: file
+    path: src/data/site.json
+    fields:
+      - name: name
+        label: Brand name
+        type: string
+      - name: url
+        label: Canonical site URL
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: description
+        label: Site SEO description
+        type: text
+      - name: pinterestUrl
+        label: Pinterest profile URL
+        type: string
+      - name: contactEmail
+        label: Public business email (optional)
+        type: string
+      - name: webAnalyticsToken
+        label: Cloudflare Web Analytics token (optional)
+        type: string

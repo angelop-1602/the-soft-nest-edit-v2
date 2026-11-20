@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedProducts } from '../../lib/catalog';
+const products=(await getPublishedProducts()).map(p=>({id:p.id,title:p.data.title,summary:p.data.summary,category:p.data.category,url:`/shop/${p.id}/`,image:p.data.image&&p.data.image_rights_confirmed?p.data.image:null}));
+const safeJson=JSON.stringify(products).replace(/</g,'\\u003c');
+---
+<Base title="Your Saved Finds | The Soft Nest Edit" description="Your personally saved home decor recommendations." noindex>
+  <section class="page-hero"><div class="shell"><span class="eyebrow">YOUR LITTLE COLLECTION</span><h1>Saved <em>finds.</em></h1><p>Keep favorite recommendations close while you plan your next styling update. Saved finds stay in this browser.</p></div></section>
+  <section class="section shell"><p class="count" id="saved-message">Loading your saved finds...</p><div class="product-grid" id="saved-grid"></div><div class="empty-state" id="saved-empty" hidden><div class="symbol" aria-hidden="true">✳</div><h3>Nothing saved yet.</h3><p>Save your favorite products from the Shop to find them again here.</p><a class="button secondary" href="/shop/">Browse the edit ↗</a></div></section>
+  <script id="saved-data" type="application/json" set:html={safeJson} />
+  <script>
+    const dataEl=document.getElementById('saved-data');
+    const grid=document.getElementById('saved-grid');
+    const empty=document.getElementById('saved-empty');
+    const message=document.getElementById('saved-message');
+    const products:{id:string;title:string;summary:string;category:string;url:string;image:string|null}[] = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+    const valid=new Map(products.map(p=>[p.id,p]));
+    function renderSaved(){
+      let ids:string[]=[];try{const parsed=JSON.parse(localStorage.getItem('softnest-affiliate-saved-v2')||'[]');ids=Array.isArray(parsed)?parsed.filter(x=>typeof x==='string'&&valid.has(x)):[];}catch{}
+      grid?.replaceChildren();
+      for(const id of [...new Set(ids)]){
+        const p=valid.get(id);if(!p||!grid)continue;
+        const card=document.createElement('article');card.className='product-card';
+        const imageLink=document.createElement('a');imageLink.className='product-visual';imageLink.href=p.url;
+        if(p.image){const image=document.createElement('img');image.src=p.image;image.alt=p.title;image.loading='lazy';imageLink.append(image)}
+        else {const placeholder=document.createElement('div');placeholder.className='product-placeholder';const sym=document.createElement('span');sym.textContent='✳';placeholder.append(sym);imageLink.append(placeholder)}
+        const copy=document.createElement('div');copy.className='product-copy';
+        const label=document.createElement('span');label.className='eyebrow';label.textContent=p.category;
+        const h=document.createElement('h3');const l=document.createElement('a');l.href=p.url;l.textContent=p.title;h.append(l);
+        const summary=document.createElement('p');summary.textContent=p.summary;
+        const actions=document.createElement('div');actions.className='product-actions';
+        const detail=document.createElement('a');detail.className='text-link';detail.href=p.url;detail.textContent='View details ↗';
+        const save=document.createElement('button');save.type='button';save.className='save-button';save.dataset.save=id;save.textContent='♥ Saved';save.setAttribute('aria-pressed','true');
+        actions.append(detail,save);copy.append(label,h,summary,actions);card.append(imageLink,copy);grid.append(card);
+      }
+      if(empty)empty.hidden=ids.length>0;if(message)message.textContent=`${ids.length} saved ${ids.length===1?'find':'finds'}`;
+    }
+    document.addEventListener('softnest:saved',renderSaved);renderSaved();
+  </script>
+</Base>

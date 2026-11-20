@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import { categories } from '../../data/categories';
+import { getPublishedPosts } from '../../lib/catalog';
+export async function getStaticPaths(){return categories.map(cat=>({params:{slug:cat.slug},props:{cat}}));}
+const {cat}=Astro.props;
+const posts=(await getPublishedPosts()).filter(p=>p.data.category===cat.name);
+---
+<Base title={`${cat.name} Styling Ideas | The Soft Nest Edit`} description={`Explore original ${cat.name.toLowerCase()} styling ideas and approachable guides from The Soft Nest Edit.`} noindex={posts.length===0}>
+  <section class="page-hero"><div class="shell"><span class="eyebrow">THE JOURNAL / {cat.name}</span><h1>{cat.name} <em>inspiration.</em></h1><p>{cat.subtitle}. Thoughtful ideas for a more inviting space.</p></div></section><section class="section shell"><div class="shop-category-links"><a href="/journal/">All stories</a>{categories.filter(c=>c.slug!==cat.slug).map(c=><a href={`/category/${c.slug}/`}>{c.name}</a>)}</div>{posts.length ? <div class="journal-grid">{posts.map(post=><JournalCard post={post}/>)}</div> : <div class="empty-state"><h3>We're writing this chapter.</h3><p>Browse all our home styling guides while new articles are in preparation.</p><a href="/journal/" class="button secondary">View the Journal ↗</a></div>}</section>
+</Base>

@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { product: CollectionEntry<'products'>; compact?: boolean }
+const {product, compact=false}=Astro.props;
+const p=product.data;
+const displayImage=!!p.image && p.image_rights_confirmed;
+---
+<article class:list={['product-card',{compact}]} data-searchable={`${p.title} ${p.category} ${p.summary}`.toLowerCase()} data-category={p.category}>
+  <a class="product-visual" href={`/shop/${product.id}/`} aria-label={`Read about ${p.title}`}>
+    {displayImage ? <img src={p.image} alt={p.image_alt || p.title} loading="lazy" width="600" height="690" /> : <span class="product-placeholder"><span aria-hidden="true">✳</span><small>THE SOFT NEST EDIT</small></span>}
+    {p.featured && <span class="product-ribbon">Editor's pick</span>}
+    <span class="product-arrow" aria-hidden="true">↗</span>
+  </a>
+  <div class="product-copy"><span class="eyebrow">{p.category} · Curated find</span><h3><a href={`/shop/${product.id}/`}>{p.title}</a></h3><p>{p.summary}</p>
+    <div class="product-actions"><a class="text-link" href={p.affiliate_url} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate-click={product.id}>View on Amazon ↗</a><button type="button" class="save-button" data-save={product.id} aria-label={`Save ${p.title}`} aria-pressed="false">♡ Save</button></div>
+  </div>
+</article>

@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+import { asAbsolute } from '../lib/escapes';
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  kind?: 'article' | 'website';
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+const { title = site.name, description = site.description, image, noindex = false, kind = 'website', schema } = Astro.props;
+const pageUrl = new URL(Astro.url.pathname, site.url).href;
+const ogImage = image ? asAbsolute(image, site.url) : `${site.url}/assets/social-preview.svg`;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f4ef" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={kind} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="The Journal RSS" href="/rss.xml" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
+    {site.webAnalyticsToken && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: site.webAnalyticsToken })}></script>}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="topline">Considered finds, cozy spaces &amp; everyday inspiration <span aria-hidden="true">✳</span></div>
+    <header class="site-header" id="site-header">
+      <div class="shell nav-wrap">
+        <a class="logo" href="/" aria-label="The Soft Nest Edit home"><span class="logo-mark">✳</span><span>THE SOFT NEST <small>EDIT</small></span></a>
+        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <a class:list={[{'active':path==='/'}, 'nav-link']} href="/">Home</a>
+          <a class:list={[{'active':path.startsWith('/shop/') && path !== '/shop/saved/'},'nav-link']} href="/shop/">Shop the Edit</a>
+          <a class:list={[{'active':path.startsWith('/journal/') || path.startsWith('/category/')},'nav-link']} href="/journal/">The Journal</a>
+          <a class:list={[{'active':path==='/about/'},'nav-link']} href="/about/">Our Story</a>
+          <a class="saved-nav" href="/shop/saved/">Saved <span id="saved-count" aria-live="polite">0</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="footer">
+      <div class="shell footer-layout">
+        <div class="footer-brand"><span class="footer-icon" aria-hidden="true">✳</span><h2>The Soft Nest Edit<span>.</span></h2><p>More comfort. More meaning.<br/>A little beauty in the everyday.</p></div>
+        <div><h3>Discover</h3><a href="/shop/">Shop the Edit</a><a href="/journal/">The Journal</a><a href="/about/">Our Story</a><a href="/shop/saved/">Your Saved Finds</a></div>
+        <div><h3>Good to know</h3><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/privacy/">Privacy Policy</a><a href="/contact/">Contact</a><a href="/admin/" rel="nofollow">Editor access</a></div>
+        <div class="footer-social"><h3>Follow along</h3><p>Fresh styling ideas and inspiring spaces, saved one pin at a time.</p><a href={site.pinterestUrl} target="_blank" rel="noopener noreferrer">Find us on Pinterest ↗</a></div>
+      </div>
+      <div class="shell footer-bottom"><span>© {new Date().getFullYear()} The Soft Nest Edit</span><span>As an Amazon Associate I earn from qualifying purchases.</span></div>
+    </footer>
+    <script>
+      const nav = document.getElementById('site-nav');
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const header = document.getElementById('site-header');
+      function closeMenu(){ nav?.classList.remove('open'); toggle?.setAttribute('aria-expanded', 'false'); }
+      toggle?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(!!open));
+      });
+      document.addEventListener('keydown', event => { if(event.key === 'Escape') closeMenu(); });
+      nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+      const storageKey='softnest-affiliate-saved-v2';
+      const safeSlug=/^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+      function saved() : string[] {
+        try { const value=JSON.parse(localStorage.getItem(storageKey)||'[]'); return Array.isArray(value) ? [...new Set(value.filter(v=>typeof v==='string' && safeSlug.test(v)))].slice(0,100) as string[] : []; } catch {return [];}
+      }
+      function updateSaves(){
+        const ids=new Set(saved());
+        const count=document.getElementById('saved-count');if(count)count.textContent=String(ids.size);
+        document.querySelectorAll<HTMLButtonElement>('[data-save]').forEach(button=>{
+          const active=ids.has(button.dataset.save||'');
+          button.setAttribute('aria-pressed',String(active));
+          button.textContent=active?'♥ Saved':'♡ Save';
+        });
+        document.dispatchEvent(new CustomEvent('softnest:saved'));
+      }
+      document.addEventListener('click',event=>{
+        const button=(event.target as Element)?.closest<HTMLButtonElement>('[data-save]');
+        if(!button)return;
+        const id=button.dataset.save||'';if(!safeSlug.test(id))return;
+        const ids=saved();const i=ids.indexOf(id);if(i>=0)ids.splice(i,1);else ids.push(id);
+        try{localStorage.setItem(storageKey,JSON.stringify(ids));}catch{}
+        updateSaves();
+      });
+      document.querySelectorAll<HTMLElement>('[data-product-search-list]').forEach(container=>{
+        const form=document.querySelector<HTMLInputElement>('[data-search]');
+        const select=document.querySelector<HTMLSelectElement>('[data-category-filter]');
+        const count=document.querySelector<HTMLElement>('[data-filter-count]');
+        const cards=[...container.querySelectorAll<HTMLElement>('[data-searchable]')];
+        function filter(){
+          let visible=0;
+          const q=(form?.value||'').trim().toLowerCase();const cat=select?.value||'all';
+          for(const card of cards){const ok=(!q||(card.dataset.searchable||'').includes(q))&&(cat==='all'||card.dataset.category===cat);card.hidden=!ok;if(ok)visible++}
+          if(count)count.textContent=`${visible} ${visible===1?'find':'finds'}`;
+          const empty=document.querySelector<HTMLElement>('[data-no-matches]');if(empty)empty.hidden=visible!==0;
+        }
+        form?.addEventListener('input',filter);select?.addEventListener('change',filter);filter();
+      });
+      document.querySelectorAll<HTMLAnchorElement>('[data-affiliate-click]').forEach(link=>{
+        link.addEventListener('click',()=>{
+          const details={event_category:'affiliate',product_id:link.dataset.affiliateClick||'', outbound:true};
+          const w=window as typeof window & {gtag?:(...args:any[])=>void};
+          if(typeof w.gtag==='function')w.gtag('event','affiliate_click',details);
+        });
+      });
+      updateSaves();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import { getPublishedPosts } from '../../lib/catalog';
+import { categories } from '../../data/categories';
+const posts=await getPublishedPosts();
+---
+<Base title="The Journal | Home Decor & Cozy Living Ideas | The Soft Nest Edit" description="Thoughtful, practical styling guides for cozy bedrooms, affordable living room updates, small spaces, and everyday living.">
+  <section class="page-hero"><div class="shell"><span class="eyebrow">THE SOFT NEST EDIT / JOURNAL</span><h1>A little inspiration<br/><em>goes a long way.</em></h1><p>Thoughts on good living: approachable decorating ideas, thoughtful details, and small changes that make a home yours.</p></div></section>
+  <section class="section shell"><div class="shop-category-links"><a href="/journal/">All stories</a>{categories.map(c=><a href={`/category/${c.slug}/`}>{c.name}</a>)}</div><div class="journal-grid">{posts.map(p=><JournalCard post={p}/>)}</div>{posts.length===0 && <div class="empty-state"><h3>Stories are being written.</h3><p>Return soon for original home styling guides.</p></div>}</section>
+</Base>
