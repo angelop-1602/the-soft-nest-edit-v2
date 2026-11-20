@@ -9,11 +9,11 @@ considerations: Verify Amazon listing specifications and photo rights before app
 affiliate_url: https://amzn.to/4AKrkah
 link_verified: false
 image: /uploads/91-vcvxpxelacsl1500.avif
-image_alt: Bedsure GentleSoft Sherpa Fleece Throw
+image_alt: BedsureGentleSoftSherpaFleeceThrow
 image_rights_confirmed: true
 reviewed_at: 2026-11-20
 featured: false
-status: draft
+status: approved
 published: true
 ---
 LEGACY RESEARCH LINK (not verified): [https://www.amazon.com/dp/B0158EQJSY](https://www.amazon.com/dp/B0158EQJSY)
