@@ -1,0 +1,28 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { rooms } from '../../../data/rooms';
+import { productTypes } from '../../../data/product-types';
+import { getPublishedProducts } from '../../../lib/catalog';
+import { roomsForProduct,typeSlugForProduct } from '../../../lib/shop-taxonomy';
+export async function getStaticPaths(){return rooms.map(room=>({params:{slug:room.slug},props:{room}}));}
+const {room}=Astro.props;
+const products=(await getPublishedProducts()).filter(product=>roomsForProduct(product.data).includes(room.name));
+const activeTypes=productTypes.map(type=>({...type,count:products.filter(p=>typeSlugForProduct(p.data)===type.slug).length})).filter(type=>type.count>0);
+---
+<Base title={`${room.name} Decor & Accessories | Shop by Room | The Soft Nest Edit`} description={room.description} image={room.image} noindex={products.length===0}>
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/shop/">Shop</a> / {room.name}</nav></div>
+  <section class="page-hero"><div class="shell"><span class="eyebrow">SHOP BY ROOM / {room.name}</span><h1>{room.name} <em>finds.</em></h1><p>{room.description}</p></div></section>
+  <section class="section shell">
+    <p class="affiliate-note">As an Amazon Associate I earn from qualifying purchases. Amazon provides current prices, availability, and purchase terms.</p>
+    <div class="shop-room-heading"><h2>Explore the <em>details.</em></h2><p>{products.length} carefully reviewed {products.length===1?'find':'finds'} for this space.</p></div>
+    {products.length>0 ? <>
+      <div class="room-type-chips" aria-label="Filter by product type"><button type="button" data-type-chip="all" aria-pressed="true">All products ({products.length})</button>{activeTypes.map(type=><button type="button" data-type-chip={type.slug} aria-pressed="false">{type.name} ({type.count})</button>)}</div>
+      <div class="shop-view-by"><span class="count" data-filter-count>{products.length} {products.length===1?'find':'finds'}</span><a class="text-link" href="/shop/">View all rooms ↗</a></div>
+      <div class="product-grid" data-product-search-list>{products.map(product=><ProductCard product={product}/>)}</div>
+      <div class="empty-state" data-no-matches hidden><h3>No products match this type yet.</h3><p>Choose All products to view the full room collection.</p></div>
+    </> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>We're curating this room.</h3><p>Our product recommendations aren't ready here yet. Browse the current Shop or discover ideas in the Journal.</p><a class="button secondary" href="/shop/">Browse all finds ↗</a></div>}
+    <p class="room-suggestions"><strong>Ideas for this room:</strong> {room.suggestedTypes.join(' · ')}. We only show clickable filters when verified products are available.</p>
+    <div class="note-panel"><strong>Before you buy:</strong> Review the listing's current specifications, measurements, materials, and seller on Amazon. Products appearing here are editorial selections, not claims of hands-on testing.</div>
+  </section>
+</Base>

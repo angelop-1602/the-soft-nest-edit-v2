@@ -101,18 +101,56 @@ const path = Astro.url.pathname;
         updateSaves();
       });
       document.querySelectorAll<HTMLElement>('[data-product-search-list]').forEach(container=>{
-        const form=document.querySelector<HTMLInputElement>('[data-search]');
-        const select=document.querySelector<HTMLSelectElement>('[data-category-filter]');
+        const search=document.querySelector<HTMLInputElement>('[data-search]');
+        const roomSelect=document.querySelector<HTMLSelectElement>('[data-room-filter]');
+        const typeSelect=document.querySelector<HTMLSelectElement>('[data-type-filter]');
         const count=document.querySelector<HTMLElement>('[data-filter-count]');
         const cards=[...container.querySelectorAll<HTMLElement>('[data-searchable]')];
-        function filter(){
-          let visible=0;
-          const q=(form?.value||'').trim().toLowerCase();const cat=select?.value||'all';
-          for(const card of cards){const ok=(!q||(card.dataset.searchable||'').includes(q))&&(cat==='all'||card.dataset.category===cat);card.hidden=!ok;if(ok)visible++}
-          if(count)count.textContent=`${visible} ${visible===1?'find':'finds'}`;
-          const empty=document.querySelector<HTMLElement>('[data-no-matches]');if(empty)empty.hidden=visible!==0;
+        const typeButtons=[...document.querySelectorAll<HTMLButtonElement>('[data-type-chip]')];
+        const params=new URLSearchParams(window.location.search);
+        const selectedRoom=params.get('room');
+        const selectedType=params.get('type');
+        const available=(select:HTMLSelectElement| null,value:string|null)=>!!select&&!!value&&[...select.options].some(opt=>opt.value===value);
+        if(available(roomSelect,selectedRoom))roomSelect!.value=selectedRoom!;
+        if(available(typeSelect,selectedType))typeSelect!.value=selectedType!;
+        let chipType=typeButtons.some(b=>b.dataset.typeChip===selectedType)?selectedType||'all':'all';
+        const hasRoom=(card:HTMLElement,room:string)=>room==='all'||(card.dataset.roomSlugs||'').split(' ').includes(room);
+        function refreshTypeOptions(){
+          if(!typeSelect)return;
+          const selected=roomSelect?.value||'all';
+          [...typeSelect.options].forEach(opt=>{
+            if(opt.value==='all')return;
+            const exists=cards.some(card=>hasRoom(card,selected)&&card.dataset.typeSlug===opt.value);
+            opt.disabled=!exists;opt.hidden=!exists;
+          });
+          if(typeSelect.selectedOptions[0]?.disabled)typeSelect.value='all';
         }
-        form?.addEventListener('input',filter);select?.addEventListener('change',filter);filter();
+        function filter(){
+          refreshTypeOptions();
+          const q=(search?.value||'').trim().toLowerCase();
+          const room=roomSelect?.value||'all';
+          const selected=typeButtons.length?chipType:typeSelect?.value||'all';
+          let visible=0;
+          for(const card of cards){
+            const matches=(!q||(card.dataset.searchable||'').includes(q))&&hasRoom(card,room)&&(selected==='all'||card.dataset.typeSlug===selected);
+            card.hidden=!matches;if(matches)visible++;
+          }
+          if(count)count.textContent=`${visible} ${visible===1?'find':'finds'}`;
+          const empty=document.querySelector<HTMLElement>('[data-no-matches]');
+          if(empty)empty.hidden=visible!==0;
+          typeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.typeChip===chipType)));
+        }
+        search?.addEventListener('input',filter);
+        roomSelect?.addEventListener('change',()=>{refreshTypeOptions();filter();});
+        typeSelect?.addEventListener('change',filter);
+        typeButtons.forEach(button=>button.addEventListener('click',()=>{
+          chipType=button.dataset.typeChip||'all';
+          const url=new URL(window.location.href);
+          if(chipType==='all')url.searchParams.delete('type');else url.searchParams.set('type',chipType);
+          window.history.replaceState(null,'',url);
+          filter();
+        }));
+        filter();
       });
       document.querySelectorAll<HTMLAnchorElement>('[data-affiliate-click]').forEach(link=>{
         link.addEventListener('click',()=>{

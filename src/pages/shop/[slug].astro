@@ -3,22 +3,26 @@ import Base from '../../layouts/Base.astro';
 import { getPublishedProducts, dateDisplay } from '../../lib/catalog';
 import ProductCard from '../../components/ProductCard.astro';
 import site from '../../data/site.json';
+import { roomsForProduct, roomSlugsForProduct } from '../../lib/shop-taxonomy';
 export async function getStaticPaths() {
   const products=await getPublishedProducts();
-  return products.map(product=>({params:{slug:product.id},props:{product,related:products.filter(p=>p.id!==product.id && p.data.category===product.data.category).slice(0,3)}}));
+  return products.map(product=>({params:{slug:product.id},props:{product,related:products.filter(p=>p.id!==product.id && (roomsForProduct(p.data).some(room=>roomsForProduct(product.data).includes(room)) || (p.data.product_type && p.data.product_type===product.data.product_type))).slice(0,3)}}));
 }
 const {product,related}=Astro.props;
 const p=product.data;
 const hasImage=p.image && p.image_rights_confirmed;
+const firstRoom=roomsForProduct(p)[0];
+const firstRoomSlug=roomSlugsForProduct(p)[0];
 const breadcrumb={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
 {'@type':'ListItem','position':1,'name':'Home','item':site.url+'/'},
 {'@type':'ListItem','position':2,'name':'Shop','item':site.url+'/shop/'},
-{'@type':'ListItem','position':3,'name':p.title,'item':site.url+`/shop/${product.id}/`} ]};
+...(firstRoom&&firstRoomSlug?[{'@type':'ListItem','position':3,'name':firstRoom,'item':site.url+`/shop/room/${firstRoomSlug}/`}]:[]),
+{'@type':'ListItem','position':firstRoom?4:3,'name':p.title,'item':site.url+`/shop/${product.id}/`} ]};
 ---
 <Base title={`${p.title} | Curated Home Decor | The Soft Nest Edit`} description={p.summary} image={hasImage?p.image:undefined} schema={breadcrumb}>
-  <nav class="shell breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/shop/">Shop the Edit</a> / {p.title}</nav>
+  <nav class="shell breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/shop/">Shop the Edit</a> / {firstRoom&&firstRoomSlug&&<><a href={`/shop/room/${firstRoomSlug}/`}>{firstRoom}</a> / </>}{p.title}</nav>
   <section class="shell detail"><div class="detail-image">{hasImage ? <img src={p.image} alt={p.image_alt||p.title} width="750" height="900"/> : <div class="product-placeholder"><span aria-hidden="true">✳</span><small>THE SOFT NEST EDIT</small></div>}</div>
-    <div class="detail-content"><span class="eyebrow">{p.category} / Editorial pick</span><h1>{p.title}</h1><p class="lead">{p.summary}</p><div class="detail-points">
+    <div class="detail-content"><span class="eyebrow">{firstRoom || p.category} / {p.product_type || 'Editorial pick'}</span><h1>{p.title}</h1><p class="lead">{p.summary}</p><div class="detail-points">
       {p.best_for && <><h2>Best suited for</h2><p>{p.best_for}</p></>}
       {p.highlights.length>0 && <><h2>What caught our eye</h2><ul>{p.highlights.map(h=><li>{h}</li>)}</ul></>}
       {p.considerations && <><h2>Before you buy</h2><p>{p.considerations}</p></>}

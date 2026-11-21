@@ -3,6 +3,8 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const categories = z.enum(['Living Room', 'Bedroom', 'Small Spaces', 'Home Organization', 'Lifestyle']);
+const rooms = z.enum(['Living Room', 'Bedroom', 'Kitchen & Dining', 'Bathroom', 'Home Office', 'Entryway & Hallway', 'Outdoor & Balcony']);
+const productTypes = z.enum(['Pillows & Cushions', 'Throws & Blankets', 'Vases', 'Decor Accents', 'Lighting', 'Bedding', 'Rugs & Mats', 'Storage & Organization', 'Wall Decor', 'Mirrors', 'Tableware', 'Kitchen Essentials', 'Bathroom Accessories', 'Desk Accessories', 'Compact Furniture', 'Plants & Planters', 'Other']);
 
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
@@ -24,7 +26,9 @@ const products = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/products' }),
   schema: z.object({
     title: z.string().min(5),
-    category: categories,
+    category: categories.default('Lifestyle'),
+    rooms: z.preprocess(value => value == null || value === '' ? [] : value, z.array(rooms).max(3).default([])),
+    product_type: z.preprocess(value => value == null || value === '' ? undefined : value, productTypes.optional()),
     summary: z.string().min(20),
     retailer: z.string().default('Amazon US'),
     status: z.enum(['draft', 'approved', 'hidden']).default('draft'),

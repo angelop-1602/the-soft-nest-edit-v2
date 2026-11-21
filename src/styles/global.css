@@ -4,3 +4,27 @@
 @media (max-width:790px){.shell{width:min(100% - 38px,1220px)}.nav-wrap{min-height:72px}.menu-toggle{display:flex;flex-direction:column;gap:5px;background:transparent;border:0;padding:10px;margin-left:auto}.menu-toggle span{height:2px;width:22px;background:var(--ink)}.site-nav{display:none;position:absolute;top:100%;left:0;right:0;z-index:40;background:#fffef8;padding:24px 22px;box-shadow:0 12px 18px #1d301a18;flex-direction:column;align-items:stretch;gap:15px}.site-nav.open{display:flex}.saved-nav{border:0;padding:5px 0}.hero{grid-template-columns:1fr}.hero-panel{padding:65px 28px}.hero h1{font-size:clamp(3.8rem,12vw,5.8rem)}.hero-media{min-height:400px;height:50vh}.editorial{grid-template-columns:1fr}.editorial-photo{height:330px}.editorial-copy{padding:45px 28px}.footer-layout{grid-template-columns:repeat(2,1fr);gap:45px 20px}.section{padding:65px 0}.detail{grid-template-columns:1fr;gap:35px}.detail-image{height:440px}.page-hero{padding:65px 0 45px}.article-image{height:330px}.related-products .product-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:530px){.topline{font-size:.55rem}.logo{font-size:.76rem;gap:5px}.logo-mark{font-size:2.3rem}.logo small{font-size:.8rem}.hero-panel{padding:60px 22px}.hero-media{min-height:310px;height:43vh}.section-head{display:block}.section-head .text-link{margin-top:7px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-image{height:180px}.category-card h3{font-size:1rem}.product-grid,.journal-grid,.related-products .product-grid{grid-template-columns:1fr}.product-visual{height:340px}.journal-photo{height:270px}.footer-layout{grid-template-columns:1fr 1fr}.footer-brand,.footer-social{grid-column:span 2}.footer-bottom{flex-direction:column}.filter-controls{width:100%}.field{flex:1}.field input,.field select{width:100%}.article-header{padding-top:42px}.article-header h1{font-size:2.8rem}.detail-image{height:350px}.cards-2{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Room-first Shop taxonomy (in addition to existing editorial Journal categories). */
+.room-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:19px;margin:26px 0 38px}
+.room-card{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);background:#fff;transition:transform .2s,box-shadow .2s}
+.room-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px #25342912}
+.room-card img{width:100%;height:175px;object-fit:cover;background:#e4e9e1}
+.room-card-copy{padding:15px 16px 17px;display:grid;gap:3px}
+.room-card-copy strong{font:normal 1.3rem/1.25 var(--serif)}
+.room-card-copy small{color:var(--muted);font-size:.75rem;line-height:1.4}
+.shop-room-heading{margin-top:8px}
+.shop-room-heading h2{font:normal clamp(1.8rem,3vw,2.6rem) var(--serif);margin:0 0 8px}
+.shop-room-heading p{color:var(--muted);margin:0}
+.room-summary{margin-top:14px;color:var(--muted);max-width:820px}
+.room-type-chips{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 23px}
+.room-type-chips button{background:transparent;border:1px solid #cbd4c7;padding:9px 14px;font-size:.84rem;color:var(--ink);transition:background .18s,border-color .18s}
+.room-type-chips button:hover,.room-type-chips button[aria-pressed="true"]{background:#dbe5d8;border-color:#859e86}
+.room-type-chips button:focus-visible{outline-offset:3px}
+.room-suggestions{font-size:.82rem;color:var(--muted);margin:16px 0 26px}
+.room-suggestions strong{color:var(--ink)}
+.shop-view-by{display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:18px 0 20px}
+.shop-view-by .count{white-space:nowrap}
+@media(max-width:1070px){.room-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:790px){.room-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:530px){.room-grid{gap:12px}.room-card img{height:120px}.room-card-copy{padding:12px}.room-card-copy strong{font-size:1.12rem}.room-card-copy small{font-size:.7rem}}

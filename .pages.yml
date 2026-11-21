@@ -84,10 +84,25 @@ content:
         label: Product title
         type: string
         required: true
-      - name: category
-        label: Room / category
+      - name: rooms
+        label: Rooms (choose up to 3)
         type: select
-        required: true
+        description: Where does this item belong? Existing Living Room and Bedroom items keep working even if blank.
+        options:
+          multiple: true
+          max: 3
+          values: [Living Room, Bedroom, Kitchen & Dining, Bathroom, Home Office, Entryway & Hallway, Outdoor & Balcony]
+      - name: product_type
+        label: Product type
+        type: select
+        description: Choose one item type for browsing within the selected rooms.
+        options:
+          values: [Pillows & Cushions, Throws & Blankets, Vases, Decor Accents, Lighting, Bedding, Rugs & Mats, Storage & Organization, Wall Decor, Mirrors, Tableware, Kitchen Essentials, Bathroom Accessories, Desk Accessories, Compact Furniture, Plants & Planters, Other]
+      - name: category
+        label: Legacy editorial collection (optional)
+        type: select
+        default: Lifestyle
+        description: Kept for existing products and older links. New Shop navigation uses Rooms and Product type.
         options:
           values: [Living Room, Bedroom, Small Spaces, Home Organization, Lifestyle]
       - name: retailer

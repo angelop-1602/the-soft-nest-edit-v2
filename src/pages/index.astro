@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import JournalCard from '../components/JournalCard.astro';
 import { getPublishedProducts, getPublishedPosts } from '../lib/catalog';
-import { categories } from '../data/categories';
+import { rooms } from '../data/rooms';
+import { roomProductCount } from '../lib/shop-taxonomy';
 import site from '../data/site.json';
 const products=await getPublishedProducts();
 const posts=await getPublishedPosts();
@@ -15,7 +16,7 @@ const schema={'@context':'https://schema.org','@graph':[{'@type':'Organization',
     <div class="hero-media"><img src="https://images.unsplash.com/photo-1722942631531-5b09fed44978?auto=format&fit=crop&w=1500&q=84" alt="Warm neutral living room with a comfortable sofa and soft natural light" fetchpriority="high" width="1400" height="1250"/><span class="hero-stamp">GOOD LIVING BEGINS AT HOME.</span></div>
   </section>
   <section class="intro"><span class="kicker">A MORE INTENTIONAL WAY TO DECORATE</span><h2>Less about buying more.<br/><em>More about loving where you live.</em></h2><p>We're here for approachable styling inspiration and genuinely useful finds, chosen to suit real spaces and real life.</p></section>
-  <section class="section shell"><div class="section-head"><div><span class="eyebrow">ROOM BY ROOM</span><h2 class="section-title">Every corner, <em>considered.</em></h2></div><p>From restful bedrooms to the smallest apartments, start with the space that matters to you.</p></div><div class="category-grid">{categories.map(c=><a class="category-card" href={`/category/${c.slug}/`}><div class="category-image"><img src={c.image} alt={`${c.name} interior inspiration`} loading="lazy" width="440" height="540"/></div><h3>{c.name} ↗</h3><p>{c.subtitle}</p></a>)}</div></section>
+  <section class="section shell"><div class="section-head"><div><span class="eyebrow">SHOP BY ROOM</span><h2 class="section-title">Every corner, <em>considered.</em></h2></div><p>Find pieces that fit your space. Choose a room, then narrow the collection by item type.</p></div><div class="room-grid">{rooms.map(room=><a class="room-card" href={`/shop/room/${room.slug}/`}><img src={room.image} alt={`${room.name} interior inspiration`} loading="lazy" width="440" height="300"/><span class="room-card-copy"><strong>{room.name} ↗</strong><small>{room.subtitle}</small><small>{roomProductCount(products,room.name)} approved {roomProductCount(products,room.name)===1?'find':'finds'}</small></span></a>)}</div></section>
   <section class="section" style="background:#f7f6f0"><div class="shell"><div class="section-head"><div><span class="eyebrow">SHOP THE EDIT</span><h2 class="section-title">A little more <em>lovely.</em></h2></div><a href="/shop/" class="text-link">Discover the collection ↗</a></div><div class="affiliate-note"><strong>Affiliate note:</strong> As an Amazon Associate I earn from qualifying purchases. Product prices and availability are checked on Amazon.</div>
     {products.length ? <div class="product-grid">{products.slice(0,3).map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>Thoughtful finds are on their way.</h3><p>We're reviewing our first selections. Explore the Journal while we prepare our curated Amazon recommendations.</p><a class="button secondary" href="/journal/">Explore styling ideas ↗</a></div>}
   </div></section>
