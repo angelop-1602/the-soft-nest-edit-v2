@@ -50,6 +50,10 @@ content:
       - name: image_alt
         label: Image description
         type: string
+      - name: pinterest_pin_url
+        label: Published Pinterest Pin URL (optional)
+        type: string
+        description: Link to this story on Pinterest (pin.it short URL or pinterest.com/pin/ URL)
       - name: featured
         label: Featured article
         type: boolean

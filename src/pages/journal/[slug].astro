@@ -31,6 +31,7 @@ const pinUrl=`https://www.pinterest.com/pin/create/button/?url=${encodeURICompon
       <span class="eyebrow">THE SOFT NEST EDIT / JOURNAL</span>
       <p>Little ideas for a home you love.</p>
       <a href={pinUrl} target="_blank" rel="noopener noreferrer">Save on Pinterest ↗</a>
+      {p.pinterest_pin_url && <a href={p.pinterest_pin_url} target="_blank" rel="noopener noreferrer">View our Pinterest Pin ↗</a>}
     </aside>
     <div class="article-reading-content"><div class="prose"><Content /></div>
     {products.length>0 && <><hr class="thin-divider"/><h2 class="section-title">Shop the <em>details.</em></h2><div class="product-grid">{products.map(pr=><ProductCard product={pr}/>)}</div></>}

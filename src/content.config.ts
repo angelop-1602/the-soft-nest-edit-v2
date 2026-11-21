@@ -16,6 +16,7 @@ const posts = defineCollection({
     description: z.string().min(20),
     image: z.string().optional(),
     image_alt: z.string().optional(),
+    pinterest_pin_url: z.string().url().regex(/^https:\/\/(?:pin\.it\/|(?:www\.)?pinterest\.com\/pin\/)/i, { message: 'Use a Pinterest Pin URL' }).optional(),
     published: z.boolean().default(false),
     featured: z.boolean().default(false),
     related_products: z.array(z.string()).default([])
