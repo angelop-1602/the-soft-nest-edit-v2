@@ -1,8 +1,9 @@
 ---
+import EditorialHero from '../components/EditorialHero.astro';
 import Base from '../layouts/Base.astro';
 import site from '../data/site.json';
 ---
 <Base title="Contact | The Soft Nest Edit" description="Contact The Soft Nest Edit about editorial content, decor inspiration, and collaborations.">
-  <section class="page-hero"><div class="shell"><span class="eyebrow">SAY HELLO</span><h1>Let's keep <em>in touch.</em></h1><p>Have a decor question, suggestion, or collaboration idea? We'd love to hear it.</p></div></section>
+  <EditorialHero eyebrow="SAY HELLO" description="Have a decor question, suggestion, or collaboration idea? We'd love to hear it." photo="contact">Let's keep <em>in touch.</em></EditorialHero>
   <div class="shell info-page"><h2>How to reach us</h2>{site.contactEmail ? <><p>Send us a note at <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p><a class="button" href={`mailto:${site.contactEmail}`}>Write an email ↗</a></> : <><p>We're preparing our public business contact address. Until then, follow along with our latest ideas on Pinterest or explore the Journal.</p><a class="button" href={site.pinterestUrl} target="_blank" rel="noopener noreferrer">Find us on Pinterest ↗</a></>}<p class="mini-panel">For orders, delivery, returns and refunds from Amazon, please contact Amazon customer support through your order. We do not process or fulfill purchases.</p></div>
 </Base>

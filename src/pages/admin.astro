@@ -1,6 +1,7 @@
 ---
+import EditorialHero from '../components/EditorialHero.astro';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Editor Access | The Soft Nest Edit" description="Secure GitHub-based editorial access for The Soft Nest Edit." noindex>
-  <div class="shell info-page"><span class="eyebrow">EDITOR ACCESS</span><h1>Manage the <em>edit.</em></h1><p>Products, articles, and site settings are edited through Pages CMS using authorized GitHub accounts. This public page is a shortcut, not a password form.</p><a class="button" href="https://app.pagescms.org/" target="_blank" rel="noopener noreferrer">Open Pages CMS ↗</a><p>Publishing requires both editorial approval and valid Amazon affiliate links. Draft or unverified products do not appear publicly.</p></div>
+  <EditorialHero eyebrow="EDITOR ACCESS">Manage the <em>edit.</em></EditorialHero><div class="shell info-page"><p>Products, articles, and site settings are edited through Pages CMS using authorized GitHub accounts. This public page is a shortcut, not a password form.</p><a class="button" href="https://app.pagescms.org/" target="_blank" rel="noopener noreferrer">Open Pages CMS ↗</a><p>Publishing requires both editorial approval and valid Amazon affiliate links. Draft or unverified products do not appear publicly.</p></div>
 </Base>

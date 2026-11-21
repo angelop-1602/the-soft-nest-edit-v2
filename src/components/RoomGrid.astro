@@ -1,0 +1,22 @@
+---
+import { rooms } from '../data/rooms';
+import EditorialImage from './EditorialImage.astro';
+import { roomProductCount } from '../lib/shop-taxonomy';
+import type { getPublishedProducts } from '../lib/catalog';
+
+interface Props { products: Awaited<ReturnType<typeof getPublishedProducts>> }
+const { products } = Astro.props;
+---
+<div class="room-grid">
+  {rooms.map(room => {
+    const count = roomProductCount(products, room.name);
+    return <a class="room-card" href={`/shop/room/${room.slug}/`}>
+      <div class="room-photo"><EditorialImage photo={room.slug} sizes="(max-width: 700px) 46vw, (max-width: 1020px) 30vw, 23vw" /></div>
+      <div class="room-card-copy">
+        <strong>{room.name}</strong><span aria-hidden="true">↗</span>
+        <small>{room.subtitle}</small>
+        <small>{count} approved {count === 1 ? 'find' : 'finds'}</small>
+      </div>
+    </a>;
+  })}
+</div>

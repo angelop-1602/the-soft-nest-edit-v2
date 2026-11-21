@@ -1,25 +1,69 @@
 ---
+import AffiliateNote from '../components/AffiliateNote.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+import EditorialImage from '../components/EditorialImage.astro';
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import JournalCard from '../components/JournalCard.astro';
 import { getPublishedProducts, getPublishedPosts } from '../lib/catalog';
-import { rooms } from '../data/rooms';
-import { roomProductCount } from '../lib/shop-taxonomy';
+import { rooms, roomBySlug } from '../data/rooms';
 import site from '../data/site.json';
-const products=await getPublishedProducts();
-const posts=await getPublishedPosts();
-const schema={'@context':'https://schema.org','@graph':[{'@type':'Organization','name':site.name,'url':site.url,'sameAs':[site.pinterestUrl]},{'@type':'WebSite','name':site.name,'url':site.url}]};
+const products = await getPublishedProducts();
+const posts = await getPublishedPosts();
+const featuredRooms = rooms.filter(room => room.slug !== 'outdoor-balcony');
+const schema = {'@context':'https://schema.org','@graph':[{'@type':'Organization','name':site.name,'url':site.url,'sameAs':[site.pinterestUrl]},{'@type':'WebSite','name':site.name,'url':site.url}]};
 ---
 <Base title="Cozy Home Styling Ideas & Curated Finds | The Soft Nest Edit" description={site.description} schema={schema}>
-  <section class="hero">
-    <div class="hero-panel"><div class="hero-panel-inner"><span class="kicker">THE SOFT NEST EDIT / THE EVERYDAY EDIT</span><h1>Make room<br/>for a home<br/><em>you love.</em></h1><p>Beautiful spaces aren't built overnight. Find thoughtful ideas, warm textures, and carefully curated details that make a house feel like yours.</p><div class="hero-actions"><a class="button" href="/shop/">Explore the Edit ↗</a><a class="text-link" href="/journal/">Read our Journal ↗</a></div></div></div>
-    <div class="hero-media"><img src="https://images.unsplash.com/photo-1722942631531-5b09fed44978?auto=format&fit=crop&w=1500&q=84" alt="Warm neutral living room with a comfortable sofa and soft natural light" fetchpriority="high" width="1400" height="1250"/><span class="hero-stamp">GOOD LIVING BEGINS AT HOME.</span></div>
-  </section>
-  <section class="intro"><span class="kicker">A MORE INTENTIONAL WAY TO DECORATE</span><h2>Less about buying more.<br/><em>More about loving where you live.</em></h2><p>We're here for approachable styling inspiration and genuinely useful finds, chosen to suit real spaces and real life.</p></section>
-  <section class="section shell"><div class="section-head"><div><span class="eyebrow">SHOP BY ROOM</span><h2 class="section-title">Every corner, <em>considered.</em></h2></div><p>Find pieces that fit your space. Choose a room, then narrow the collection by item type.</p></div><div class="room-grid">{rooms.map(room=><a class="room-card" href={`/shop/room/${room.slug}/`}><img src={room.image} alt={`${room.name} interior inspiration`} loading="lazy" width="440" height="300"/><span class="room-card-copy"><strong>{room.name} ↗</strong><small>{room.subtitle}</small><small>{roomProductCount(products,room.name)} approved {roomProductCount(products,room.name)===1?'find':'finds'}</small></span></a>)}</div></section>
-  <section class="section" style="background:#f7f6f0"><div class="shell"><div class="section-head"><div><span class="eyebrow">SHOP THE EDIT</span><h2 class="section-title">A little more <em>lovely.</em></h2></div><a href="/shop/" class="text-link">Discover the collection ↗</a></div><div class="affiliate-note"><strong>Affiliate note:</strong> As an Amazon Associate I earn from qualifying purchases. Product prices and availability are checked on Amazon.</div>
-    {products.length ? <div class="product-grid">{products.slice(0,3).map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>Thoughtful finds are on their way.</h3><p>We're reviewing our first selections. Explore the Journal while we prepare our curated Amazon recommendations.</p><a class="button secondary" href="/journal/">Explore styling ideas ↗</a></div>}
-  </div></section>
-  <section class="section shell"><div class="section-head"><div><span class="eyebrow">THE JOURNAL</span><h2 class="section-title">Stories for <em>living well.</em></h2></div><a href="/journal/" class="text-link">View all stories ↗</a></div><div class="journal-grid">{posts.slice(0,3).map(p=><JournalCard post={p}/>)}</div></section>
-  <section class="editorial"><div class="editorial-photo"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85" alt="Natural textures and warm home decor in a quiet living space" loading="lazy" width="1000" height="900"/></div><div class="editorial-copy"><span class="eyebrow">OUR PHILOSOPHY</span><h2>Make it feel<br/><em>like home.</em></h2><p>Thoughtful spaces aren't about perfection. They're about the little things you reach for every day—the lighting, the texture, the comfort.</p><a href="/about/" class="text-link">Get to know us ↗</a></div></section>
+  <div class="home-editorial">
+    <section class="hero">
+      <div class="hero-panel"><div class="hero-panel-inner">
+        <span class="kicker">Thoughtfully curated home decor</span>
+        <h1>Make room<br/>for a home<br/><em>you love.</em></h1>
+        <p>Explore home decor for every room: thoughtful lighting, soft layers, and meaningful details — plus styling advice in our Journal.</p>
+        <div class="hero-actions"><a class="button" href="/shop/">Shop home decor <span aria-hidden="true">↗</span></a><a class="text-link" href="/journal/">Read the Journal <span aria-hidden="true">↗</span></a></div>
+        <p class="hero-signoff">Good design. Real living.</p>
+      </div></div>
+      <div class="hero-media">
+        <EditorialImage photo="living-room" alt="Sunlit living room with a cream sofa, oak coffee table and warm decorative accents" sizes="(max-width: 700px) 100vw, 51vw" priority />
+        <a class="hero-stamp" href="/shop/room/living-room/"><span>01 / Your home, reimagined</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="home-intro shell">
+      <span class="eyebrow">Welcome to The Soft Nest Edit</span>
+      <div class="home-intro-layout"><h2>There’s beauty<br/>in <em>the everyday.</em></h2><div><p>We believe a beautiful home shouldn't feel out of reach. Discover considered ideas for styling your space with warmth, intention and a little personality.</p><a class="text-link" href="/about/">Get to know us <span aria-hidden="true">↗</span></a></div></div>
+    </section>
+    <section class="section section-tinted"><div class="shell">
+      <div class="section-head"><div><span class="eyebrow">Shop by room</span><h2 class="section-title">Every corner, <em>considered.</em></h2></div><a class="text-link" href="/shop/">Explore all {rooms.length} rooms <span aria-hidden="true">↗</span></a></div>
+      <div class="home-room-grid">{featuredRooms.map((room, index) => <a class="room-card" href={`/shop/room/${room.slug}/`}>
+        <div class="room-photo"><EditorialImage photo={room.slug} alt={room.subtitle} sizes="(max-width: 530px) 92vw, (max-width: 900px) 45vw, 30vw" /></div>
+        <div class="home-room-copy"><span class="eyebrow">0{index + 1} / Explore the room</span><h3>{room.name}</h3><span class="home-room-arrow" aria-hidden="true">↗</span></div>
+      </a>)}</div>
+    </div></section>
+    <section class="section home-journal"><div class="shell">
+      <div class="section-head"><div><span class="eyebrow">The latest from our Journal</span><h2 class="section-title">Stories for <em>living well.</em></h2></div><a href="/journal/" class="text-link">View the Journal <span aria-hidden="true">↗</span></a></div>
+      <div class="journal-grid">{posts.slice(0,3).map(post => <JournalCard {post} />)}</div>
+    </div></section>
+    <section class="home-quote" aria-label="Our philosophy"><div class="shell">
+      <span class="eyebrow">A little beauty, every day</span>
+      <blockquote>“A home should feel like <em>your favourite place to be.</em>”</blockquote>
+      <span class="eyebrow">The Soft Nest philosophy</span>
+    </div></section>
+    <section class="section home-discover"><div class="shell">
+      <div class="section-head"><div><span class="eyebrow">For every kind of home</span><h2 class="section-title">So much more <em>to discover.</em></h2></div><a class="text-link" href="/shop/#all-finds">Shop the edit <span aria-hidden="true">↗</span></a></div>
+      <div class="home-discover-layout">
+        <div class="home-discover-image"><EditorialImage photo="collected-living" alt="Layered living room with a neutral sofa, wood coffee table and warm accent lighting" sizes="(max-width: 700px) 92vw, 45vw" /></div>
+        <div class="home-discover-copy"><span class="eyebrow">The home edit / 001</span><h3>From soft layers to finishing touches, <em>make it yours.</em></h3><p>Find the details that bring a room together. Explore welcoming spaces, considered lighting, and everyday pieces with a little personality.</p>
+          <ol>{['living-room', 'bedroom', 'kitchen-dining'].map(slug => { const room = roomBySlug(slug)!; return <li><a href={`/shop/room/${slug}/`}>{room.name}<span aria-hidden="true">↗</span></a></li>; })}</ol>
+        </div>
+      </div>
+    </div></section>
+    {products.length > 0 && <section class="section section-tinted home-finds"><div class="shell">
+      <div class="section-head"><div><span class="eyebrow">Thoughtful finds</span><h2 class="section-title">A little more <em>lovely.</em></h2></div><a href="/shop/#all-finds" class="text-link">Browse all finds <span aria-hidden="true">↗</span></a></div>
+      <AffiliateNote /><div class:list={["product-grid", { "featured-single": products.length === 1 }]}>{products.slice(0,3).map(product => <ProductCard {product} />)}</div>
+    </div></section>}
+    <div class="home-closing"><EditorialHero eyebrow="A space to come home to" description="More comfort, less clutter. More meaning, fewer things. Find your own way to make a space feel just right." photo="journal" heading={2}>
+      Good living<br/>begins <em>at home.</em>
+      <a slot="actions" href="/journal/" class="button cream">Find your inspiration <span aria-hidden="true">↗</span></a>
+    </EditorialHero></div>
+  </div>
 </Base>

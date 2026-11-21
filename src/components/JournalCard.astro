@@ -1,14 +1,17 @@
 ---
+import EditorialImage from './EditorialImage.astro';
+import { localJournalPhoto } from '../data/editorial';
 import type { CollectionEntry } from 'astro:content';
 import { dateDisplay } from '../lib/catalog';
 interface Props { post: CollectionEntry<'posts'> }
 const {post}=Astro.props;
 const p=post.data;
+const photo = localJournalPhoto(p.image);
 ---
 <article class="journal-card">
   <a href={`/journal/${post.id}/`} class="journal-photo" aria-label={`Read ${p.title}`}>
-    {p.image ? <img src={p.image} alt={p.image_alt || p.title} width="660" height="460" loading="lazy" /> : <div class="journal-fallback" aria-hidden="true">✳</div>}
-    <span class="journal-arrow">↗</span>
+    {photo ? <EditorialImage {photo} sizes="(max-width: 530px) 92vw, (max-width: 700px) 46vw, 30vw" alt={p.image_alt || p.title} /> : p.image ? <img src={p.image} alt={p.image_alt || p.title} width="660" height="460" loading="lazy" /> : <div class="journal-fallback" aria-hidden="true">✳</div>}
+    <span class="journal-arrow" aria-hidden="true">↗</span>
   </a>
   <div class="journal-details"><span class="eyebrow">{p.category} <span class="dot">·</span> {dateDisplay(p.date)}</span><h3><a href={`/journal/${post.id}/`}>{p.title}</a></h3><p>{p.description}</p><a class="text-link" href={`/journal/${post.id}/`}>Read the story ↗</a></div>
 </article>

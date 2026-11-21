@@ -1,4 +1,7 @@
 ---
+import AffiliateNote from '../../components/AffiliateNote.astro';
+import RoomGrid from '../../components/RoomGrid.astro';
+import EditorialHero from '../../components/EditorialHero.astro';
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { getPublishedProducts } from '../../lib/catalog';
@@ -9,13 +12,12 @@ const products=await getPublishedProducts();
 const liveTypes=new Set(products.map(p=>typeSlugForProduct(p.data)).filter(Boolean));
 ---
 <Base title="Shop by Room | Curated Home Decor Finds | The Soft Nest Edit" description="Shop curated Amazon home decor by room, then narrow your search to pillows, vases, lighting, storage, and more. Every published recommendation is reviewed.">
-  <section class="page-hero"><div class="shell"><span class="eyebrow">THE SOFT NEST EDIT / SHOP</span><h1>Find your next<br/><em>favorite detail.</em></h1><p>Start with a room. Find the touches that make it yours—pillows, vases, lighting, and practical pieces chosen for real homes.</p></div></section>
-  <section class="section shell">
-    <p class="affiliate-note"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. We may receive a commission from qualifying purchases through the links here, at no additional cost to you. Check current prices and availability on Amazon.</p>
+  <EditorialHero eyebrow="SHOP THE EDIT" description="Start with a room. Find the touches that make it yours—pillows, vases, lighting, and practical pieces chosen for real homes." photo="shop">Find your next<br/><em>favorite detail.</em><a slot="actions" class="text-link" href="#all-finds">Browse all finds ↓</a></EditorialHero>
+  <section class="section shell section-compact">
     <div class="shop-room-heading"><span class="eyebrow">DISCOVER THE EDIT</span><h2>Shop by <em>room.</em></h2><p>Choose the part of your home you're styling, then explore product types inside.</p></div>
-    <div class="room-grid">
-      {rooms.map(room=><a class="room-card" href={`/shop/room/${room.slug}/`}><img src={room.image} alt={`${room.name} interior inspiration`} loading="lazy" width="400" height="260"/><span class="room-card-copy"><strong>{room.name} ↗</strong><small>{room.subtitle}</small><small>{roomProductCount(products,room.name)} approved {roomProductCount(products,room.name)===1?'find':'finds'}</small></span></a>)}
-    </div>
+    <RoomGrid {products} />
+  </section>
+  <section class="section section-tinted" id="all-finds"><div class="shell">
     <div class="shop-room-heading"><span class="eyebrow">ALL APPROVED FINDS</span><h2>Or browse <em>everything.</em></h2><p>Filter by room and item type, or search by name and description.</p></div>
     <div class="shop-view-by">
       <div class="filter-controls">
@@ -23,10 +25,11 @@ const liveTypes=new Set(products.map(p=>typeSlugForProduct(p.data)).filter(Boole
         <label class="field">Room<select data-room-filter><option value="all">All rooms</option>{rooms.filter(r=>roomProductCount(products,r.name)>0).map(r=><option value={r.slug}>{r.name}</option>)}</select></label>
         <label class="field">Product type<select data-type-filter><option value="all">All types</option>{productTypes.filter(t=>liveTypes.has(t.slug)).map(t=><option value={t.slug}>{t.name}</option>)}</select></label>
       </div>
-      <span class="count" data-filter-count>{products.length} {products.length===1?'find':'finds'}</span>
+      <span class="count" data-filter-count role="status">{products.length} {products.length===1?'find':'finds'}</span>
     </div>
+    {products.length > 0 && <AffiliateNote />}
     {products.length ? <div class="product-grid" data-product-search-list>{products.map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>The edit is coming together.</h3><p>We're reviewing affiliate links and image permissions before adding our first approved finds. In the meantime, explore the Journal.</p><a class="button secondary" href="/journal/">Read the Journal ↗</a></div>}
     {products.length>0 && <div class="empty-state" data-no-matches hidden><h3>No matches yet.</h3><p>Try another room, product type, or search phrase.</p></div>}
     <div class="note-panel"><strong>How we choose:</strong> We prioritize usefulness, fit for real homes, and clear specifications. Our recommendations are editorial selections, not claims of firsthand testing or Amazon customer review scores. Purchases are completed on Amazon, not on this website.</div>
-  </section>
+  </div></section>
 </Base>

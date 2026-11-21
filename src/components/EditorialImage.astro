@@ -1,0 +1,14 @@
+---
+interface Props {
+  photo: string;
+  alt?: string;
+  sizes: string;
+  priority?: boolean;
+  class?: string;
+}
+const { photo, alt = '', sizes, priority = false, class: className } = Astro.props;
+const path = `/assets/editorial/${photo}`;
+---
+<img src={`${path}-480.webp`} srcset={`${path}-480.webp 480w, ${path}-1080.webp 1080w`}
+  class={className} {sizes} {alt} width="1080" height="720" loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : undefined} decoding="async" />
