@@ -1,4 +1,6 @@
 ---
+import AffiliateNote from '../../../components/AffiliateNote.astro';
+import EditorialHero from '../../../components/EditorialHero.astro';
 import Base from '../../../layouts/Base.astro';
 import ProductCard from '../../../components/ProductCard.astro';
 import { categories } from '../../../data/categories';
@@ -8,9 +10,9 @@ const {cat}=Astro.props;
 const products=(await getPublishedProducts()).filter(p=>p.data.category===cat.name);
 ---
 <Base title={`${cat.name} Decor Finds | The Soft Nest Edit`} description={`Original ${cat.name.toLowerCase()} home decor recommendations and buying notes. Browse curated picks and confirm all details on Amazon.`} noindex={true}>
-  <section class="page-hero"><div class="shell"><span class="eyebrow">SHOP / {cat.name}</span><h1>{cat.name} <em>finds.</em></h1><p>{cat.subtitle}. Thoughtful recommendations for spaces worth coming home to.</p></div></section>
-  <section class="section shell"><p class="room-summary">Our Shop is now organized by rooms and product types. <a class="text-link" href="/shop/">Explore Shop by Room</a></p><div class="affiliate-note">As an Amazon Associate I earn from qualifying purchases. Prices and availability are shown on Amazon.</div>
-  <div class="shop-category-links"><a href="/shop/">All finds ↗</a>{categories.filter(c=>c.slug!==cat.slug).map(c=><a href={`/shop/category/${c.slug}/`}>{c.name}</a>)}</div>
+  <EditorialHero eyebrow={`SHOP / ${cat.name}`} description={`${cat.subtitle}. Thoughtful recommendations for spaces worth coming home to.`} photo={cat.photo}>{cat.name}{" "}<em>finds.</em></EditorialHero>
+  <section class="section shell section-compact"><p class="room-summary">Our Shop is now organized by rooms and product types. <a class="text-link" href="/shop/">Explore Shop by Room</a></p>{products.length > 0 && <AffiliateNote />}
+  <div class="shop-category-links"><a href="/shop/">All finds ↗</a>{categories.map(c=><a aria-current={c.slug === cat.slug ? "page" : undefined} href={`/shop/category/${c.slug}/`}>{c.name}</a>)}</div>
   {products.length ? <div class="product-grid">{products.map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol">✳</div><h3>We're still curating this space.</h3><p>Read room-specific styling advice until we publish verified recommendations here.</p><a class="button secondary" href={`/category/${cat.slug}/`}>Read styling ideas ↗</a></div>}
   </section>
 </Base>

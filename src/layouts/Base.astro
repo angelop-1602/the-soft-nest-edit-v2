@@ -20,7 +20,7 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f7f4ef" />
+    <meta name="theme-color" content="#fbf9f4" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl} />
@@ -35,6 +35,7 @@ const path = Astro.url.pathname;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <link rel="preload" href="/assets/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="The Journal RSS" href="/rss.xml" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
@@ -45,14 +46,14 @@ const path = Astro.url.pathname;
     <div class="topline">Considered finds, cozy spaces &amp; everyday inspiration <span aria-hidden="true">✳</span></div>
     <header class="site-header" id="site-header">
       <div class="shell nav-wrap">
-        <a class="logo" href="/" aria-label="The Soft Nest Edit home"><span class="logo-mark">✳</span><span>THE SOFT NEST <small>EDIT</small></span></a>
+        <a class="logo" href="/" aria-label="The Soft Nest Edit home"><span class="logo-mark" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 37 37" fill="none"><path d="M18.5 4c6 6 8 12 0 28C10.5 16 12.5 10 18.5 4Z" stroke="currentColor" stroke-width="1.2"/><path d="M6 15c7 0 13 3 21 17C12 29 8 25 6 15Zm25 0c-7 0-13 3-21 17C25 29 29 25 31 15Z" stroke="currentColor" stroke-width="1.1"/></svg></span><span>THE SOFT NEST <small>EDIT</small></span></a>
         <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
         <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-          <a class:list={[{'active':path==='/'}, 'nav-link']} href="/">Home</a>
-          <a class:list={[{'active':path.startsWith('/shop/') && path !== '/shop/saved/'},'nav-link']} href="/shop/">Shop the Edit</a>
-          <a class:list={[{'active':path.startsWith('/journal/') || path.startsWith('/category/')},'nav-link']} href="/journal/">The Journal</a>
-          <a class:list={[{'active':path==='/about/'},'nav-link']} href="/about/">Our Story</a>
-          <a class="saved-nav" href="/shop/saved/">Saved <span id="saved-count" aria-live="polite">0</span></a>
+          <a class:list={[{'active':path==='/'}, 'nav-link']} aria-current={path === '/' ? 'page' : undefined} href="/">Home</a>
+          <a class:list={[{'active':path.startsWith('/shop/') && path !== '/shop/saved/'},'nav-link']} aria-current={path === "/shop/" ? "page" : undefined} href="/shop/">Shop the Edit</a>
+          <a class:list={[{'active':path.startsWith('/journal/') || path.startsWith('/category/')},'nav-link']} aria-current={path === "/journal/" ? "page" : undefined} href="/journal/">The Journal</a>
+          <a class:list={[{'active':path==='/about/'},'nav-link']} aria-current={path === "/about/" ? "page" : undefined} href="/about/">Our Story</a>
+          <a class="saved-nav" aria-current={path === "/shop/saved/" ? "page" : undefined} href="/shop/saved/">Saved <span id="saved-count" aria-live="polite">0</span></a>
         </nav>
       </div>
     </header>
@@ -70,13 +71,43 @@ const path = Astro.url.pathname;
       const nav = document.getElementById('site-nav');
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const header = document.getElementById('site-header');
-      function closeMenu(){ nav?.classList.remove('open'); toggle?.setAttribute('aria-expanded', 'false'); }
-      toggle?.addEventListener('click', () => {
-        const open = nav?.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(!!open));
-      });
-      document.addEventListener('keydown', event => { if(event.key === 'Escape') closeMenu(); });
-      nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-      window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+      if (nav && toggle && header) {
+        header.dataset.menuReady = '';
+        function setMenu(open: boolean) {
+          nav?.classList.toggle('open', open);
+          toggle?.setAttribute('aria-expanded', String(open));
+          toggle?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+        }
+        toggle.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+        document.addEventListener('keydown', event => {
+          if (event.key === 'Escape' && nav.classList.contains('open')) {
+            setMenu(false);
+            toggle.focus();
+          }
+        });
+        document.addEventListener('pointerdown', event => {
+          if (event.target instanceof Node && !nav.contains(event.target) && !toggle.contains(event.target)) setMenu(false);
+        });
+        nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+      }
+      const syncHeader = () => header?.classList.toggle('scrolled', window.scrollY > 16);
+      syncHeader();
+      window.addEventListener('scroll', syncHeader, { passive: true });
+
+      // Content starts visible. Offscreen elements animate only when they enter the viewport.
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver(entries => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('reveal-in');
+            observer.unobserve(entry.target);
+          }
+        }, { threshold: .08 });
+        document.querySelectorAll('.room-card, .product-card, .journal-card, .section-head, .intro > div, .prose h2, .manifesto, .shop-room-heading, .footer-layout > div').forEach(element => {
+          if (element.getBoundingClientRect().top >= window.innerHeight) observer.observe(element);
+        });
+      }
+
       const storageKey='softnest-affiliate-saved-v2';
       const safeSlug=/^[a-z0-9]+(?:-[a-z0-9]+)*$/;
       function saved() : string[] {
@@ -160,6 +191,9 @@ const path = Astro.url.pathname;
         });
       });
       updateSaves();
+      window.addEventListener('storage', event => {
+        if (event.key === storageKey || event.key === null) updateSaves();
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,20 @@
+---
+import EditorialImage from './EditorialImage.astro';
+interface Props {
+  eyebrow: string;
+  description?: string;
+  photo?: string;
+  heading?: 1 | 2;
+}
+const { eyebrow, description, photo, heading = 1 } = Astro.props;
+const Heading = heading === 2 ? 'h2' : 'h1';
+---
+<section class:list={['page-hero', { 'page-hero--photo': photo }]}>
+  {photo && <div class="page-hero-media"><EditorialImage photo={photo} sizes="(max-width: 700px) 100vw, 67vw" priority={heading === 1} /></div>}
+  <div class="shell page-hero-copy">
+    <span class="eyebrow">{eyebrow}</span>
+    <Heading><slot /></Heading>
+    {description && <p>{description}</p>}
+    <slot name="actions" />
+  </div>
+</section>

@@ -1,0 +1,9 @@
+---
+interface Props { compact?: boolean; id?: string }
+const { compact = false, id } = Astro.props;
+---
+<p class="affiliate-note" {id}>
+  {compact ? 'Paid link. As an Amazon Associate I earn from qualifying purchases.' : <>
+    As an Amazon Associate I earn from qualifying purchases. <a href="/affiliate-disclosure/">Affiliate disclosure</a>
+  </>}
+</p>

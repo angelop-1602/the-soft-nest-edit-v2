@@ -111,19 +111,19 @@ Original editorial research notes go here.
 3. The repository's `.pages.yml` defines Journal, Affiliate Products, and Website Settings. Product status/verification gates remain enforced by the build even if an editor accidentally checks Publish.
 4. `https://thesoftnestedit.online/admin/` is only a shortcut to Pages CMS. It is not an admin login; do not put API keys in content files.
 
-## Deploy to Cloudflare Workers (staging)
+## Review and deploy to Cloudflare Workers
 
-Astro is **static** in this version. The Cloudflare adapter is intentionally unnecessary. Cloudflare's Workers static assets serve the built `dist/` output. No databases, custom Worker API, or cron jobs are needed.
+Use `npm run dev` for local review. To check the production build and static assets locally, run:
 
 ```powershell
-npm run build
-npx wrangler login
-npx wrangler deploy
+npm run validate
+node scripts/audit-content.mjs
+npx wrangler deploy --dry-run
 ```
 
-Cloudflare will provide a temporary `workers.dev` address. Prefer a staging subdomain or workers.dev for acceptance testing. **Do not connect the live `thesoftnestedit.online` custom domain yet.** Set a staging-only `noindex` policy at the hosting layer if the preview is public; do not allow a duplicate content site to be indexed. The site config currently has the production canonical URL intentionally so you're testing the final URL plan, not indexing a duplicate host.
+Workers serves the built `dist/` directory using the static assets configuration in `wrangler.jsonc`. For a hosted staging review, deploy under a separate Worker name using `npx wrangler deploy --name the-soft-nest-edit-v2-staging`. Restrict access to the preview or set a staging-only `noindex` policy. The production canonical URLs remain in the staging HTML.
 
-For an automated CI deployment, connect the *new* GitHub repository through Workers Builds and configure build command `npm run build` and deploy command `npx wrangler deploy`. The included GitHub Actions workflow tests PRs, but it does **not** deploy automatically or contain deployment credentials.
+After approval, verify the Cloudflare account and Worker name, then run `npm run deploy` from the approved revision. Use `npx wrangler login` first if needed. If production is connected to Workers Builds, use the existing production branch and deployment workflow instead. Review the current deployment in Cloudflare before replacing it so it is available for rollback.
 
 ## Before connecting the live domain
 
@@ -141,6 +141,10 @@ For an automated CI deployment, connect the *new* GitHub repository through Work
 
 This architecture is optimized for low ongoing cost. It can serve an affiliate publication and curated catalog for a long time. When revenue justifies commerce, add Shopify as a **separate** ordering/fulfillment project rather than reactivating the old CJ/PayPal sandbox code in production.
 
-## Current validation caveat
+## Editorial photography
 
-This project was authored with official Astro 6, Pages CMS, Cloudflare and Amazon documentation as of November 20, 2026. The generation environment did not have access to the npm registry, so `npm install`, Astro compilation and browser-based tests **could not be executed here**. The included plain Node policy tests are executable without dependencies and were run locally. Run the full validation commands on your machine before deployment.
+Room cards and page headers use responsive WebP assets in `public/assets/editorial/`. The Journal uses local derivatives of its original photographs where available and keeps the source URLs in Markdown metadata.
+
+- **Unsplash** under the [Unsplash License](https://unsplash.com/license). [Living room](https://images.unsplash.com/photo-1722942631531-5b09fed44978), [bedroom](https://images.unsplash.com/photo-1616594039964-ae9021a400a0), [bathroom](https://images.unsplash.com/photo-1620626011761-996317b8d101), [Journal and small spaces](https://images.unsplash.com/photo-1600607687920-4e2a09cf159d), and [About](https://images.unsplash.com/photo-1618221195710-dd6b41faaea6).
+- **Pexels** under the [Pexels License](https://www.pexels.com/license/). [Kitchen by Max Vakhtbovych](https://www.pexels.com/photo/interior-of-minimalist-kitchen-with-wooden-furniture-and-island-7147286/), [home office by Dmitry Zvolskiy](https://www.pexels.com/photo/minimalist-home-office-desk-and-chair-setup-29434680/), [entryway by Alina Skazka](https://www.pexels.com/photo/wooden-furniture-in-the-house-15456906/), [patio by Volkan Buyukvardar](https://www.pexels.com/photo/cozy-terrace-with-round-table-near-house-5106999/), [Shop by Sami Raad](https://www.pexels.com/photo/cozy-sofa-with-neutral-colored-throw-pillows-37023127/), [Contact by Satvinder Ghotra](https://www.pexels.com/photo/modern-home-interior-with-elegant-decor-30358305/), [Saved by saad alawi](https://www.pexels.com/photo/cozy-living-room-with-beige-sofa-and-floor-lamp-33679009/), and [organization by Rachel Claire](https://www.pexels.com/photo/various-households-on-wooden-shelves-of-home-5490786/).
+- **Typography** uses locally hosted DM Sans and DM Serif Display. The license files are in `public/assets/fonts/`.
