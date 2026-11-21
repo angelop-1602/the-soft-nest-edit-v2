@@ -26,6 +26,7 @@ const products = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/products' }),
   schema: z.object({
     title: z.string().min(5),
+    card_title: z.string().min(3).max(95).optional(),
     category: categories.default('Lifestyle'),
     rooms: z.preprocess(value => value == null || value === '' ? [] : value, z.array(rooms).max(3).default([])),
     product_type: z.preprocess(value => value == null || value === '' ? undefined : value, productTypes.optional()),

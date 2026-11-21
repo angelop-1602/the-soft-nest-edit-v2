@@ -1,6 +1,5 @@
 ---
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-import AffiliateNote from '../../../components/AffiliateNote.astro';
 import EditorialHero from '../../../components/EditorialHero.astro';
 import Base from '../../../layouts/Base.astro';
 import ProductCard from '../../../components/ProductCard.astro';
@@ -21,7 +20,7 @@ const activeTypes=productTypes.map(type=>({...type,count:products.filter(p=>type
     {products.length>0 ? <>
       <div class="room-type-chips" role="group" aria-label="Filter by product type"><button type="button" data-type-chip="all" aria-pressed="true">All products ({products.length})</button>{activeTypes.map(type=><button type="button" data-type-chip={type.slug} aria-pressed="false">{type.name} ({type.count})</button>)}</div>
       <div class="shop-view-by"><span class="count" data-filter-count role="status">{products.length} {products.length===1?'find':'finds'}</span><a class="text-link" href="/shop/">View all rooms ↗</a></div>
-      <AffiliateNote />
+      
       <div class="product-grid" data-product-search-list>{products.map(product=><ProductCard product={product}/>)}</div>
       <div class="empty-state" data-no-matches hidden><h3>No products match this type yet.</h3><p>Choose All products to view the full room collection.</p></div>
     </> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>We're curating this room.</h3><p>Our product recommendations aren't ready here yet. Browse the current Shop or discover ideas in the Journal.</p><a class="button secondary" href="/shop/">Browse all finds ↗</a></div>}

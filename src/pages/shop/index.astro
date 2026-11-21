@@ -1,5 +1,4 @@
 ---
-import AffiliateNote from '../../components/AffiliateNote.astro';
 import RoomGrid from '../../components/RoomGrid.astro';
 import EditorialHero from '../../components/EditorialHero.astro';
 import Base from '../../layouts/Base.astro';
@@ -27,7 +26,7 @@ const liveTypes=new Set(products.map(p=>typeSlugForProduct(p.data)).filter(Boole
       </div>
       <span class="count" data-filter-count role="status">{products.length} {products.length===1?'find':'finds'}</span>
     </div>
-    {products.length > 0 && <AffiliateNote />}
+    
     {products.length ? <div class="product-grid" data-product-search-list>{products.map(p=><ProductCard product={p}/>)}</div> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>The edit is coming together.</h3><p>We're reviewing affiliate links and image permissions before adding our first approved finds. In the meantime, explore the Journal.</p><a class="button secondary" href="/journal/">Read the Journal ↗</a></div>}
     {products.length>0 && <div class="empty-state" data-no-matches hidden><h3>No matches yet.</h3><p>Try another room, product type, or search phrase.</p></div>}
     <div class="note-panel"><strong>How we choose:</strong> We prioritize usefulness, fit for real homes, and clear specifications. Our recommendations are editorial selections, not claims of firsthand testing or Amazon customer review scores. Purchases are completed on Amazon, not on this website.</div>

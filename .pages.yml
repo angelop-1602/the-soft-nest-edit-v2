@@ -84,6 +84,10 @@ content:
         label: Product title
         type: string
         required: true
+      - name: card_title
+        label: Short card title (optional)
+        type: string
+        description: Shown only on compact product cards; full title remains on the product page and in SEO.
       - name: rooms
         label: Rooms (choose up to 3)
         type: select
@@ -121,8 +125,9 @@ content:
         type: string
         list: true
       - name: considerations
-        label: What to check before buying
+        label: Helpful buyer notes (public)
         type: text
+        description: Write only practical shopper advice (size, materials, care). Never put photo rights, approval reminders, or internal research notes here.
       - name: affiliate_url
         label: Approved Amazon Associates Special Link
         type: string

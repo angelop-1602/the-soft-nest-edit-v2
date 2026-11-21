@@ -1,5 +1,4 @@
 ---
-import AffiliateNote from '../components/AffiliateNote.astro';
 import EditorialHero from '../components/EditorialHero.astro';
 import EditorialImage from '../components/EditorialImage.astro';
 import Base from '../layouts/Base.astro';
@@ -60,7 +59,7 @@ const schema = {'@context':'https://schema.org','@graph':[{'@type':'Organization
     </div></section>
     {products.length > 0 && <section class="section section-tinted home-finds"><div class="shell">
       <div class="section-head"><div><span class="eyebrow">Thoughtful finds</span><h2 class="section-title">A little more <em>lovely.</em></h2></div><a href="/shop/#all-finds" class="text-link">Browse all finds <span aria-hidden="true">↗</span></a></div>
-      <AffiliateNote /><div class:list={["product-grid", { "featured-single": products.length === 1 }]}>{products.slice(0,3).map(product => <ProductCard {product} />)}</div>
+      <div class:list={["product-grid", { "featured-single": products.length === 1 }]}>{products.slice(0,3).map(product => <ProductCard {product} />)}</div>
     </div></section>}
     <div class="home-closing"><EditorialHero eyebrow="A space to come home to" description="More comfort, less clutter. More meaning, fewer things. Find your own way to make a space feel just right." photo="journal" heading={2}>
       Good living<br/>begins <em>at home.</em>

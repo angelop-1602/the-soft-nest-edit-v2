@@ -1,0 +1,128 @@
+/* The Soft Nest Edit — focused product card and detail refinements.
+ * Works with the current Astro V2 global.css; no changes to checkout or publishing rules.
+ */
+
+/* Dense, consistent catalog cards as the catalog grows. */
+.product-grid:not(.featured-single) { align-items: stretch; }
+.product-grid:not(.featured-single) > .product-card {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+.product-grid:not(.featured-single) > .product-card:is(:hover, :focus-within) {
+  border-color: #b6b3a5;
+  box-shadow: 0 12px 26px rgb(48 47 41 / 7%);
+}
+.product-grid:not(.featured-single) > .product-card .product-visual {
+  flex: 0 0 auto;
+  aspect-ratio: 4 / 3;
+}
+.product-grid:not(.featured-single) > .product-card .product-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  padding: clamp(16px, 1.8vw, 22px);
+}
+.product-card .product-copy .eyebrow {
+  font-size: .68rem;
+  line-height: 1.5;
+  letter-spacing: .13em;
+}
+.product-card .product-copy h3 {
+  font: 400 clamp(1.23rem, 1.45vw, 1.48rem)/1.25 var(--serif);
+  letter-spacing: -.012em;
+  margin: 9px 0 10px;
+}
+.product-card .product-copy h3 a {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card .product-copy > p:not(.affiliate-note) {
+  color: var(--muted);
+  font-size: .87rem;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 15px;
+}
+.product-grid:not(.featured-single) .product-card .product-actions {
+  margin-top: auto;
+  padding-top: 14px;
+}
+.product-card .product-actions .button {
+  min-height: 40px;
+  padding: 9px 13px;
+  font-size: .79rem;
+}
+.product-card .product-actions .save-button { font-size: .81rem; }
+.product-card .product-copy .affiliate-note {
+  margin: 9px 0 0;
+  font-size: .8rem;
+  line-height: 1.55;
+  color: #5e5b51;
+}
+
+/* Featured single product keeps the editorial, split layout. */
+.featured-single > .product-card .product-copy h3 {
+  font-size: clamp(1.3rem, 1.9vw, 1.65rem);
+}
+.featured-single > .product-card .product-copy > p:not(.affiliate-note) {
+  line-height: 1.7;
+  font-size: .9rem;
+}
+
+/* Keep long manufacturer product names legible on individual product pages. */
+.detail { gap: clamp(22px, 4.1vw, 66px); }
+.detail-content { min-width: 0; }
+.detail-content h1 {
+  font: 400 clamp(1.9rem, 2.85vw, 3.05rem)/1.13 var(--serif);
+  letter-spacing: -.024em;
+  max-width: 23ch;
+  margin: 10px 0 15px;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.detail-content .lead {
+  max-width: 56ch;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: .95rem;
+  margin-bottom: 18px;
+}
+.detail-content .detail-points {
+  padding: 9px 0;
+  margin-bottom: 20px;
+}
+.detail-content .detail-points h2 {
+  font: 400 clamp(1.2rem, 1.65vw, 1.48rem)/1.25 var(--serif);
+  margin: 12px 0 4px;
+}
+.detail-content .detail-points p, .detail-content .detail-points li {
+  color: var(--muted);
+  font-size: .91rem;
+  line-height: 1.72;
+}
+.detail-content .detail-cta { align-items: center; gap: 9px; }
+.detail-content .detail-cta .button { min-height: 42px; font-size: .81rem; }
+.detail-content > .affiliate-note {
+  color: #5e5b51;
+  font-size: .82rem;
+  line-height: 1.65;
+  margin: 13px 0 0;
+}
+.detail .detail-image img { object-fit: contain; }
+
+@media (max-width: 700px) {
+  .detail-content h1 { font-size: clamp(1.82rem, 6.2vw, 2.55rem); max-width: 100%; }
+  .detail-content .lead { font-size: .94rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-grid:not(.featured-single) > .product-card { transition: none; }
+}

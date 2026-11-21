@@ -17,7 +17,7 @@ const displayCollection=productRooms[0] || (p.category && p.category !== 'Lifest
     {p.featured && <span class="product-ribbon">Editor's pick</span>}
     <span class="product-arrow" aria-hidden="true">↗</span>
   </a>
-  <div class="product-copy"><span class="eyebrow">{displayCollection} · {p.product_type || 'Curated find'}</span><h3><a href={`/shop/${product.id}/`}>{p.title}</a></h3><p>{p.summary}</p>
+  <div class="product-copy"><span class="eyebrow">{displayCollection} · {p.product_type || 'Curated find'}</span><h3><a href={`/shop/${product.id}/`} aria-label={`View details: ${p.title}`} title={p.title}>{p.card_title || p.title}</a></h3><p>{p.summary}</p>
     <div class="product-actions"><a class="button" aria-describedby={`paid-${product.id}`} href={p.affiliate_url} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate-click={product.id}>View on Amazon ↗</a><button type="button" class="save-button" data-save={product.id} aria-label={`Save ${p.title}`} aria-pressed="false">♡ Save</button></div>
     <AffiliateNote compact id={`paid-${product.id}`} />
   </div>
