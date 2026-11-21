@@ -1,0 +1,176 @@
+/* The Soft Nest Edit — Shop Card Refinement (Nov 2026)
+ * A presentation-only overlay. No product links, auth hooks or disclosures are changed.
+ * Loaded after the existing theme files; scoped to product cards in product grids.
+ */
+
+.product-grid:not(.featured-single) {
+  align-items: stretch;
+  gap: clamp(18px, 2vw, 24px);
+}
+
+.product-grid > .product-card {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fffefa;
+  border: 1px solid #dedbd2;
+  box-shadow: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.product-grid > .product-card:is(:hover, :focus-within) {
+  border-color: #c5bfb2;
+  box-shadow: 0 12px 30px rgb(41 40 34 / 8%);
+  transform: translateY(-2px);
+}
+
+/* Consistent vertical, photographic product tiles. */
+.product-grid:not(.featured-single) > .product-card .product-visual {
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #eae6dd;
+}
+
+.product-grid:not(.featured-single) > .product-card .product-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #eae6dd;
+}
+
+/* Even heights, readable titles, actions aligned across each grid row. */
+.product-grid > .product-card .product-copy {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(16px, 1.75vw, 22px);
+}
+
+.product-grid > .product-card .product-copy > .eyebrow {
+  font-size: .65rem;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: .115em;
+  color: #727365;
+  overflow-wrap: anywhere;
+}
+
+.product-grid > .product-card .product-copy h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.18rem, 1.48vw, 1.44rem);
+  font-weight: 400;
+  line-height: 1.24;
+  letter-spacing: -.012em;
+  margin: 9px 0 9px;
+  min-height: 2.48em;
+  overflow-wrap: anywhere;
+}
+
+.product-grid > .product-card .product-copy h3 a {
+  color: inherit;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.product-grid > .product-card .product-copy h3 a:hover,
+.product-grid > .product-card .product-copy h3 a:focus-visible {
+  color: var(--accent);
+}
+
+.product-grid > .product-card .product-copy > p:not(.affiliate-note) {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #67645b;
+  font-size: .83rem;
+  line-height: 1.58;
+  margin: 0 0 16px;
+  min-height: 4.74em;
+  max-height: 4.74em;
+}
+
+.product-grid > .product-card .product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid #e8e5db;
+}
+
+.product-grid > .product-card .product-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 13px;
+  font-size: .75rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+/* Preserve existing data-save hooks used by the member-login feature. */
+.product-grid > .product-card .product-actions .save-button {
+  min-height: 40px;
+  padding: 8px 4px;
+  font-size: .77rem;
+  line-height: 1.2;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* Keep affiliate disclosures visible and clearly associated with the Amazon CTA. */
+.product-grid > .product-card .product-copy > .affiliate-note {
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: .71rem;
+  line-height: 1.5;
+  color: #68645a;
+}
+
+.product-grid > .product-card .product-copy > .affiliate-note a {
+  color: inherit;
+}
+
+/* Keep V2's intentionally wider split-feature layout. */
+@media (min-width: 1021px) {
+  .featured-single > .product-card {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    align-items: stretch;
+  }
+  .featured-single > .product-card .product-visual {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 530px) {
+  .product-grid > .product-card .product-copy {
+    padding: 17px;
+  }
+  .product-grid > .product-card .product-copy h3 {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-grid > .product-card {
+    transition: none;
+  }
+  .product-grid > .product-card:is(:hover, :focus-within) {
+    transform: none;
+  }
+}

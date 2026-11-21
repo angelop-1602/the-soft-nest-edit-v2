@@ -3,7 +3,9 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "engines": {"node": ">=22.12.0"},
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/postbuild.mjs",
@@ -14,6 +16,14 @@
     "deploy": "npm run build && wrangler deploy",
     "import:v1": "node scripts/import-v1.mjs"
   },
-  "dependencies": {"astro": "^6.0.0", "yaml": "^2.6.1"},
-  "devDependencies": {"@astrojs/check": "^0.9.0", "typescript": "^5.9.0", "wrangler": "^4.0.0"}
+  "dependencies": {
+    "astro": "^6.0.0",
+    "yaml": "^2.6.1",
+    "@supabase/supabase-js": "^2.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.0.0"
+  }
 }

@@ -6,36 +6,16 @@ const products=(await getPublishedProducts()).map(p=>({id:p.id,title:p.data.titl
 const safeJson=JSON.stringify(products).replace(/</g,'\\u003c');
 ---
 <Base title="Your Saved Finds | The Soft Nest Edit" description="Your personally saved home decor recommendations." noindex>
-  <EditorialHero eyebrow="YOUR LITTLE COLLECTION" description="Keep favorite recommendations close while you plan your next styling update. Saved finds stay in this browser." photo="saved">Saved <em>finds.</em></EditorialHero>
-  <section class="section shell section-compact"><noscript><p>Enable JavaScript to see the finds saved in this browser.</p><style>#saved-message{display:none}</style></noscript><p class="count" role="status" id="saved-message">Loading your saved finds...</p><div class="product-grid" id="saved-grid"></div><div class="empty-state" id="saved-empty" hidden><div class="symbol" aria-hidden="true">✳</div><h3>Nothing saved yet.</h3><p>Save your favorite products from the Shop to find them again here.</p><a class="button secondary" href="/shop/">Browse the edit ↗</a></div></section>
+  <EditorialHero eyebrow="YOUR LITTLE COLLECTION" description="Keep favorite recommendations close while you plan your next styling update. Sign in to keep your favorite finds across devices, or save them in this browser." photo="saved">Saved <em>finds.</em></EditorialHero>
+  <section class="section shell section-compact"><noscript><p>Enable JavaScript to see the finds saved in this browser.</p><style>#saved-message{display:none}</style></noscript><p class="count" role="status" id="saved-message">Loading your saved finds...</p><div class="member-saved-gate" id="saved-login-gate" hidden>
+    <h2>Sign in to see your favorites</h2>
+    <p>Use your email to access the products you've saved on any device.</p><button class="button" data-member-open type="button">Sign in with email</button>
+  </div>
+  <p id="saved-local-notice" class="count" hidden>These finds are saved only in this browser. Account syncing will be available when the member service is configured.</p>
+  <div class="member-saved-gate" id="saved-import-gate" hidden><h2>Saved things on this device?</h2>
+    <p>Import your older browser-only saved products into your account. This moves your saved identifiers into your account's private collection.</p>
+    <button class="button secondary" data-import-saved type="button">Import saved finds</button>
+  </div><div class="product-grid" id="saved-grid"></div><div class="empty-state" id="saved-empty" hidden><div class="symbol" aria-hidden="true">✳</div><h3>Nothing saved yet.</h3><p>Save your favorite products from the Shop to find them again here.</p><a class="button secondary" href="/shop/">Browse the edit ↗</a></div></section>
   <script id="saved-data" type="application/json" set:html={safeJson} />
-  <script>
-    const dataEl=document.getElementById('saved-data');
-    const grid=document.getElementById('saved-grid');
-    const empty=document.getElementById('saved-empty');
-    const message=document.getElementById('saved-message');
-    const products:{id:string;title:string;summary:string;category:string;url:string;image:string|null}[] = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
-    const valid=new Map(products.map(p=>[p.id,p]));
-    function renderSaved(){
-      let ids:string[]=[];try{const parsed=JSON.parse(localStorage.getItem('softnest-affiliate-saved-v2')||'[]');ids=Array.isArray(parsed)?parsed.filter(x=>typeof x==='string'&&valid.has(x)):[];}catch{}
-      grid?.replaceChildren();
-      for(const id of [...new Set(ids)]){
-        const p=valid.get(id);if(!p||!grid)continue;
-        const card=document.createElement('article');card.className='product-card';
-        const imageLink=document.createElement('a');imageLink.className='product-visual';imageLink.href=p.url;imageLink.setAttribute('aria-label', `Read about ${p.title}`);
-        if(p.image){const image=document.createElement('img');image.src=p.image;image.alt=p.title;image.loading='lazy';imageLink.append(image)}
-        else {const placeholder=document.createElement('div');placeholder.setAttribute('aria-hidden','true');placeholder.className='product-placeholder';const sym=document.createElement('span');sym.textContent='✳';placeholder.append(sym);imageLink.append(placeholder)}
-        const copy=document.createElement('div');copy.className='product-copy';
-        const label=document.createElement('span');label.className='eyebrow';label.textContent=p.category;
-        const h=document.createElement('h3');const l=document.createElement('a');l.href=p.url;l.textContent=p.title;h.append(l);
-        const summary=document.createElement('p');summary.textContent=p.summary;
-        const actions=document.createElement('div');actions.className='product-actions';
-        const detail=document.createElement('a');detail.className='text-link';detail.href=p.url;detail.textContent='View details ↗';
-        const save=document.createElement('button');save.type='button';save.className='save-button';save.dataset.save=id;save.textContent='♥ Saved';save.setAttribute('aria-pressed','true');save.setAttribute('aria-label',`Remove ${p.title} from saved finds`);
-        actions.append(detail,save);copy.append(label,h,summary,actions);card.append(imageLink,copy);grid.append(card);
-      }
-      if(empty)empty.hidden=ids.length>0;if(message)message.textContent=`${ids.length} saved ${ids.length===1?'find':'finds'}`;
-    }
-    document.addEventListener('softnest:saved',renderSaved);renderSaved();
-  </script>
+<script src="../../scripts/saved-page.js"></script>
 </Base>
