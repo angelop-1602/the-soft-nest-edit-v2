@@ -1,0 +1,91 @@
+/* The Soft Nest Edit — focused Journal, header and member sign-in polish.
+   Imported after prior style layers. Does not change product cards or auth providers. */
+
+/* Keep the clear Shop the Edit destination; avoid a redundant desktop CTA. */
+.site-header .nav-wrap > .nav-cta { display: none; }
+.site-header .nav-wrap { gap: clamp(14px, 2vw, 30px); }
+.site-header .site-nav { gap: clamp(14px, 1.7vw, 28px); }
+.site-header .saved-nav {
+  margin-left: clamp(2px, .5vw, 10px);
+  padding-left: clamp(14px, 1.6vw, 23px);
+}
+.site-header .member-nav {
+  font-size: 11px;
+  letter-spacing: .055em;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 11px 2px;
+}
+.site-header .nav-link,
+.site-header .saved-nav,
+.site-header .member-nav { min-height: 38px; }
+
+/* Pinterest actions: plain editorial underlined links on TWO separate rows.
+   No bordered cards, background fills or columns. */
+.article-aside .pinterest-share-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 230px;
+}
+.article-aside .pinterest-share-links.single { flex-direction: column; }
+.article-aside .pinterest-share-links a {
+  display: inline-block;
+  align-self: flex-start;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0 0 9px;
+  border: 0;
+  border-bottom: 1px solid var(--olive);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #383a31;
+  text-decoration: none;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.article-aside .pinterest-share-links a:is(:hover, :focus-visible) {
+  color: var(--olive-dark);
+  border-bottom-color: var(--olive-dark);
+  background: transparent;
+}
+/* The existing sidebar is hidden on narrow screens: make the published Pin
+   accessible from the article footer there too. */
+.article-footer .article-footer-pin { display: none; }
+
+/* Explicitly hide the form while a sign-in link has been sent. */
+.member-dialog #member-email-form[hidden],
+.member-dialog #member-email-sent[hidden] { display: none !important; }
+.member-email-sent { border: 1px solid #dcd5c9; background: #f5f1e9; padding: 16px; margin: 12px 0 16px; border-radius: 7px; }
+.member-email-sent p { margin: 0 0 12px; font-size: .87rem; }
+.member-email-sent strong { overflow-wrap: anywhere; }
+.member-email-sent-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 15px; }
+.member-email-sent-actions .button { font-size: .8rem; min-height: 40px; }
+.member-email-sent-actions .button:disabled { opacity: .56; cursor: not-allowed; }
+.member-change-email { border: 0; border-bottom: 1px solid currentColor; background: none; color: #525747; cursor: pointer; font: inherit; font-size: .78rem; padding: 5px 0; }
+.member-dialog #member-email-form button:disabled { opacity: .56; cursor: not-allowed; }
+
+@media (max-width: 1020px) {
+  .site-header .site-nav { gap: 14px; }
+  .site-header .saved-nav { margin-left: 0; padding-left: 12px; }
+}
+@media (max-width: 800px) {
+  .site-header .site-nav { gap: 12px; }
+  .site-header .nav-wrap { gap: 12px; }
+  .site-header .member-nav { padding: 10px 0; font-size: 13px; text-align: left; }
+}
+@media (max-width: 700px) {
+  .article-footer .article-footer-pin { display: inline-flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .article-aside .pinterest-share-links a { transition: none; }
+}

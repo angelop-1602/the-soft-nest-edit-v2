@@ -61,6 +61,12 @@ function publish() {
   if (guestSection) guestSection.hidden = !!currentUser;
   if (memberSection) memberSection.hidden = !currentUser;
   if (emailDisplay) emailDisplay.textContent = currentUser?.email || 'Your account';
+  if (currentUser && sentEmail) {
+    clearEmailState();
+    if (dialog?.open) dialog.close();
+  } else {
+    refreshEmailUI();
+  }
   document.dispatchEvent(new CustomEvent('softnest:saved', {detail: {
     ids: [...ids], mode, email: currentUser?.email || null,
     legacyCount: storedLocal().length, ready: isReady
@@ -69,6 +75,7 @@ function publish() {
 function showDialog() {
   if (!client) { say('Member sign-in has not been enabled. Saves still work on this device.'); return; }
   say('');
+  refreshEmailUI();
   if (dialog && !dialog.open) dialog.showModal();
   if (!currentUser) form?.querySelector('input[type="email"]')?.focus();
 }
@@ -171,19 +178,126 @@ document.addEventListener('click', event => {
     });
   }
 });
-form?.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (!client) return;
-  const field = form.querySelector('input[type="email"]');
-  const email = field?.value?.trim() || '';
-  if (!email || !field.validity.valid) { say('Enter a valid email address.'); return; }
-  const button = form.querySelector('button[type="submit"]');
-  button.disabled = true;
+/* softnest-member-email-flow-v2
+ * This snippet replaces only the sign-in submit handler in saved-members.js.
+ * Existing Supabase persistent auth, product saves and RLS queries stay intact.
+ */
+const EMAIL_COOLDOWN_MS = 60_000;
+const emailSentStateKey = 'softnest-member-email-sent-v2';
+const sentSection = document.getElementById('member-email-sent');
+const sentAddress = document.getElementById('member-email-sent-to');
+const resendButton = document.getElementById('member-resend-link');
+const changeEmailButton = document.getElementById('member-change-email');
+const emailInput = form?.querySelector('input[type="email"]');
+const emailSubmit = form?.querySelector('button[type="submit"]');
+const productionRedirect = dialog?.getAttribute('data-auth-redirect') || `${window.location.origin}/shop/saved/`;
+let sentEmail = '';
+let cooldownEmail = '';
+let cooldownUntil = 0;
+let editingEmail = false;
+let sendingLink = false;
+let cooldownTimer = null;
+
+function remainingSeconds() { return Math.max(0, Math.ceil((cooldownUntil - Date.now()) / 1000)); }
+function restoreEmailState() {
+  try {
+    const value = JSON.parse(sessionStorage.getItem(emailSentStateKey) || 'null');
+    if (value && typeof value.email === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value.email) && Number.isFinite(value.until)) {
+      sentEmail = value.email;
+      cooldownEmail = value.email;
+      cooldownUntil = value.until;
+    }
+  } catch { /* Browsers may restrict session storage */ }
+}
+function saveEmailState() {
+  try { sessionStorage.setItem(emailSentStateKey, JSON.stringify({email: sentEmail, until: cooldownUntil})); }
+  catch { /* In-memory countdown still works */ }
+}
+function stopCooldownTimer() {
+  if (cooldownTimer !== null) { window.clearInterval(cooldownTimer); cooldownTimer = null; }
+}
+function refreshEmailUI() {
+  const showSent = !!sentEmail && !editingEmail && !currentUser;
+  const remaining = remainingSeconds();
+  if (form) form.hidden = showSent;
+  if (sentSection) sentSection.hidden = !showSent;
+  if (sentAddress) sentAddress.textContent = sentEmail;
+  if (resendButton) {
+    resendButton.disabled = sendingLink || !showSent || remaining > 0;
+    resendButton.textContent = remaining ? `Resend link (${remaining}s)` : sendingLink ? 'Sending…' : 'Resend link';
+  }
+  if (emailSubmit) {
+    const sameAddress = (emailInput?.value || '').trim().toLowerCase() === cooldownEmail.toLowerCase();
+    emailSubmit.disabled = sendingLink || (sameAddress && remaining > 0);
+    emailSubmit.textContent = sendingLink ? 'Sending…' : 'Email me a sign-in link';
+  }
+  if (remaining > 0 && cooldownTimer === null) cooldownTimer = window.setInterval(refreshEmailUI, 1000);
+  if (remaining === 0) stopCooldownTimer();
+}
+function clearEmailState() {
+  sentEmail = '';
+  cooldownEmail = '';
+  cooldownUntil = 0;
+  editingEmail = false;
+  try { sessionStorage.removeItem(emailSentStateKey); } catch { /* storage unavailable */ }
+  refreshEmailUI();
+}
+async function sendSignInLink(email) {
+  if (!client || currentUser || sendingLink) return;
+  const normalized = email.trim().toLowerCase();
+  if (normalized === cooldownEmail && remainingSeconds() > 0) {
+    say(`You can request another link in ${remainingSeconds()} seconds.`);
+    refreshEmailUI();
+    return;
+  }
+  sendingLink = true;
+  refreshEmailUI();
   say('Sending your sign-in link…');
-  const {error} = await client.auth.signInWithOtp({email, options: {emailRedirectTo: `${window.location.origin}/shop/saved/`, shouldCreateUser: true}});
-  button.disabled = false;
-  say(error ? `We couldn't send the email: ${error.message}` : 'Check your inbox for a sign-in link. Open it to finish signing in.');
+  try {
+    const {error} = await client.auth.signInWithOtp({
+      email: normalized,
+      options: {emailRedirectTo: productionRedirect, shouldCreateUser: true}
+    });
+    if (error) {
+      say(`We couldn't send the email: ${error.message}`);
+      return;
+    }
+    sentEmail = normalized;
+    cooldownEmail = normalized;
+    cooldownUntil = Date.now() + EMAIL_COOLDOWN_MS;
+    editingEmail = false;
+    saveEmailState();
+    say('Check your inbox. Open your sign-in link to sign in automatically.');
+  } catch {
+    say('The sign-in request failed. Check your connection and try again.');
+  } finally {
+    sendingLink = false;
+    refreshEmailUI();
+  }
+}
+form?.addEventListener('submit', event => {
+  event.preventDefault();
+  const email = emailInput?.value?.trim() || '';
+  if (!emailInput || !emailInput.validity.valid || !email) {
+    say('Enter a valid email address.');
+    return;
+  }
+  void sendSignInLink(email);
 });
+resendButton?.addEventListener('click', () => {
+  if (!sentEmail || remainingSeconds() > 0) return;
+  void sendSignInLink(sentEmail);
+});
+changeEmailButton?.addEventListener('click', () => {
+  editingEmail = true;
+  refreshEmailUI();
+  say('Enter another email address.');
+  emailInput?.focus();
+  emailInput?.select();
+});
+emailInput?.addEventListener('input', refreshEmailUI);
+restoreEmailState();
+refreshEmailUI();
 document.addEventListener('softnest:request-saved', publish);
 if (client) {
   client.auth.onAuthStateChange(() => { window.setTimeout(() => { void syncFromServer(); }, 0); });

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/v1-parity.css';
 import '../styles/saved-members.css';
 import '../styles/shop-card-refinement.css';
+import '../styles/header-pinterest-auth.css';
 import site from '../data/site.json';
 import { asAbsolute } from '../lib/escapes';
 interface Props {
@@ -62,14 +63,22 @@ const path = Astro.url.pathname;
       </div>
     </header>
     <main id="main"><slot /></main>
-    <dialog class="member-dialog" id="member-dialog" aria-labelledby="member-heading">
+    <dialog class="member-dialog" id="member-dialog" aria-labelledby="member-heading" data-auth-redirect={new URL('/shop/saved/', site.url).href}>
       <button type="button" class="member-close" data-member-close aria-label="Close sign-in dialog">×</button>
       <h2 id="member-heading">Your saved finds</h2>
       <div id="member-guest"><p>Sign in by email to keep your favorite home finds across devices. No password needed.</p>
         <form id="member-email-form"><label class="member-email-label" for="member-email-input">Email address</label>
           <input class="member-email-input" id="member-email-input" type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
           <button class="button" type="submit">Email me a sign-in link</button>
-        </form><p><small>See our <a href="/privacy/">Privacy Policy</a> for account and saved-list data.</small></p></div>
+        </form>
+        <div class="member-email-sent" id="member-email-sent" hidden>
+          <p>We emailed a secure sign-in link to <strong id="member-email-sent-to"></strong>. Open it to sign in automatically.</p>
+          <div class="member-email-sent-actions">
+            <button type="button" class="button secondary" id="member-resend-link" disabled>Resend link (60s)</button>
+            <button type="button" class="member-change-email" id="member-change-email">Change email</button>
+          </div>
+        </div>
+        <p><small>See our <a href="/privacy/">Privacy Policy</a> for account and saved-list data.</small></p></div>
       <div id="member-signed-in" hidden><p>Signed in as <strong id="member-email"></strong></p>
         <p><a class="text-link" href="/shop/saved/">View your saved finds ↗</a></p>
         <button type="button" class="button secondary" data-member-signout>Sign out</button>
