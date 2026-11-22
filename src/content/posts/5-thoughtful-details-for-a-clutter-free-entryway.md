@@ -5,6 +5,7 @@ category: Home Organization
 description: "Create a welcoming, organized entryway with a shoe bench, wall hooks, key shelf, round mirror, and practical hallway runner."
 image: /uploads/entryway-five-thoughtful-details-hero.webp
 image_alt: "AI-generated wide entryway styling scene with a wood shoe bench, round mirror, wall hooks, five-hook key shelf, and geometric runner"
+pinterest_pin_url: "https://pin.it/3synxBjwa"
 published: true
 featured: true
 related_products:
