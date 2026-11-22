@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 const browserKey = 'softnest-affiliate-saved-v2';
-const pendingKey = 'softnest-pending-member-save';
+const pendingKey = 'softnest-pending-member-saves-v3';
 const isSlug = (v) => typeof v === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v) && v.length <= 120;
 const url = import.meta.env.PUBLIC_SUPABASE_URL;
 const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -14,6 +14,7 @@ const msg = document.getElementById('member-message');
 const emailDisplay = document.getElementById('member-email');
 const guestSection = document.getElementById('member-guest');
 const memberSection = document.getElementById('member-signed-in');
+const pendingHint = document.getElementById('member-pending-detail');
 let currentUser = null;
 let ids = new Set();
 let isReady = false;
@@ -29,15 +30,50 @@ function localWrite(next) {
   try { localStorage.setItem(browserKey, JSON.stringify([...next])); }
   catch { say('Browser storage is unavailable; the change may not persist.'); }
 }
+/* softnest-member-continuity-v3
+ * Product selection survives an email-link opening in another tab on the same origin.
+ * Only public product slugs are stored. Supabase owns auth tokens and RLS enforcement.
+ */
+const legacyPendingKey = 'softnest-pending-member-save';
+const PENDING_TTL_MS = 24 * 60 * 60 * 1000;
 function pendingRead() {
-  try { const v = sessionStorage.getItem(pendingKey); return isSlug(v) ? v : null; }
-  catch { return null; }
+  const result = [];
+  try {
+    const raw = JSON.parse(localStorage.getItem(pendingKey) || 'null');
+    if (raw && Array.isArray(raw.slugs) && typeof raw.createdAt === 'number' &&
+      raw.createdAt <= Date.now() + 60_000 && Date.now() - raw.createdAt < PENDING_TTL_MS) {
+      result.push(...raw.slugs.filter(isSlug));
+    } else if (raw) {
+      localStorage.removeItem(pendingKey); // expire stale selections
+    }
+  } catch { /* Browser storage may be restricted */ }
+  // Import an older pending click stored in this tab by the previous version.
+  try {
+    const legacy = sessionStorage.getItem(legacyPendingKey);
+    if (isSlug(legacy)) result.push(legacy);
+  } catch { /* no legacy state */ }
+  return [...new Set(result)].slice(0, 20);
 }
-function pendingWrite(v) {
-  try { sessionStorage.setItem(pendingKey, v); } catch { /* session storage blocked */ }
+function pendingWrite(slug) {
+  if (!isSlug(slug)) return;
+  try {
+    const slugs = [...new Set([...pendingRead(), slug])].slice(-20);
+    localStorage.setItem(pendingKey, JSON.stringify({ slugs, createdAt: Date.now() }));
+    sessionStorage.removeItem(legacyPendingKey);
+  } catch {
+    // Same-tab fallback if localStorage has been disabled by the browser.
+    try { sessionStorage.setItem(legacyPendingKey, slug); } catch { /* blocked */ }
+  }
 }
-function pendingClear() {
-  try { sessionStorage.removeItem(pendingKey); } catch { /* session storage blocked */ }
+function pendingClear(done) {
+  try {
+    if (Array.isArray(done)) {
+      const remaining = pendingRead().filter(slug => !done.includes(slug));
+      if (remaining.length) localStorage.setItem(pendingKey, JSON.stringify({slugs: remaining, createdAt: Date.now()}));
+      else localStorage.removeItem(pendingKey);
+    } else localStorage.removeItem(pendingKey);
+  } catch { /* storage unavailable */ }
+  try { sessionStorage.removeItem(legacyPendingKey); } catch { /* storage unavailable */ }
 }
 function say(value) {
   if (msg) msg.textContent = value;
@@ -75,6 +111,8 @@ function publish() {
 function showDialog() {
   if (!client) { say('Member sign-in has not been enabled. Saves still work on this device.'); return; }
   say('');
+  const queued = pendingRead();
+  if (pendingHint) pendingHint.hidden = queued.length === 0 || !!currentUser;
   refreshEmailUI();
   if (dialog && !dialog.open) dialog.showModal();
   if (!currentUser) form?.querySelector('input[type="email"]')?.focus();
@@ -99,10 +137,18 @@ async function syncFromServer() {
   }
   const id = currentUser.id;
   const pending = pendingRead();
-  if (pending) {
-    const {error} = await client.from('saved_products').upsert({user_id: id, product_slug: pending}, {onConflict: 'user_id,product_slug'});
-    if (!error) pendingClear();
-    else say('Signed in, but the product could not be saved. Check the member database configuration.');
+  if (pending.length) {
+    const {error} = await client.from('saved_products').upsert(
+      pending.map(product_slug => ({user_id: id, product_slug})),
+      {onConflict: 'user_id,product_slug'}
+    );
+    if (mine !== revision) return;
+    if (!error) {
+      pendingClear(pending);
+      say(pending.length === 1 ? 'Your selected product was saved to your account.' : 'Your selected products were saved to your account.');
+    } else {
+      say('You are signed in, but the selected product could not be saved. Please try again from the Shop.');
+    }
   }
   const {data, error} = await client.from('saved_products').select('product_slug').eq('user_id', id).order('saved_at', {ascending: false}).limit(100);
   if (mine !== revision) return;
@@ -299,7 +345,38 @@ emailInput?.addEventListener('input', refreshEmailUI);
 restoreEmailState();
 refreshEmailUI();
 document.addEventListener('softnest:request-saved', publish);
+/* Refresh authenticated state when returning to the original tab. Supabase also
+ * synchronizes its own auth events; this is a defensive UI refresh only. */
+let syncScheduled = false;
+function scheduleMemberRefresh() {
+  if (!client || syncScheduled) return;
+  syncScheduled = true;
+  window.setTimeout(() => {
+    syncScheduled = false;
+    void syncFromServer();
+  }, 40);
+}
+const authChannel = client && typeof BroadcastChannel === 'function'
+  ? new BroadcastChannel('softnest-member-auth-ui-v3') : null;
+authChannel?.addEventListener('message', event => {
+  if (event.data?.type === 'auth-changed') scheduleMemberRefresh();
+});
+window.addEventListener('focus', scheduleMemberRefresh);
+window.addEventListener('pageshow', scheduleMemberRefresh);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') scheduleMemberRefresh();
+});
+window.addEventListener('storage', event => {
+  if (event.key === pendingKey || event.key?.startsWith('sb-') && event.key?.endsWith('-auth-token')) {
+    scheduleMemberRefresh();
+  }
+});
 if (client) {
-  client.auth.onAuthStateChange(() => { window.setTimeout(() => { void syncFromServer(); }, 0); });
+  client.auth.onAuthStateChange(event => {
+    if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      authChannel?.postMessage({type: 'auth-changed'}); // never send credentials
+    }
+    scheduleMemberRefresh();
+  });
 }
 void syncFromServer();

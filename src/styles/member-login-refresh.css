@@ -1,0 +1,90 @@
+/* The Soft Nest Edit — member dialog refinement, scoped to existing member UI.
+   Imported AFTER header-pinterest-auth.css; doesn't affect other dialogs. */
+.member-dialog[open] {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(460px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: min(88dvh, 730px);
+  margin: auto;
+  padding: clamp(24px, 4vw, 38px);
+  overflow-y: auto;
+  background: #fbf9f4;
+  color: #36392d;
+  border: 1px solid #dfd9ca;
+  border-radius: 14px;
+  box-shadow: 0 28px 110px rgba(24, 31, 22, .28);
+  text-align: center;
+}
+.member-dialog::backdrop { background: rgba(22, 28, 19, .68); backdrop-filter: blur(4px); }
+.member-dialog .member-close {
+  top: 12px; right: 14px; width: 36px; height: 36px;
+  display: grid; place-items: center; padding: 0;
+  border: 1px solid #ded9cb; border-radius: 50%;
+  background: #f8f5ee; color: #5a604d; font-size: 25px; line-height: 1;
+}
+.member-dialog .member-close:hover,
+.member-dialog .member-close:focus-visible { background: #eeeadd; outline-offset: 3px; }
+.member-brandline {
+  margin: 0 auto 17px;
+  color: #71775d; font-size: .64rem; font-weight: 700;
+  letter-spacing: .2em; line-height: 1.4; text-transform: uppercase;
+}
+.member-icon {
+  display: grid; place-items: center; margin: 0 auto 16px;
+  width: 58px; height: 58px; border: 1px solid #d6d9c9;
+  border-radius: 50%; background: #edf0e6; color: #737a58;
+  font-size: 30px; font-weight: 400;
+}
+.member-dialog #member-heading {
+  margin: 0 0 12px; color: #343a2e;
+  font-size: clamp(1.9rem, 4vw, 2.28rem);
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400; line-height: 1.12;
+}
+.member-dialog #member-guest > .member-lede,
+.member-dialog #member-signed-in > .member-lede {
+  margin: 0 auto 23px; max-width: 34ch;
+  color: #67695d; font-size: .92rem; line-height: 1.6;
+}
+.member-dialog #member-guest[hidden],
+.member-dialog #member-signed-in[hidden] { display: none !important; }
+.member-dialog #member-email-form { text-align: left; margin: 0 0 16px; }
+.member-dialog .member-email-label {
+  color: #3e4537; font-size: .75rem; letter-spacing: .035em;
+  margin-bottom: 9px;
+}
+.member-dialog .member-email-input {
+  display: block; width: 100%; box-sizing: border-box;
+  min-height: 48px; border: 1px solid #c6c7b8; border-radius: 6px;
+  padding: 11px 13px; margin-bottom: 13px; background: #fffefa;
+  color: #33382c; font: inherit; font-size: .94rem;
+}
+.member-dialog .member-email-input:focus-visible { outline: 2px solid #777f5a; outline-offset: 2px; }
+.member-dialog #member-email-form .button {
+  display: flex; width: 100%; align-items: center; justify-content: center;
+  min-height: 48px; padding: 12px 16px; border-radius: 5px;
+  font-size: .88rem; font-weight: 600;
+}
+.member-dialog #member-guest > p:last-child { margin: 16px auto 0; color: #77796f; }
+.member-dialog #member-guest > p:last-child a { color: #555f42; text-underline-offset: 3px; }
+.member-dialog .member-pending-detail {
+  border: 1px solid #daddcf; padding: 10px 12px; border-radius: 6px;
+  background: #f0f3e9; color: #4d5a3d; font-size: .83rem;
+  line-height: 1.5; margin: 0 0 16px;
+}
+.member-dialog .member-pending-detail[hidden] { display: none !important; }
+.member-dialog .member-email-sent { text-align: center; border-color: #d9ddcb; background: #f2f4ea; }
+.member-dialog .member-email-sent p { line-height: 1.5; }
+.member-dialog .member-email-sent-actions { justify-content: center; }
+.member-dialog #member-signed-in p { overflow-wrap: anywhere; }
+.member-dialog #member-signed-in .button { margin-top: 8px; }
+.member-dialog .member-message { margin: 15px 0 0; color: #667053; line-height: 1.5; }
+@media (max-width: 480px) {
+  .member-dialog[open] { padding: 24px 20px 27px; border-radius: 10px; }
+  .member-dialog .member-close { top: 10px; right: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .member-dialog::backdrop { backdrop-filter: none; }
+}

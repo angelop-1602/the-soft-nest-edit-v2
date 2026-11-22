@@ -4,6 +4,7 @@ import '../styles/v1-parity.css';
 import '../styles/saved-members.css';
 import '../styles/shop-card-refinement.css';
 import '../styles/header-pinterest-auth.css';
+import '../styles/member-login-refresh.css';
 import site from '../data/site.json';
 import { asAbsolute } from '../lib/escapes';
 interface Props {
@@ -66,14 +67,17 @@ const path = Astro.url.pathname;
     <main id="main"><slot /></main>
     <dialog class="member-dialog" id="member-dialog" aria-labelledby="member-heading" data-auth-redirect={new URL('/shop/saved/', site.url).href}>
       <button type="button" class="member-close" data-member-close aria-label="Close sign-in dialog">×</button>
-      <h2 id="member-heading">Your saved finds</h2>
-      <div id="member-guest"><p>Sign in by email to keep your favorite home finds across devices. No password needed.</p>
+      <div class="member-brandline">✳ THE SOFT NEST EDIT / MEMBERS</div>
+      <div class="member-icon" aria-hidden="true">♡</div>
+      <h2 id="member-heading">Welcome to your edit.</h2>
+      <div id="member-guest"><p class="member-lede">Save the little details you love. Sign in securely by email to keep your favorites across visits.</p>
+        <p class="member-pending-detail" id="member-pending-detail" hidden>Your selected product will be saved as soon as you sign in.</p>
         <form id="member-email-form"><label class="member-email-label" for="member-email-input">Email address</label>
           <input class="member-email-input" id="member-email-input" type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
           <button class="button" type="submit">Email me a sign-in link</button>
         </form>
         <div class="member-email-sent" id="member-email-sent" hidden>
-          <p>We emailed a secure sign-in link to <strong id="member-email-sent-to"></strong>. Open it to sign in automatically.</p>
+          <p>We emailed a secure sign-in link to <strong id="member-email-sent-to"></strong>. Open it to sign in automatically. Your selected product will be saved to your account after authentication.</p>
           <div class="member-email-sent-actions">
             <button type="button" class="button secondary" id="member-resend-link" disabled>Resend link (60s)</button>
             <button type="button" class="member-change-email" id="member-change-email">Change email</button>
