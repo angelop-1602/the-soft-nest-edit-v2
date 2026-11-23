@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import EditorialHero from '../components/EditorialHero.astro';
+import site from '../data/site.json';
+---
+<Base title="Terms & Conditions | The Soft Nest Edit" description="Read the terms for browsing The Soft Nest Edit, using saved finds, and following editorial product links.">
+  <EditorialHero eyebrow="GOOD TO KNOW" description="Clear expectations for using our home-decor editorial website and member features.">Terms &amp; <em>conditions.</em></EditorialHero>
+  <div class="shell info-page">
+    <p><strong>Effective date:</strong> November 22, 2026. <strong>Version:</strong> 2026-11-22.</p>
+    <p>These Terms &amp; Conditions ("Terms") govern your use of <a href="https://thesoftnestedit.online/">thesoftnestedit.online</a> (the "Site"), operated under the name The Soft Nest Edit ("we", "us" or "our"). By using the Site, you agree to follow these Terms. Signing in requires an affirmative acknowledgement of these Terms and our <a href="/privacy/">Privacy Policy</a>. If you do not agree, do not create or use an account.</p>
+    <h2>1. Editorial content, not professional advice</h2>
+    <p>We publish home-styling ideas, research-based product roundups and shopping inspiration for general information. Articles may feature AI-generated styling illustrations and are not necessarily photographs of the exact items sold. We do not claim to have personally tested a product unless an article expressly says so. Check dimensions, variants, product safety, weight capacities, mounting requirements, seller information and current listing details before purchasing or using an item.</p>
+    <h2>2. Affiliate links and third-party retailers</h2>
+    <p>Some outbound links are affiliate links. As an Amazon Associate I earn from qualifying purchases. We may receive a commission if you purchase through qualifying links, at no additional cost to you. Purchases, pricing, payment, refunds, shipping, warranties and returns are handled by the retailer under its own policies. We do not sell or fulfill the goods linked from our editorial pages.</p>
+    <h2>3. Member accounts and saved finds</h2>
+    <p>Member sign-in uses time-limited, one-use email links. You are responsible for maintaining access to your email account and securing your browsing sessions. Do not attempt to access other people's saved lists, interfere with the Site, or exploit the sign-in service. Saved items are a convenience feature; availability of a linked product or uninterrupted account access is not guaranteed.</p>
+    <h2>4. Optional email updates</h2>
+    <p>Newsletter participation is optional and separate from account access. Selecting the newsletter checkbox expresses an interest in receiving occasional decor ideas and site updates. You may change your choice in the signed-in Account dialog. Marketing emails will only begin after a delivery service and appropriate unsubscribe processes have been configured. We may send essential account/security emails separately from marketing messages.</p>
+    <h2>5. Respect for the Site</h2>
+    <p>You may browse and share links to our pages for personal, lawful use. You may not use automated requests that disrupt the service, copy substantial amounts of our editorial text or images for redistribution without permission, misrepresent an affiliation with us, or submit harmful or unlawful material through future interactive features.</p>
+    <h2>6. Availability, accuracy and limitations</h2>
+    <p>We try to keep content helpful and accurate but cannot guarantee that every description, link, image, feature or third-party product remains current. We may update, suspend or remove Site features at any time. To the extent permitted by applicable law, the Site is provided without warranties of uninterrupted availability or fitness for a particular purpose. Nothing in these Terms excludes statutory rights or limits liability where the law prohibits doing so.</p>
+    <h2>7. Privacy and service providers</h2>
+    <p>We use service providers for hosting and account functionality, including Cloudflare and Supabase. Information about personal data, consent choices, retention and relevant rights appears in our <a href="/privacy/">Privacy Policy</a>.</p>
+    <h2>8. Updates to these Terms</h2>
+    <p>We may revise these Terms as Site features and legal requirements change. We will post the current version and effective date here; significant changes may require a renewed acknowledgement when you sign in. The previous terms acceptance record is not a substitute for reading an updated version.</p>
+    <h2>9. Contact</h2>
+    <p>For questions about these Terms, use our <a href="/contact/">Contact page</a>{site.contactEmail && <> or email <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></>}.</p>
+  </div>
+</Base>

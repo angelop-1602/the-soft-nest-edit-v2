@@ -2,6 +2,7 @@
 import EditorialHero from '../components/EditorialHero.astro';
 import EditorialImage from '../components/EditorialImage.astro';
 import Base from '../layouts/Base.astro';
+import AdSlot from '../components/AdSlot.astro';
 import ProductCard from '../components/ProductCard.astro';
 import JournalCard from '../components/JournalCard.astro';
 import { getPublishedProducts, getPublishedPosts } from '../lib/catalog';
@@ -43,6 +44,7 @@ const schema = {'@context':'https://schema.org','@graph':[{'@type':'Organization
       <div class="section-head"><div><span class="eyebrow">The latest from our Journal</span><h2 class="section-title">Stories for <em>living well.</em></h2></div><a href="/journal/" class="text-link">View the Journal <span aria-hidden="true">↗</span></a></div>
       <div class="journal-grid">{posts.slice(0,3).map(post => <JournalCard {post} />)}</div>
     </div></section>
+    <AdSlot placement="home" />
     <section class="home-quote" aria-label="Our philosophy"><div class="shell">
       <span class="eyebrow">A little beauty, every day</span>
       <blockquote>“A home should feel like <em>your favourite place to be.</em>”</blockquote>

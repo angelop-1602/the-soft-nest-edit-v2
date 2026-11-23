@@ -1,5 +1,6 @@
 /** Member saves for the static Astro storefront. Browser only; Supabase RLS owns access control. */
 import { createClient } from '@supabase/supabase-js';
+import {captureMemberConsentIntent, syncMemberPreferences} from './member-consents.js';
 
 const browserKey = 'softnest-affiliate-saved-v2';
 const pendingKey = 'softnest-pending-member-saves-v3';
@@ -156,6 +157,7 @@ async function syncFromServer() {
   else ids = new Set((data || []).map(record => record.product_slug).filter(isSlug));
   isReady = true;
   publish();
+  void syncMemberPreferences(client, currentUser);
 }
 
 async function toggleSave(button) {
@@ -243,6 +245,10 @@ let cooldownUntil = 0;
 let editingEmail = false;
 let sendingLink = false;
 let cooldownTimer = null;
+// softnest-auth-choices-v1: distinct passwordless account creation and returning sign-in.
+const authButtons = Array.from(document.querySelectorAll('[data-auth-mode]'));
+const authHelp = document.getElementById('member-auth-mode-help');
+let authMode = 'signin';
 
 function remainingSeconds() { return Math.max(0, Math.ceil((cooldownUntil - Date.now()) / 1000)); }
 function restoreEmailState() {
@@ -252,17 +258,22 @@ function restoreEmailState() {
       sentEmail = value.email;
       cooldownEmail = value.email;
       cooldownUntil = value.until;
+      authMode = value.mode === 'signup' ? 'signup' : 'signin';
     }
   } catch { /* Browsers may restrict session storage */ }
 }
 function saveEmailState() {
-  try { sessionStorage.setItem(emailSentStateKey, JSON.stringify({email: sentEmail, until: cooldownUntil})); }
+  try { sessionStorage.setItem(emailSentStateKey, JSON.stringify({email: sentEmail, until: cooldownUntil, mode: authMode})); }
   catch { /* In-memory countdown still works */ }
 }
 function stopCooldownTimer() {
   if (cooldownTimer !== null) { window.clearInterval(cooldownTimer); cooldownTimer = null; }
 }
 function refreshEmailUI() {
+  authButtons.forEach(tab => tab.setAttribute('aria-pressed', String(tab.dataset.authMode === authMode)));
+  if(authHelp) authHelp.textContent = authMode === 'signup'
+    ? 'New here? Create your account with a secure email confirmation link. No password required.'
+    : 'Already have an account? Enter your email for a secure sign-in link.';
   const showSent = !!sentEmail && !editingEmail && !currentUser;
   const remaining = remainingSeconds();
   if (form) form.hidden = showSent;
@@ -275,7 +286,7 @@ function refreshEmailUI() {
   if (emailSubmit) {
     const sameAddress = (emailInput?.value || '').trim().toLowerCase() === cooldownEmail.toLowerCase();
     emailSubmit.disabled = sendingLink || (sameAddress && remaining > 0);
-    emailSubmit.textContent = sendingLink ? 'Sending…' : 'Email me a sign-in link';
+    emailSubmit.textContent = sendingLink ? 'Sending…' : authMode === 'signup' ? 'Create account via email' : 'Send sign-in link';
   }
   if (remaining > 0 && cooldownTimer === null) cooldownTimer = window.setInterval(refreshEmailUI, 1000);
   if (remaining === 0) stopCooldownTimer();
@@ -298,22 +309,23 @@ async function sendSignInLink(email) {
   }
   sendingLink = true;
   refreshEmailUI();
-  say('Sending your sign-in link…');
+  say(authMode === 'signup' ? 'Sending your account confirmation link…' : 'Sending your sign-in link…');
   try {
     const {error} = await client.auth.signInWithOtp({
       email: normalized,
-      options: {emailRedirectTo: productionRedirect, shouldCreateUser: true}
+      options: {emailRedirectTo: productionRedirect, shouldCreateUser: authMode === 'signup'}
     });
     if (error) {
       say(`We couldn't send the email: ${error.message}`);
       return;
     }
+    captureMemberConsentIntent(normalized);
     sentEmail = normalized;
     cooldownEmail = normalized;
     cooldownUntil = Date.now() + EMAIL_COOLDOWN_MS;
     editingEmail = false;
     saveEmailState();
-    say('Check your inbox. Open your sign-in link to sign in automatically.');
+    say(authMode === 'signup' ? 'Check your email for the account confirmation link. Also check Spam, Junk and Promotions.' : 'Check your email for a sign-in link. Also check Spam, Junk and Promotions.');
   } catch {
     say('The sign-in request failed. Check your connection and try again.');
   } finally {
@@ -342,6 +354,21 @@ changeEmailButton?.addEventListener('click', () => {
   emailInput?.select();
 });
 emailInput?.addEventListener('input', refreshEmailUI);
+authButtons.forEach(button => button.addEventListener('click', () => {
+  const selected=button.dataset.authMode;
+  if(selected!=='signin' && selected!=='signup')return;
+  if(sendingLink || selected===authMode)return;
+  authMode=selected;
+  sentEmail='';
+  editingEmail=false;
+  // Do not reset the same-email send cooldown when switching modes.
+  authButtons.forEach(tab => tab.setAttribute('aria-pressed',String(tab.dataset.authMode===authMode)));
+  if(authHelp) authHelp.textContent=authMode==='signup'
+    ? 'New here? Create your account with a secure email confirmation link. No password required.'
+    : 'Already have an account? Enter your email for a secure sign-in link.';
+  say('');
+  refreshEmailUI();
+}));
 restoreEmailState();
 refreshEmailUI();
 document.addEventListener('softnest:request-saved', publish);

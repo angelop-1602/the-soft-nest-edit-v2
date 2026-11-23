@@ -1,0 +1,20 @@
+/* Intentionally empty when disabled: no ad boxes or layout shifts before approval. */
+.softnest-ad-slot {
+  width: min(100%, 970px);
+  margin: clamp(34px, 5vw, 54px) auto;
+  padding: 16px 12px;
+  border-top: 1px solid var(--line, #ddd5c9);
+  border-bottom: 1px solid var(--line, #ddd5c9);
+}
+.softnest-ad-label {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 10px/1.4 var(--sans, sans-serif);
+  letter-spacing: .16em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--muted, #77776d);
+}
+@media (max-width: 700px) {
+  .softnest-ad-slot { padding-inline: 0; }
+}

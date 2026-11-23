@@ -1,0 +1,26 @@
+/* Scoped member legal acknowledgement and optional newsletter UI. */
+.member-dialog .member-consent-choice {
+  display: flex; align-items: flex-start; gap: 12px; margin: 13px 0;
+  font-size: .86rem; line-height: 1.55; color: #43473b;
+  cursor: pointer; text-align: left;
+}
+.member-dialog .member-consent-choice input[type='checkbox'] {
+  appearance: auto; flex: 0 0 18px; width: 18px; height: 18px;
+  margin: 2px 0 0; accent-color: #707a57; cursor: pointer;
+}
+.member-dialog .member-consent-choice a { color: #546442; text-decoration: underline; text-underline-offset: 3px; }
+.member-dialog .member-consent-choice small { display:block; margin-top: 3px; color:#74796b; font-size: .76rem; }
+.member-dialog .member-consent-choice:focus-within { outline: 2px solid #747b57; outline-offset: 4px; border-radius: 3px; }
+.member-dialog .member-consent-separator { border-top: 1px solid #e4ddcf; margin: 17px 0 14px; }
+.member-dialog .member-consent-optin { margin-bottom: 19px; }
+.member-dialog #member-email-form > button[type='submit'] { display: flex; width: 100%; justify-content: center; }
+.member-dialog .member-consent-account { margin: 19px 0 14px; padding-top: 12px; border-top: 1px solid #e4ddcf; }
+.member-dialog .member-consent-account h3 { font-size: .97rem; margin: 0 0 9px; }
+.member-dialog .member-consent-account p { font-size: .83rem; margin: 0 0 8px; }
+.member-dialog .member-consent-status { min-height: 1.3em; font-size: .76rem; color: #576348; line-height: 1.5; }
+.member-dialog #member-legal-review[hidden], .member-dialog #member-email-form[hidden] { display: none !important; }
+.member-dialog #member-legal-review-save { margin-top: 8px; width: 100%; }
+.member-dialog .member-consent-choice input:disabled { cursor: not-allowed; }
+@media (max-width: 520px) {
+  .member-dialog .member-consent-choice { gap: 10px; }
+}

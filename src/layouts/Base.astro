@@ -5,7 +5,11 @@ import '../styles/saved-members.css';
 import '../styles/shop-card-refinement.css';
 import '../styles/header-pinterest-auth.css';
 import '../styles/member-login-refresh.css';
+import '../styles/member-consents.css';
+import '../styles/member-auth-choices.css';
+import '../styles/adsense.css';
 import site from '../data/site.json';
+import softnestAdsense from '../data/adsense.json';
 import { asAbsolute } from '../lib/escapes';
 interface Props {
   title?: string;
@@ -24,6 +28,11 @@ const path = Astro.url.pathname;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- softnest-adsense-verification: site ownership only while adsEnabled is false -->
+    <meta name="google-adsense-account" content={softnestAdsense.publisherId} />
+    {softnestAdsense.adsEnabled && (
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${softnestAdsense.publisherId}`} crossorigin="anonymous"></script>
+    )}
     <meta name="p:domain_verify" content="d5194fd5684c6934f80f5ac1da33f85c" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f4ef" />
@@ -72,12 +81,27 @@ const path = Astro.url.pathname;
       <h2 id="member-heading">Welcome to your edit.</h2>
       <div id="member-guest"><p class="member-lede">Save the little details you love. Sign in securely by email to keep your favorites across visits.</p>
         <p class="member-pending-detail" id="member-pending-detail" hidden>Your selected product will be saved as soon as you sign in.</p>
+        <div class="member-auth-switch" id="member-auth-switch" role="group" aria-label="Choose account action">
+          <button type="button" class="member-auth-tab" data-auth-mode="signin" aria-pressed="true">Sign in</button>
+          <button type="button" class="member-auth-tab" data-auth-mode="signup" aria-pressed="false">Create account</button>
+        </div>
+        <p id="member-auth-mode-help" class="member-auth-help">Already have an account? Enter your email for a secure sign-in link.</p>
         <form id="member-email-form"><label class="member-email-label" for="member-email-input">Email address</label>
           <input class="member-email-input" id="member-email-input" type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
+          <div class="member-consent-separator" aria-hidden="true"></div>
+          <label class="member-consent-choice" for="member-terms-accept">
+            <input type="checkbox" id="member-terms-accept" required />
+            <span>I agree to the <a href="/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and acknowledge the <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.<small>Required to request a sign-in link. Not consent to marketing.</small></span>
+          </label>
+          <label class="member-consent-choice member-consent-optin" for="member-newsletter-opt-in">
+            <input type="checkbox" id="member-newsletter-opt-in" />
+            <span>Send me occasional home styling ideas and updates.<small>Optional newsletter. Off by default; unsubscribe in Account any time.</small></span>
+          </label>
           <button class="button" type="submit">Email me a sign-in link</button>
         </form>
         <div class="member-email-sent" id="member-email-sent" hidden>
           <p>We emailed a secure sign-in link to <strong id="member-email-sent-to"></strong>. Open it to sign in automatically. Your selected product will be saved to your account after authentication.</p>
+          <p class="member-delivery-help" id="member-delivery-help"><strong>Can't find our email?</strong> Check your Spam or Junk folder, plus Gmail's Promotions tab. Search for “The Soft Nest Edit” or the sender address. Delivery may take a few minutes. If it's still missing, verify the address above and resend the link when available.</p>
           <div class="member-email-sent-actions">
             <button type="button" class="button secondary" id="member-resend-link" disabled>Resend link (60s)</button>
             <button type="button" class="member-change-email" id="member-change-email">Change email</button>
@@ -86,6 +110,23 @@ const path = Astro.url.pathname;
         <p><small>See our <a href="/privacy/">Privacy Policy</a> for account and saved-list data.</small></p></div>
       <div id="member-signed-in" hidden><p>Signed in as <strong id="member-email"></strong></p>
         <p><a class="text-link" href="/shop/saved/">View your saved finds ↗</a></p>
+        <div class="member-consent-account" aria-label="Newsletter settings">
+          <h3>Email preferences</h3>
+          <label class="member-consent-choice" for="member-newsletter-preference">
+            <input type="checkbox" id="member-newsletter-preference" disabled />
+            <span>Receive occasional styling emails<small>Separate from essential sign-in messages. Change this any time.</small></span>
+          </label>
+          <p class="member-consent-status" id="member-consent-status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="member-consent-account" id="member-legal-review" hidden>
+          <h3>Review current policies</h3>
+          <p>We do not have a recorded acknowledgement of the current policy versions for this account.</p>
+          <label class="member-consent-choice" for="member-legal-review-check">
+            <input type="checkbox" id="member-legal-review-check" />
+            <span>I agree to the <a href="/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and acknowledge the <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+          </label>
+          <button type="button" class="button secondary" id="member-legal-review-save">Record agreement</button>
+        </div>
         <button type="button" class="button secondary" data-member-signout>Sign out</button>
       </div>
       <p class="member-message" id="member-message" role="status" aria-live="polite"></p>
@@ -94,7 +135,7 @@ const path = Astro.url.pathname;
       <div class="shell footer-layout">
         <div class="footer-brand"><span class="footer-icon" aria-hidden="true">✳</span><h2>The Soft Nest Edit<span>.</span></h2><p>More comfort. More meaning.<br/>A little beauty in the everyday.</p></div>
         <div><h3>Discover</h3><a href="/shop/">Shop the Edit</a><a href="/journal/">The Journal</a><a href="/about/">Our Story</a><a href="/shop/saved/">Your Saved Finds</a></div>
-        <div><h3>Good to know</h3><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/privacy/">Privacy Policy</a><a href="/contact/">Contact</a><a href="/admin/" rel="nofollow">Editor access</a></div>
+        <div><h3>Good to know</h3><a href="/affiliate-disclosure/">Affiliate Disclosure</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms &amp; Conditions</a><a href="/contact/">Contact</a><a href="/admin/" rel="nofollow">Editor access</a></div>
         <div class="footer-social"><h3>Follow along</h3><p>Fresh styling ideas and inspiring spaces, saved one pin at a time.</p><a href={site.pinterestUrl} target="_blank" rel="noopener noreferrer">Find us on Pinterest ↗</a></div>
       </div>
       <div class="shell footer-bottom"><span>© {new Date().getFullYear()} The Soft Nest Edit</span><span>As an Amazon Associate I earn from qualifying purchases.</span></div>

@@ -1,0 +1,13 @@
+/* The Soft Nest Edit – passwordless Create account / Sign in choices. */
+.member-auth-switch { display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:5px;border:1px solid #dfddce;background:#f3f0e8;border-radius:10px;margin:20px 0 12px; }
+.member-auth-tab { appearance:none; border:0; background:transparent; color:#5a5d4e; padding:12px 10px; border-radius:7px; font:inherit; font-size:.88rem; font-weight:650; cursor:pointer; transition:background-color .16s ease, box-shadow .16s ease; }
+.member-auth-tab[aria-pressed="true"] { background:#fffefa;color:#3f4a32;box-shadow:0 2px 9px rgba(48,52,33,.1); }
+.member-auth-tab:focus-visible { outline:2px solid #657447;outline-offset:2px; }
+.member-auth-help { color:#646958;font-size:.86rem;line-height:1.6;margin:0 0 18px !important;text-align:center;min-height:2.7em; }
+.member-delivery-help { margin:12px 0 !important; padding:13px 15px; border-left:3px solid #777c56; background:#f6f4ec; font-size:.84rem;line-height:1.7;color:#444c3a; }
+.member-delivery-help strong { color:#34412b; }
+.member-auth-smallprint { font-size:.76rem;color:#6d6e61;line-height:1.5;margin:.5rem 0 .2rem;text-align:center; }
+.member-dialog { box-sizing:border-box; }
+.member-dialog #member-email-form .member-email-input { max-width:100%;box-sizing:border-box; }
+@media(max-width:420px){ .member-auth-tab{padding:11px 5px;font-size:.83rem;} .member-auth-help{font-size:.83rem;} }
+@media(prefers-reduced-motion:reduce){ .member-auth-tab{transition:none;} }
