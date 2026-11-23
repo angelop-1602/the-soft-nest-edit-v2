@@ -1,6 +1,6 @@
 {
   "publisherId": "ca-pub-7465186188701869",
-  "adsEnabled": false,
+  "adsEnabled": true,
   "slots": {
     "home": "",
     "journal": ""
