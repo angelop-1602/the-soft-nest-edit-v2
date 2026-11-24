@@ -1,0 +1,8 @@
+/* Keep the homepage's principal content visible immediately for LCP.
+   Other page, section and hover transitions remain unchanged. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-editorial .hero-media img,
+  .home-editorial .hero-panel-inner > :nth-child(-n + 4) {
+    animation: none;
+  }
+}

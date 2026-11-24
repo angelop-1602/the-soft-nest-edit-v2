@@ -1,0 +1,32 @@
+[
+  {
+    "path": "src/layouts/Base.astro",
+    "find": "import '../styles/home-hero-first-screen.css';\n",
+    "replace": "import '../styles/home-hero-first-screen.css';\nimport '../styles/performance-first-paint.css';\n"
+  },
+  {
+    "path": "src/layouts/Base.astro",
+    "find": "const path = Astro.url.pathname;\n",
+    "replace": "const path = Astro.url.pathname;\nconst isHomePage = path === '/';\n"
+  },
+  {
+    "path": "src/layouts/Base.astro",
+    "find": "    {softnestAdsense.adsEnabled && (\n      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${softnestAdsense.publisherId}`} crossorigin=\"anonymous\"></script>\n    )}\n",
+    "replace": "    {softnestAdsense.adsEnabled && (\n      <script is:inline data-publisher-id={softnestAdsense.publisherId}>\n        // Preserve AdSense Auto Ads, but avoid competing with the first-screen hero.\n        (() => {\n          const publisherId = document.currentScript?.getAttribute('data-publisher-id');\n          if (!publisherId) return;\n          const loadAdsense = () => {\n            if (document.querySelector('script[data-softnest-adsense-loader]')) return;\n            const script = document.createElement('script');\n            script.async = true;\n            script.crossOrigin = 'anonymous';\n            script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(publisherId)}`;\n            script.dataset.softnestAdsenseLoader = '';\n            document.head.appendChild(script);\n          };\n          const onLoaded = () => {\n            if ('requestIdleCallback' in window) window.requestIdleCallback(loadAdsense, { timeout: 5000 });\n            else window.setTimeout(loadAdsense, 1200);\n          };\n          if (document.readyState === 'complete') onLoaded();\n          else window.addEventListener('load', onLoaded, { once: true });\n        })();\n      </script>\n    )}\n"
+  },
+  {
+    "path": "src/layouts/Base.astro",
+    "find": "    <link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicon.svg\" />\n",
+    "replace": "    <link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicon.svg\" />\n    {isHomePage && (\n      <link rel=\"preload\" as=\"image\"\n        href=\"/assets/editorial/living-room-480.webp\"\n        imagesrcset=\"/assets/editorial/living-room-480.webp 480w, /assets/editorial/living-room-1080.webp 1080w\"\n        imagesizes=\"(max-width: 800px) 100vw, 51vw\"\n        fetchpriority=\"high\" />\n    )}\n"
+  },
+  {
+    "path": "src/layouts/Base.astro",
+    "find": "    <script src=\"../scripts/saved-members.js\"></script>\n",
+    "replace": "    <script src=\"../scripts/activate-members.js\"></script>\n"
+  },
+  {
+    "path": "src/pages/index.astro",
+    "find": "<EditorialImage photo=\"living-room\" alt=\"Sunlit living room with a cream sofa, oak coffee table and warm decorative accents\" sizes=\"(max-width: 700px) 100vw, 51vw\" priority />",
+    "replace": "<EditorialImage photo=\"living-room\" alt=\"Sunlit living room with a cream sofa, oak coffee table and warm decorative accents\" sizes=\"(max-width: 800px) 100vw, 51vw\" priority />"
+  }
+]
