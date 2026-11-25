@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "type": "module",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "astro dev",
@@ -14,12 +14,15 @@
     "test": "node --test tests/*.test.mjs",
     "validate": "npm run check && npm run test && npm run build",
     "deploy": "npm run build && wrangler deploy",
-    "import:v1": "node scripts/import-v1.mjs"
+    "import:v1": "node scripts/import-v1.mjs",
+    "scheduler:list": "node scripts/publish-scheduled.mjs --list",
+    "scheduler:calendar": "node scripts/publish-scheduled.mjs --calendar",
+    "scheduler:bulk": "node scripts/publish-scheduled.mjs --bulk"
   },
   "dependencies": {
-    "astro": "^6.0.0",
-    "yaml": "^2.6.1",
-    "@supabase/supabase-js": "^2.0.0"
+    "@supabase/supabase-js": "^2.0.0",
+    "astro": "7.4.13",
+    "yaml": "^2.6.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",

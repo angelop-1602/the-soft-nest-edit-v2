@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { validPublishAt } from "./lib/publication-rules.js";
 
 const categories = z.enum([
   "Living Room",
@@ -58,6 +59,10 @@ const posts = defineCollection({
       .optional(),
     published: z.boolean().default(false),
     featured: z.boolean().default(false),
+    publish_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
+    publication_approved: z.boolean().default(false),
+    campaign_id: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().regex(/^[a-z0-9][a-z0-9-]{0,79}$/).optional()),
+    image_rights_confirmed: z.boolean().default(false),
     related_products: z.array(z.string()).default([]),
   }),
 });
@@ -89,6 +94,9 @@ const products = defineCollection({
     considerations: z.string().optional(),
     highlights: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
+    publish_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
+    publication_approved: z.boolean().default(false),
+    campaign_id: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().regex(/^[a-z0-9][a-z0-9-]{0,79}$/).optional()),
     reviewed_at: z.coerce.date().optional(),
   }),
 });

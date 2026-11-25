@@ -5,3 +5,6 @@ dist/
 .env*
 .DS_Store
 *.log
+
+# Local scheduler calendar and campaign plans
+.scheduler-local/

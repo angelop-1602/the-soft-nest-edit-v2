@@ -1,0 +1,47 @@
+name: Scheduled content publication
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: soft-nest-production-scheduler
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main' && vars.SCHEDULER_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Activate only eligible scheduled records
+        env:
+          SCHEDULER_ENABLED: ${{ vars.SCHEDULER_ENABLED }}
+          CLOUDFLARE_DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+        run: node scripts/publish-scheduled.mjs --activate
+      - name: Validate changed content before committing
+        run: |
+          if ! git diff --quiet -- src/content/posts src/content/products; then
+            npm run validate
+            node scripts/audit-content.mjs
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -- src/content/posts src/content/products
+            git commit -m 'Publish approved scheduled content'
+            git push origin HEAD:main
+          fi
+      - name: Request and verify deployment if released routes are missing
+        env:
+          SCHEDULER_ENABLED: ${{ vars.SCHEDULER_ENABLED }}
+          CLOUDFLARE_DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+        run: node scripts/publish-scheduled.mjs --deploy

@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import { validPublishAt, publicProduct, publicPost, releaseQueue } from '../src/lib/publication-rules.js';
+const now=new Date('2026-12-01T14:00:00Z'), imageExists=()=>true;
+const p={status:'approved',published:false,link_verified:true,affiliate_url:'https://www.amazon.com/dp/B0158EQJSY?tag=test-20',image:'/uploads/a.webp',image_alt:'Illustration',image_rights_confirmed:true,publication_approved:true,publish_at:'2026-12-01T14:00:00Z'};
+const j={...p,date:'2026-12-01',related_products:['src/content/products/a.md']};
+const r=(kind,id,data)=>({kind,id,data});
+test('UTC timestamp strict, including leap dates',()=>{for(const x of ['2026-02-29T00:00:00Z','2026-12-01T09:00:00','2026-12-01T09:00:00-05:00','2026-12-01T24:00:00Z',''])assert.equal(validPublishAt(x),false,x);assert.equal(validPublishAt('2028-02-29T00:00:00Z'),true);});
+test('manual legacy product and journal remain unchanged',()=>{assert.equal(publicProduct({...p,publish_at:undefined,publication_approved:false,published:true},now,imageExists),true);assert.equal(publicPost({published:true,date:'2026-11-30'},now,imageExists,new Set()),true);});
+test('future, draft, canceled, unverified and missing image stay private',()=>{for(const x of [{publish_at:'2026-12-01T14:00:01Z'},{published:false},{publication_approved:false},{link_verified:false},{status:'hidden'},{image_rights_confirmed:false},{image_alt:''},{image:''}])assert.equal(publicProduct({...p,published:true,...x},now,imageExists),false,JSON.stringify(x));assert.equal(publicProduct({...p,published:true},now,()=>false),false);});
+test('exact scheduled time, approved and activated',()=>assert.equal(publicProduct({...p,published:true},now,imageExists),true));
+test('article requires product and image approvals',()=>{assert.equal(publicPost({...j,published:true},now,imageExists,new Set()),false);assert.equal(publicPost({...j,published:true},now,imageExists,new Set(['a'])),true);assert.equal(publicPost({...j,published:true,image_rights_confirmed:false},now,imageExists,new Set(['a'])),false);});
+test('batch releases product before article without mutating source',()=>{const product=r('products','a',p),post=r('posts','b',j);assert.deepEqual(releaseQueue([post,product],now,imageExists).release,[product,post]);assert.equal(p.published,false);});
+test('blocked or future product prevents dependent article release',()=>{for(const change of [{link_verified:false},{publish_at:'2026-12-02T14:00:00Z'}])assert.equal(releaseQueue([r('posts','b',j),r('products','a',{...p,...change})],now,imageExists).release.length,0);});
+test('released records are not activated again',()=>assert.equal(releaseQueue([r('products','a',{...p,published:true}),r('posts','b',{...j,published:true})],now,imageExists).release.length,0));
