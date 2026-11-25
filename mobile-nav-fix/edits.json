@@ -1,0 +1,17 @@
+[
+  {
+    "label": "existing hero stylesheet",
+    "find": "import '../styles/home-hero-first-screen.css';",
+    "replace": "import '../styles/home-hero-first-screen.css';\nimport '../styles/mobile-navigation.css';"
+  },
+  {
+    "label": "header and main boundary",
+    "find": "    </header>\n    <main id=\"main\"><slot /></main>",
+    "replace": "    </header>\n    <dialog class=\"mobile-navigation\" id=\"mobile-navigation\" aria-labelledby=\"mobile-navigation-heading\">\n      <div class=\"mobile-navigation-inner\">\n        <div class=\"mobile-navigation-top\"><span class=\"mobile-navigation-brand\">\u2733 THE SOFT NEST EDIT</span><button type=\"button\" class=\"mobile-navigation-close\" data-mobile-nav-close aria-label=\"Close navigation\">\u00d7</button></div>\n        <h2 class=\"mobile-navigation-heading\" id=\"mobile-navigation-heading\">Explore the Edit</h2>\n        <div data-mobile-nav-mount></div>\n        <div class=\"mobile-navigation-footer\"><a href={site.pinterestUrl} target=\"_blank\" rel=\"noopener noreferrer\">Follow us on Pinterest \u2197</a><p>Good design. Real living.</p></div>\n      </div>\n    </dialog>\n    <main id=\"main\"><slot /></main>"
+  },
+  {
+    "label": "original menu controller",
+    "find": "      const nav = document.getElementById('site-nav');\n      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');\n      const header = document.getElementById('site-header');\n      function closeMenu(){ nav?.classList.remove('open'); toggle?.setAttribute('aria-expanded', 'false'); }\n      toggle?.addEventListener('click', () => {\n        const open = nav?.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(!!open));\n      });\n      document.addEventListener('keydown', event => { if(event.key === 'Escape') closeMenu(); });\n      nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));\n",
+    "replace": "      import { initMobileNavigation } from '../scripts/mobile-navigation.js';\n      initMobileNavigation();\n      const header = document.getElementById('site-header');\n"
+  }
+]

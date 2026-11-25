@@ -1,0 +1,2 @@
+# Mobile drawer alignment fix
+Extract at the repository root, run `node .\mobile-nav-polish\apply.mjs --check`, then `node .\mobile-nav-polish\apply.mjs` and `npm run validate`. Only appends scoped CSS to src/styles/mobile-navigation.css. No JS, markup, auth or desktop changes. Verify at 320, 375, 390 and 430px and desktop; check arrows, saved count, sign-in, focus and menu closing. Full browser/site validation is not included.

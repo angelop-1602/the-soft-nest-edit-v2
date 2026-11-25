@@ -5,7 +5,8 @@ category: Bedroom
 description: "Refresh your bed using existing sheets, pillows, quilts, and throws with simple layering, texture, color, and a realistic 15-minute styling routine."
 image: /uploads/bedroom-layered-bed-hero.webp
 image_alt: "AI-generated bedroom styling illustration of an inviting cream bed with layered cotton bedding, one olive cushion, a taupe throw, and walnut wood furniture"
-published: false
+pinterest_pin_url: "https://pin.it/6kMVXQEYe"
+published: true
 featured: false
 related_products: []
 ---

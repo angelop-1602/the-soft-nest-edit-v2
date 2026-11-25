@@ -9,6 +9,8 @@ import '../styles/member-consents.css';
 import '../styles/member-auth-choices.css';
 import '../styles/adsense.css';
 import '../styles/home-hero-first-screen.css';
+import '../styles/mobile-navigation.css';
+import '../styles/performance-first-paint.css';
 import site from '../data/site.json';
 import softnestAdsense from '../data/adsense.json';
 import { asAbsolute } from '../lib/escapes';
@@ -24,6 +26,7 @@ const { title = site.name, description = site.description, image, noindex = fals
 const pageUrl = new URL(Astro.url.pathname, site.url).href;
 const ogImage = image ? asAbsolute(image, site.url) : `${site.url}/assets/social-preview.svg`;
 const path = Astro.url.pathname;
+const isHomePage = path === '/';
 ---
 <!doctype html>
 <html lang="en">
@@ -32,7 +35,28 @@ const path = Astro.url.pathname;
     <!-- softnest-adsense-verification: site ownership only while adsEnabled is false -->
     <meta name="google-adsense-account" content={softnestAdsense.publisherId} />
     {softnestAdsense.adsEnabled && (
-      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${softnestAdsense.publisherId}`} crossorigin="anonymous"></script>
+      <script is:inline data-publisher-id={softnestAdsense.publisherId}>
+        // Preserve AdSense Auto Ads, but avoid competing with the first-screen hero.
+        (() => {
+          const publisherId = document.currentScript?.getAttribute('data-publisher-id');
+          if (!publisherId) return;
+          const loadAdsense = () => {
+            if (document.querySelector('script[data-softnest-adsense-loader]')) return;
+            const script = document.createElement('script');
+            script.async = true;
+            script.crossOrigin = 'anonymous';
+            script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(publisherId)}`;
+            script.dataset.softnestAdsenseLoader = '';
+            document.head.appendChild(script);
+          };
+          const onLoaded = () => {
+            if ('requestIdleCallback' in window) window.requestIdleCallback(loadAdsense, { timeout: 5000 });
+            else window.setTimeout(loadAdsense, 1200);
+          };
+          if (document.readyState === 'complete') onLoaded();
+          else window.addEventListener('load', onLoaded, { once: true });
+        })();
+      </script>
     )}
     <meta name="p:domain_verify" content="d5194fd5684c6934f80f5ac1da33f85c" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,6 +76,13 @@ const path = Astro.url.pathname;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    {isHomePage && (
+      <link rel="preload" as="image"
+        href="/assets/editorial/living-room-480.webp"
+        imagesrcset="/assets/editorial/living-room-480.webp 480w, /assets/editorial/living-room-1080.webp 1080w"
+        imagesizes="(max-width: 800px) 100vw, 51vw"
+        fetchpriority="high" />
+    )}
     <link rel="alternate" type="application/rss+xml" title="The Journal RSS" href="/rss.xml" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
     {site.webAnalyticsToken && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: site.webAnalyticsToken })}></script>}
@@ -74,6 +105,14 @@ const path = Astro.url.pathname;
         <a class="nav-cta" href="/shop/">Shop decor <span aria-hidden="true">↗</span></a>
       </div>
     </header>
+    <dialog class="mobile-navigation" id="mobile-navigation" aria-labelledby="mobile-navigation-heading">
+      <div class="mobile-navigation-inner">
+        <div class="mobile-navigation-top"><span class="mobile-navigation-brand">✳ THE SOFT NEST EDIT</span><button type="button" class="mobile-navigation-close" data-mobile-nav-close aria-label="Close navigation">×</button></div>
+        <h2 class="mobile-navigation-heading" id="mobile-navigation-heading">Explore the Edit</h2>
+        <div data-mobile-nav-mount></div>
+        <div class="mobile-navigation-footer"><a href={site.pinterestUrl} target="_blank" rel="noopener noreferrer">Follow us on Pinterest ↗</a><p>Good design. Real living.</p></div>
+      </div>
+    </dialog>
     <main id="main"><slot /></main>
     <dialog class="member-dialog" id="member-dialog" aria-labelledby="member-heading" data-auth-redirect={new URL('/shop/saved/', site.url).href}>
       <button type="button" class="member-close" data-member-close aria-label="Close sign-in dialog">×</button>
@@ -142,15 +181,9 @@ const path = Astro.url.pathname;
       <div class="shell footer-bottom"><span>© {new Date().getFullYear()} The Soft Nest Edit</span><span>As an Amazon Associate I earn from qualifying purchases.</span></div>
     </footer>
     <script>
-      const nav = document.getElementById('site-nav');
-      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      import { initMobileNavigation } from '../scripts/mobile-navigation.js';
+      initMobileNavigation();
       const header = document.getElementById('site-header');
-      function closeMenu(){ nav?.classList.remove('open'); toggle?.setAttribute('aria-expanded', 'false'); }
-      toggle?.addEventListener('click', () => {
-        const open = nav?.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(!!open));
-      });
-      document.addEventListener('keydown', event => { if(event.key === 'Escape') closeMenu(); });
-      nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
       window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
       document.querySelectorAll<HTMLElement>('[data-product-search-list]').forEach(container=>{
         const search=document.querySelector<HTMLInputElement>('[data-search]');
@@ -212,6 +245,6 @@ const path = Astro.url.pathname;
         });
       });
     </script>
-    <script src="../scripts/saved-members.js"></script>
+    <script src="../scripts/activate-members.js"></script>
   </body>
 </html>
