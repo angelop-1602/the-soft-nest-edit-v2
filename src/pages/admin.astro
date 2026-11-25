@@ -1,7 +1,0 @@
----
-import EditorialHero from '../components/EditorialHero.astro';
-import Base from '../layouts/Base.astro';
----
-<Base title="Editor Access | The Soft Nest Edit" description="Secure GitHub-based editorial access for The Soft Nest Edit." noindex>
-  <EditorialHero eyebrow="EDITOR ACCESS">Manage the <em>edit.</em></EditorialHero><div class="shell info-page"><p>Products, articles, and site settings are edited through Pages CMS using authorized GitHub accounts. This public page is a shortcut, not a password form.</p><a class="button" href="https://app.pagescms.org/" target="_blank" rel="noopener noreferrer">Open Pages CMS ↗</a>{import.meta.env.DEV && <p><a class="button" href="/admin/scheduler/">Open Content Scheduler ↗</a></p>}<p>Publishing requires both editorial approval and valid Amazon affiliate links. Draft or unverified products do not appear publicly.</p><p>Authorized editors can set a UTC release time and approve a scheduled release in Pages CMS. Keep Published off until the scheduler releases the record. See repository scheduler documentation for the private local calendar and bulk campaign tools.</p></div>
-</Base>

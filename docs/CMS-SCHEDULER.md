@@ -1,0 +1,30 @@
+# The Soft Nest Edit — CMS-only automatic publishing v2.3
+
+Target: `angelop-1602/the-soft-nest-edit-v2`, main commit `8c9650454a8c8eb643e69aeec533020c4d28cefd` (2026-11-25). No dependency, existing content, customer account, saved product or URL changes other than removing `/admin/` and its local scheduler. Pages CMS remains the editor.
+
+## Install (PowerShell, from repository)
+Stop the local dev server first. Download the ZIP to Downloads. Paste the following block once (it automatically extracts to a unique temporary directory):
+
+```powershell
+$ErrorActionPreference = 'Stop'; $p = Join-Path $env:TEMP ('softnest-cms-' + [guid]::NewGuid()); Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\the-soft-nest-edit-cms-v2.3.zip" -DestinationPath $p; node "$p\apply.mjs" (Get-Location).Path --apply; if ($LASTEXITCODE -ne 0) { throw 'Patch failed' }; npm run validate; if ($LASTEXITCODE -ne 0) { throw 'Validation failed' }; node scripts/audit-content.mjs
+```
+
+Installer checks all anchors and old scheduler source before writing. It backs up originals under `.scheduler-local/cms-v23-backup-*` (ignored by Git). Dashboard files and two dashboard tests are removed; local calendar generation is removed, while the optional terminal list and bulk draft planning commands stay. It does not commit, push, enable schedules, or deploy. Do not push until validation succeeds; keep GitHub variable `SCHEDULER_ENABLED` unset or `false` before merging. If you already set it to true, disable it manually before pushing. Existing live site may be auto-deployed on a push by your Cloudflare integration.
+
+## How to schedule in Pages CMS
+Open https://app.pagescms.org/ and the connected repository. No website admin link is needed.
+
+Journal: set Published off, set Scheduled release (UTC, e.g. `2026-12-26T14:00:00Z`, 10 PM Manila / 9 AM US Eastern on Dec 26), approve automatic release and confirm image rights and image alt text. Select related products and tick Automatically release approved related products. The actual editorial `date` is updated to the scheduled US Eastern calendar date when activated. No social posting is performed.
+
+Each new linked product: set status Approved, confirm actual affiliate tracking/link, confirm image rights, supply image and alt text, tick approval for automatic release, and keep Published off. Leave the Scheduled release field blank to inherit its Journal date. Existing published products are reused untouched. To publish a product independently, enter its own UTC timestamp. A product with a later explicit date blocks its Journal until it is eligible. Hidden, invalid, missing, unverified or canceled products block the Journal. An inherited product is not released from a partially blocked Journal. Separately scheduled due products can still release independently. A Journal with no related products can be scheduled normally. Scheduled items require cleared local images; existing manually published items retain previous behavior.
+
+Cancellation: before release turn off automatic approval (and keep Published off); a linked product needs its own approval. After release, turn off approval and Published and retain the System release timestamp (`released_at`) so the scheduler does not republish it. For a legacy release lacking that timestamp, explicitly turn off approval too. The release timestamp is the activation time in UTC, not a guarantee of deployment time. To intentionally re-schedule a previously released record, manually review and clear the system timestamp, enter a new time, and reapprove; the bulk command refuses previously released records. For unpublishing to take effect, the updated source must be deployed through the normal deployment path. No records are automatically migrated or changed during installation.
+
+## Check locally
+`npm run scheduler:list` shows scheduled and inherited items (without mutating files). `npm run validate` runs Astro check, tests and production build. `node scripts/audit-content.mjs` checks affiliate content. `npm audit` checks dependencies. `npm run dev` serves the public website only; `/admin/` and `/admin/scheduler/` should no longer be pages. Use `git diff --stat` and `git status --short` to review. The existing `scheduler:bulk` command can still prepare draft schedules, but Pages CMS is sufficient.
+
+## Enable automatic publishing only after explicit approval
+The existing GitHub workflow is guarded by `SCHEDULER_ENABLED == 'true'` and runs every 15 minutes on main. GitHub Actions needs permission to write repository contents and push to main (branch rules must allow the configured bot). Configure the existing Cloudflare Workers Builds deploy hook as the GitHub Actions secret `CLOUDFLARE_DEPLOY_HOOK_URL`; never paste the secret in chats or source. Confirm it deploys main and uses a Node version satisfying Astro >=22.23.4. GitHub workflow Node range is now >=22.23.4 <23. Do not enable until you verify these settings, review the local build, and approve a test release. The existing workflow checks for due eligible items, activates them, validates, commits and pushes, then calls the deployment hook if scheduled public routes are missing from the live sitemap. Its URL verification confirms sitemap presence and HTTP success, not exact deployed revision. Existing live routes may not prove freshness; check the actual build in Cloudflare. It retries missing routes on later runs. Schedules are best effort and may be delayed by GitHub and Cloudflare. Public repository content and images are not confidential, even if unpublished on the website.
+
+## Validation scope
+17 isolated publication-rule tests passed against the existing affiliate rule fixture. Installer fixture tests and syntax checks recorded in TEST-RESULTS.txt. Full Astro 7 build, YAML persistence using the actual repository dependencies, Pages CMS save behavior, Cloudflare deployment, and GitHub permissions require verification in your own environment. No publication is authorized by installing this patch.

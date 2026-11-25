@@ -6,7 +6,7 @@ export function validPublishAt(value) {
   const ms = Date.parse(value);
   return Number.isFinite(ms) && new Date(ms).toISOString() === value.replace(/Z$/, '.000Z');
 }
-export const isScheduled = data => Boolean(data.publish_at || data.publication_approved === true);
+export const isScheduled = data => Boolean(data.publish_at || data.publication_approved === true || data.released_at);
 export const productSlug = ref => typeof ref === 'string' ? ref.replace(/\\/g, '/').split('/').pop().replace(/\.md$/, '') : '';
 export const due = (data, now) => validPublishAt(data.publish_at) && Date.parse(data.publish_at) <= now.getTime();
 export function scheduleReady(data, now, imageExists) {
@@ -23,23 +23,55 @@ export function publicPost(data, now, imageExists, productIds) {
   if (!isScheduled(data)) return true;
   return scheduleReady(data, now, imageExists) && (data.related_products ?? []).every(ref => productIds.has(productSlug(ref)));
 }
-// Determine releases as a batch, products first. Does not mutate source records.
+// Keep the editorial date in US Eastern time, matching the previous bulk tool.
+export function editorialDate(timestamp) {
+  if (!validPublishAt(timestamp)) throw new Error('Invalid release timestamp');
+  const parts = new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(timestamp));
+  const get = type => parts.find(p => p.type === type).value;
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+// Explicit opt-in is required for both article and inherited product. A product
+// with its own timestamp always follows that timestamp, never the parent date.
 export function releaseQueue(records, now, imageExists) {
-  const release = [], blocked = [], products = new Set();
-  for (const record of records.filter(r => r.kind === 'products')) {
+  const release = [], blocked = [], fields = new Map(), products = new Set();
+  const productRecords = new Map(records.filter(r => r.kind === 'products').map(r => [r.id, r]));
+  const released_at = now.toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const eligible = d => d.published !== true && !d.released_at;
+  const activate = (r, extra = {}) => {
+    release.push(r); fields.set(r, { ...extra, published:true, released_at });
+    if (r.kind === 'products') products.add(r.id);
+  };
+  for (const record of productRecords.values()) {
     const d = record.data;
     if (publicProduct(d, now, imageExists)) products.add(record.id);
-    if (isScheduled(d) && due(d, now) && d.published !== true) {
-      if (publicProduct({...d, published:true}, now, imageExists)) { release.push(record); products.add(record.id); }
+    if (eligible(d) && due(d, now)) {
+      if (publicProduct({...d,published:true}, now,imageExists)) activate(record);
       else blocked.push(record);
     }
   }
-  for (const record of records.filter(r => r.kind === 'posts')) {
+  for (const record of records.filter(r => r.kind === 'posts').sort((a,b) => String(a.data.publish_at ?? '').localeCompare(String(b.data.publish_at ?? '')))) {
     const d = record.data;
-    if (isScheduled(d) && due(d, now) && d.published !== true) {
-      if (publicPost({...d, published:true}, now, imageExists, products)) release.push(record);
-      else blocked.push(record);
+    if (!eligible(d) || !due(d,now)) continue;
+    // Check the article itself before considering any inherited products.
+    const date = editorialDate(d.publish_at);
+    if (!scheduleReady(d,now,imageExists)) { blocked.push(record); continue; }
+    const candidateProducts = new Set(products), inherited = new Map();
+    for (const ref of d.related_products ?? []) {
+      const id = productSlug(ref);
+      if (candidateProducts.has(id)) continue;
+      const product = productRecords.get(id);
+      if (!product || d.auto_release_related_products !== true) continue;
+      const pd = product.data;
+      if (!eligible(pd) || pd.publish_at || pd.publication_approved !== true) continue;
+      const patch = {publish_at:d.publish_at};
+      if (publicProduct({...pd,...patch,published:true},now,imageExists)) {
+        inherited.set(product,patch); candidateProducts.add(id);
+      }
     }
+    // Never activate inherited products from a partially blocked article.
+    if (!publicPost({...d,date,published:true},now,imageExists,candidateProducts)) { blocked.push(record); continue; }
+    for (const [product,patch] of inherited) activate(product,patch);
+    activate(record,{date});
   }
-  return {release, blocked};
+  return {release,blocked,fields};
 }

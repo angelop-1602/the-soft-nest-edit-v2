@@ -4,8 +4,5 @@
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-/admin/*
-  X-Robots-Tag: noindex, nofollow
-
 /shop/saved/*
   X-Robots-Tag: noindex, nofollow

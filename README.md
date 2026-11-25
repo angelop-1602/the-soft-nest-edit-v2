@@ -109,7 +109,7 @@ Original editorial research notes go here.
 1. Create a **new** GitHub repo, for example `the-soft-nest-edit-v2`, and push this source (not the `dist/` folder).
 2. Visit [Pages CMS](https://app.pagescms.org/) and authorize that new repository using the GitHub app.
 3. The repository's `.pages.yml` defines Journal, Affiliate Products, and Website Settings. Product status/verification gates remain enforced by the build even if an editor accidentally checks Publish.
-4. `https://thesoftnestedit.online/admin/` is only a shortcut to Pages CMS. It is not an admin login; do not put API keys in content files.
+4. Open [Pages CMS](https://app.pagescms.org/) directly. There is no website admin page. See [CMS-only scheduling](docs/CMS-SCHEDULER.md) for approved automatic publication. Never put API keys in content files.
 
 ## Review and deploy to Cloudflare Workers
 

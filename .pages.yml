@@ -68,6 +68,10 @@ content:
         label: I approve automatic release at the scheduled time
         type: boolean
         default: false
+      - name: released_at
+        label: System release timestamp (do not edit)
+        type: string
+        description: Written by the scheduler. Keep this value when unpublishing to prevent automatic republication.
       - name: campaign_id
         label: Campaign ID (optional)
         type: string
@@ -75,6 +79,11 @@ content:
         label: I confirmed Journal image accuracy and rights
         type: boolean
         default: false
+      - name: auto_release_related_products
+        label: Automatically release approved related products
+        type: boolean
+        default: false
+        description: Unpublished related products must separately be approved, verified and have cleared images. Their own later release date takes precedence.
       - name: related_products
         label: Related affiliate products
         type: reference
@@ -169,11 +178,15 @@ content:
       - name: publish_at
         label: Scheduled release (UTC, optional)
         type: string
-        description: Use YYYY-MM-DDTHH:mm:ssZ. Leave Published off for future releases.
+        description: Use YYYY-MM-DDTHH:mm:ssZ for independent release. Leave blank for a linked Journal to supply the date. Keep Published off.
       - name: publication_approved
-        label: I approve automatic release at the scheduled time
+        label: I approve automatic release at its own time or with a linked Journal
         type: boolean
         default: false
+      - name: released_at
+        label: System release timestamp (do not edit)
+        type: string
+        description: Written by the scheduler. Keep this value when unpublishing to prevent automatic republication.
       - name: campaign_id
         label: Campaign ID (optional)
         type: string

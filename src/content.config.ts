@@ -61,8 +61,10 @@ const posts = defineCollection({
     featured: z.boolean().default(false),
     publish_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
     publication_approved: z.boolean().default(false),
+    released_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
     campaign_id: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().regex(/^[a-z0-9][a-z0-9-]{0,79}$/).optional()),
     image_rights_confirmed: z.boolean().default(false),
+    auto_release_related_products: z.boolean().default(false),
     related_products: z.array(z.string()).default([]),
   }),
 });
@@ -96,6 +98,7 @@ const products = defineCollection({
     featured: z.boolean().default(false),
     publish_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
     publication_approved: z.boolean().default(false),
+    released_at: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().refine(validPublishAt, {message: 'Use UTC YYYY-MM-DDTHH:mm:ssZ'}).optional()),
     campaign_id: z.preprocess(value => value === '' || value == null ? undefined : value, z.string().regex(/^[a-z0-9][a-z0-9-]{0,79}$/).optional()),
     reviewed_at: z.coerce.date().optional(),
   }),
