@@ -7,9 +7,9 @@ image: /uploads/small-bathroom-counter-organization-ideas-hero.webp
 image_alt: AI-generated warm bathroom vanity with a brass faucet, wooden tray, lidded jars and olive towel
 published: false
 featured: false
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: small-bathroom-counter-organization-ideas
 related_products:
 - zoocatia-wooden-vanity-tray

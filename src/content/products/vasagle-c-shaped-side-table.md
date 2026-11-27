@@ -17,12 +17,12 @@ affiliate_url: https://www.amazon.com/dp/B08VDQN8H5?plpRedirect=mhFallback&th=1&
 link_verified: true
 image: /uploads/vasagle-c-shaped-side-table.webp
 image_alt: AI-generated illustration of C-shaped wood-look and black metal table beside a cream sofa
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 ---
 
 Editorial research: ASIN B08VDQN8H5. User confirmed supplied link tracking and selection on November 25, 2026. Independent listing details and illustration accuracy/rights remain subject to review. No hands-on testing claimed. Research: https://device.report/vasagle/b08vdqn8h5

@@ -17,15 +17,15 @@ considerations: Keep lids and dry contents away from splashes; confirm the capac
   on the listing. The styling image shows three illustrative jars, not the full pack. The image is an AI-generated
   styling illustration, not an exact product photograph.
 affiliate_url: https://www.amazon.com/dp/B09KLPLCRF?plpRedirect=mhFallback&th=1&linkCode=ll2&tag=thesoftnested-20&linkId=1c86afdb88b4d5eda63a5938b2f425e1&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl
-link_verified: false
+link_verified: true
 image: /uploads/vitever-bamboo-lid-bathroom-jars.webp
 image_alt: AI-generated illustration of three clear jars with wood-tone lids containing cotton items
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 campaign_id: small-bathroom-counter-organization-ideas
 ---
 

@@ -17,16 +17,16 @@ considerations: Check the outside and usable drawer dimensions, shelf strength a
   stable and avoid filling drawers with items too tall for them. The image is an AI-generated styling illustration,
   not an exact product photograph.
 affiliate_url: https://www.amazon.com/dp/B09ZKYQMVD?plpRedirect=mhFallback&th=1&linkCode=ll2&tag=thesoftnested-20&linkId=02a984b3dae2491ec36b0ad1563a6b03&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl
-link_verified: false
+link_verified: true
 image: /uploads/vtopmart-clear-stackable-drawers.webp
 image_alt: AI-generated illustration of four clear drawers holding cotton pads, jars and hair accessories on a wooden
   cabinet shelf
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 campaign_id: small-bathroom-counter-organization-ideas
 ---
 

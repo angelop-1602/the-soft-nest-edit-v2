@@ -6,14 +6,16 @@ description: Prepare a small guest bathroom with clear counter space, clean towe
 published: false
 featured: false
 publish_at: "2026-11-26T18:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: small-guest-bathroom-ideas
 related_products:
 - optish-over-the-door-hooks
 - zoocatia-wooden-vanity-tray
 - vitever-bamboo-lid-bathroom-jars
+image: "/uploads/small-guest-bathroom-ideas-hero.webp"
+image_alt: "AI-generated styling illustration: Guest vanity with folded ivory and olive towels, soap and mirror"
 ---
 
 A welcoming guest bathroom does not need a hotel-style display. Visitors should be able to find hand soap, a clean towel and toilet paper without opening unfamiliar cabinets. A simple arrangement is especially valuable when the room is small.
@@ -39,6 +41,10 @@ Leave a place where a damp towel can dry. [Over-door hooks](/shop/optish-over-th
 ## 5. Finish with a simple visitor check
 
 Stand at the entrance and imagine using the room for the first time. Can you see the soap, towel and spare paper? Is there a clear spot for your things? Remove heavy fragrance and unnecessary decor; a freshly cleaned, functional room is more useful than a crowded display.
+
+## Do a visitor walk-through
+
+Walk into the room as if it were unfamiliar: can you find soap, a dry hand towel, toilet tissue and a waste bin without opening several cabinets? Keep personal items and medications out of view and stored safely. Place spare tissue where it is easy to spot, rather than filling the counter with decorative bottles. If a guest is staying overnight, provide a separate dry landing space for their own toiletries. A clean surface and useful essentials usually matter more than an elaborate arrangement.
 
 ## More ideas for your home
 

@@ -17,15 +17,15 @@ considerations: Confirm the dimensions, included dividers and sliding mechanism 
   the trap and valves and keep access to plumbing clear. Do not store leaking containers. The image is an AI-generated
   styling illustration, not an exact product photograph.
 affiliate_url: https://www.amazon.com/dp/B0BTDDH4Q6?plpRedirect=mhFallback&th=1&linkCode=ll2&tag=thesoftnested-20&linkId=2fd8b300c3f4351eae39e0e7efbb53e0&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl
-link_verified: false
+link_verified: true
 image: /uploads/hihegd-two-tier-bathroom-organizer.webp
 image_alt: AI-generated generic clear two-tier organizer with toiletries inside a wood vanity beside plumbing
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 campaign_id: small-bathroom-counter-organization-ideas
 ---
 

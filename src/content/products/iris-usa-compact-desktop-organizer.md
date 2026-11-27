@@ -17,12 +17,12 @@ affiliate_url: https://www.amazon.com/IRIS-USA-Storage-Organizer-Supplies/dp/B0G
 link_verified: true
 image: /uploads/iris-usa-compact-desktop-organizer.webp
 image_alt: AI-generated illustration of Compact white-framed clear drawers on a wooden desk
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 ---
 
 Editorial research: ASIN B0GP38TS89. User confirmed supplied link tracking and selection on November 25, 2026. Independent listing details and illustration accuracy/rights remain subject to review. No hands-on testing claimed. Research: https://www.amazon.com/dp/B0GP38TS89

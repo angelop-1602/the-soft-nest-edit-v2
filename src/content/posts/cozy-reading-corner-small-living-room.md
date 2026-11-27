@@ -6,14 +6,16 @@ description: Make a small living room reading corner with comfortable seating, l
 published: false
 featured: false
 publish_at: "2026-11-25T16:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: cozy-reading-corner-small-living-room
 related_products:
 - vasagle-c-shaped-side-table
 - yarra-decor-touch-control-lamp
 - miulee-cream-slubby-pillow-covers
+image: "/uploads/cozy-reading-corner-small-living-room-hero.webp"
+image_alt: "AI-generated styling illustration: Cream reading chair, olive cushion, small side table and reading lamp"
 ---
 
 A reading corner does not need its own armchair or an empty wall. Start with the seat you actually use, then arrange light, a place for a drink and a little texture within reach. The goal is a quiet place to read without interrupting the rest of the room.
@@ -39,6 +41,10 @@ One cushion or folded throw can make the seat feel inviting without sacrificing 
 ## 5. Create a reset at the end of the day
 
 Return the mug to the kitchen, put the book on the table and fold the blanket over the chair. If the corner still collects mail or toys, give those a separate destination. Your reading corner should be comfortable to return to, not another area that requires constant styling.
+
+## Try a two-minute fit test
+
+Before buying a table, place an empty cardboard box where you imagine it will go. Sit down with a book, then stand up and walk past it. Can you reach the surface without twisting, and can someone pass without moving the box? If not, try the opposite sofa arm or a shared table behind the seat. On a tight budget, relocate a lamp or stool from another room first. Keep hot drinks away from the edge, especially where children or pets move through the room.
 
 ## More ideas for your home
 

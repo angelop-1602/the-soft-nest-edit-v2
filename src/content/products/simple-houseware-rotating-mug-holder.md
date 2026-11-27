@@ -16,12 +16,12 @@ affiliate_url: https://www.amazon.com/dp/B0DLR93XG8?plpRedirect=mhFallback&linkC
 link_verified: true
 image: /uploads/simple-houseware-rotating-mug-holder.webp
 image_alt: AI-generated illustration of White mug tree displaying cream and olive mugs on a wooden counter
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 ---
 
 Editorial research: ASIN B0DLR93XG8. User confirmed supplied link tracking and selection on November 25, 2026. Independent listing details and illustration accuracy/rights remain subject to review. No hands-on testing claimed. Research: https://www.merchantwords.com/asin/us/B0DLR93XG8

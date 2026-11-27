@@ -6,12 +6,14 @@ description: Use storage baskets in seven practical ways around the home while k
 published: false
 featured: false
 publish_at: "2026-11-29T18:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: storage-basket-ideas-around-home
 related_products:
 - oiahomy-woven-blanket-basket
+image: "/uploads/storage-basket-ideas-around-home-hero.webp"
+image_alt: "AI-generated styling illustration: Woven basket with a cream throw beside a sofa"
 ---
 
 A storage basket works when it has one clear purpose and sits where the objects are used. A basket that looks pretty but requires you to carry things across the room is likely to become a dumping ground. Use what you already own first, then choose sizes that suit the actual contents.
@@ -45,6 +47,10 @@ Use a basket for one kind of dry, lightweight item. If several identical baskets
 ## 7. Use one temporary reset basket
 
 During a quick tidy, collect items that belong elsewhere and return them before the end of the session. Do not keep a permanent basket of unsorted clutter. The goal is fewer decisions when putting things away, not hiding the decisions indefinitely.
+
+## Choose the basket after measuring its contents
+
+Fold the actual blankets or gather the items you intend to store, then measure the resulting pile and the available shelf or floor space. Check that handles will fit and that the basket can be lifted without scraping the furniture. Avoid hiding mixed categories in one large container: give each basket a specific job. If it is used near a doorway, confirm it does not reduce the walking path. Try an existing tote or cardboard box for a week before investing in a decorative basket.
 
 ## More ideas for your home
 

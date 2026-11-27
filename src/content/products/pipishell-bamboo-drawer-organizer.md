@@ -16,12 +16,12 @@ affiliate_url: https://www.amazon.com/dp/B07SRV3SN8?plpRedirect=mhFallback&th=1&
 link_verified: true
 image: /uploads/pipishell-bamboo-drawer-organizer.webp
 image_alt: AI-generated illustration of Bamboo compartments organizing cutlery in an open wooden drawer
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 ---
 
 Editorial research: ASIN B07SRV3SN8. User confirmed supplied link tracking and selection on November 25, 2026. Independent listing details and illustration accuracy/rights remain subject to review. No hands-on testing claimed. Research: https://device.report/pipishell/pibct

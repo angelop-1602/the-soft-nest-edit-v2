@@ -17,16 +17,16 @@ considerations: Measure the usable surface, check the selected dimensions and fi
   Keep the tray away from the wettest edge of the sink. The image is an AI-generated styling illustration, not an
   exact product photograph.
 affiliate_url: https://www.amazon.com/dp/B0C68RBNYL?plpRedirect=mhFallback&th=1&linkCode=ll2&tag=thesoftnested-20&linkId=c52ce7de7f2c19cdfcfe8039a379c255&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl
-link_verified: false
+link_verified: true
 image: /uploads/zoocatia-wooden-vanity-tray.webp
 image_alt: AI-generated styling illustration of a brown raised wooden tray with a cream soap dispenser beside a
   basin
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 campaign_id: small-bathroom-counter-organization-ideas
 ---
 

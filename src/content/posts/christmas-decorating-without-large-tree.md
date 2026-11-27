@@ -6,14 +6,16 @@ description: Create a warm Christmas atmosphere in a small home with compact sea
 published: false
 featured: false
 publish_at: "2026-11-28T22:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: christmas-decorating-without-large-tree
 related_products:
 - lvases-snuggle-ceramic-vase-set
 - miulee-cream-slubby-pillow-covers
 - warmplants-artificial-olive-tree-4ft
+image: "/uploads/christmas-decorating-without-large-tree-hero.webp"
+image_alt: "AI-generated styling illustration: Tabletop seasonal greenery and small illuminated decorative houses"
 ---
 
 A large Christmas tree is not the only way to make a small home feel festive. Choose two or three places where seasonal greenery, a warm light and a quiet color palette can create atmosphere while leaving the room easy to live in.
@@ -39,6 +41,10 @@ A cream [textured cushion](/shop/miulee-cream-slubby-pillow-covers/) paired with
 ## 5. Keep lighting safe and easy to remove
 
 Use suitable battery-operated candles or approved decorative lights, following their instructions. Avoid open flames near greenery, fabric and pets. Keep exits and cords clear. When the holiday ends, remove the small accents and return to the everyday room without having to store a large tree.
+
+## A small-space decorating example
+
+Use a vase of seasonal branches on a shelf, a small arrangement on the dining table or a wreath on a wall as the single focal point. Repeat a modest color accent on a cushion or ribbon instead of creating several competing displays. Keep enough space to eat, work and open cabinets. If the arrangement includes battery lights, check the battery compartment and follow the instructions. Keep loose greenery and textiles away from heat sources, and choose flameless candles where possible.
 
 ## More ideas for your home
 

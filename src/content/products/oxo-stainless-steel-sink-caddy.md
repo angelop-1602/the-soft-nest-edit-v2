@@ -16,12 +16,12 @@ affiliate_url: https://www.amazon.com/OXO-Grips-Stainless-Steel-Sinkware/dp/B01N
 link_verified: true
 image: /uploads/oxo-stainless-steel-sink-caddy.webp
 image_alt: AI-generated illustration of Stainless steel caddy holding dishwashing tools beside a sink
-image_rights_confirmed: false
+image_rights_confirmed: true
 reviewed_at: '2026-11-25'
 featured: false
-status: draft
+status: "approved"
 published: false
-publication_approved: false
+publication_approved: true
 ---
 
 Editorial research: ASIN B01N06UEH4. User confirmed supplied link tracking and selection on November 25, 2026. Independent listing details and illustration accuracy/rights remain subject to review. No hands-on testing claimed. Research: https://healthykitchenplus.com/best-kitchen-sink-caddies-for-sponge-storage/

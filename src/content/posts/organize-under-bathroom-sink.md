@@ -6,13 +6,15 @@ description: Organize the cabinet under a bathroom sink around plumbing, accessi
 published: false
 featured: false
 publish_at: "2026-11-28T18:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: organize-under-bathroom-sink
 related_products:
 - hihegd-two-tier-bathroom-organizer
 - vtopmart-clear-stackable-drawers
+image: "/uploads/organize-under-bathroom-sink-hero.webp"
+image_alt: "AI-generated styling illustration: Open vanity cabinet with plumbing, baskets and grouped toiletries"
 ---
 
 The space under a bathroom sink is not a regular rectangular cabinet. Pipes, shutoff valves and door hinges can interrupt otherwise useful space. Build the storage plan around those features instead of choosing an organizer first.
@@ -38,6 +40,10 @@ A set of [clear drawers](/shop/vtopmart-clear-stackable-drawers/) can group dry 
 ## 5. Handle cleaners and damp items carefully
 
 Keep cleaning products in their original labeled containers and follow storage directions. Use child-resistant storage where appropriate. Do not store damp towels or wet sponges in a closed cabinet. Check the area periodically for leaks, remove unused items and leave the plumbing accessible.
+
+## Sketch the plumbing footprint
+
+Draw the cabinet from above and mark the sink trap, shutoff valves and any fixed shelves. Use empty cardboard boxes to test a possible organizer footprint, including the room needed to pull a drawer forward. Leave access to valves and check for leaks before storing anything. Store household cleaning products in their original containers according to their labels, secured away from children and pets. Reserve the driest area for toiletries and use a removable, washable liner only where it will not conceal a leak.
 
 ## More ideas for your home
 

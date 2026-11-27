@@ -6,12 +6,14 @@ description: Try a flexible Sunday home reset that clears daily surfaces, prepar
 published: false
 featured: false
 publish_at: "2026-11-29T22:00:00Z"
-publication_approved: false
-image_rights_confirmed: false
-auto_release_related_products: false
+publication_approved: true
+image_rights_confirmed: true
+auto_release_related_products: true
 campaign_id: simple-sunday-home-reset-routine
 related_products:
 - hanobe-round-wood-tray
+image: "/uploads/simple-sunday-home-reset-routine-hero.webp"
+image_alt: "AI-generated styling illustration: Quiet living room with a tray, mug, book and ceramic vase"
 ---
 
 A Sunday reset is useful when it reduces Monday morning friction. It does not have to be a deep clean, a complicated routine or a perfectly staged house. Choose the tasks that make your own week easier and skip those that do not matter.
@@ -37,6 +39,10 @@ Write down the next one or two household tasks, such as putting away laundry or 
 ## 5. Finish by making one space comfortable
 
 Fold a throw, clear a seat and leave the surface next to it available. Enjoy the room without immediately creating another task. On a particularly busy week, doing only the first two steps is still a useful reset. Repeat what helps and adjust the rest.
+
+## A reset that fits a busy Sunday
+
+Set a short timer and pick one visible area, such as the kitchen counter or sofa. Put dirty dishes and laundry in their proper places first. Then refill a daily essential, clear the surface and write down one task for Monday. If there is time, fold a throw and return the remote to its tray. Stop when the timer ends rather than turning the reset into a whole-house deep clean. A smaller repeatable routine is more useful than an ambitious one that gets skipped.
 
 ## More ideas for your home
 
