@@ -1,7 +1,10 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "the-soft-nest-edit-v2",
+  "name": "the-soft-nest-edit",
   "compatibility_date": "2026-11-20",
+  "observability": {
+    "enabled": false
+  },
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
