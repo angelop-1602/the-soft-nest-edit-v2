@@ -1,0 +1,243 @@
+PASS 15 Journal records including the prior bathroom article
+PASS 6 new products + 5 previous bathroom products
+PASS no new Journal slug collision with inspected main
+PASS no product slug collision with inspected main
+PASS coffee-table-styling-without-clutter.md draft/rights gates
+PASS coffee-table-styling-without-clutter.md known schema fields
+PASS coffee-table-styling-without-clutter.md quoted timestamp
+PASS coffee-table-styling-without-clutter.md Eastern date alignment
+PASS coffee-table-styling-without-clutter.md related slug references
+PASS coffee-table-styling-without-clutter.md disclosure
+PASS coffee-table-styling-without-clutter.md internal link hanobe-round-wood-tray
+PASS coffee-table-styling-without-clutter.md internal link lvases-snuggle-ceramic-vase-set
+PASS coffee-table-styling-without-clutter.md internal link 6-thoughtful-details-for-a-cozy-living-room
+PASS coffee-table-styling-without-clutter.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS storage-basket-ideas-around-home.md draft/rights gates
+PASS storage-basket-ideas-around-home.md known schema fields
+PASS storage-basket-ideas-around-home.md quoted timestamp
+PASS storage-basket-ideas-around-home.md Eastern date alignment
+PASS storage-basket-ideas-around-home.md related slug references
+PASS storage-basket-ideas-around-home.md disclosure
+PASS storage-basket-ideas-around-home.md internal link oiahomy-woven-blanket-basket
+PASS storage-basket-ideas-around-home.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS storage-basket-ideas-around-home.md internal link 6-thoughtful-details-for-a-cozy-living-room
+PASS kitchen-sink-organization-ideas.md draft/rights gates
+PASS kitchen-sink-organization-ideas.md known schema fields
+PASS kitchen-sink-organization-ideas.md quoted timestamp
+PASS kitchen-sink-organization-ideas.md Eastern date alignment
+PASS kitchen-sink-organization-ideas.md related slug references
+PASS kitchen-sink-organization-ideas.md disclosure
+PASS kitchen-sink-organization-ideas.md internal link oxo-stainless-steel-sink-caddy
+PASS kitchen-sink-organization-ideas.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS kitchen-sink-organization-ideas.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS nightstand-organization-ideas.md draft/rights gates
+PASS nightstand-organization-ideas.md known schema fields
+PASS nightstand-organization-ideas.md quoted timestamp
+PASS nightstand-organization-ideas.md Eastern date alignment
+PASS nightstand-organization-ideas.md related slug references
+PASS nightstand-organization-ideas.md disclosure
+PASS nightstand-organization-ideas.md internal link yarra-decor-touch-control-lamp
+PASS nightstand-organization-ideas.md internal link hanobe-round-wood-tray
+PASS nightstand-organization-ideas.md internal link iris-usa-compact-desktop-organizer
+PASS nightstand-organization-ideas.md internal link how-to-style-your-bed-with-what-you-already-own
+PASS nightstand-organization-ideas.md internal link how-to-make-a-small-bedroom-feel-bigger-and-calmer
+PASS small-guest-bathroom-ideas.md draft/rights gates
+PASS small-guest-bathroom-ideas.md known schema fields
+PASS small-guest-bathroom-ideas.md quoted timestamp
+PASS small-guest-bathroom-ideas.md Eastern date alignment
+PASS small-guest-bathroom-ideas.md related slug references
+PASS small-guest-bathroom-ideas.md disclosure
+PASS small-guest-bathroom-ideas.md internal link zoocatia-wooden-vanity-tray
+PASS small-guest-bathroom-ideas.md internal link vitever-bamboo-lid-bathroom-jars
+PASS small-guest-bathroom-ideas.md internal link optish-over-the-door-hooks
+PASS small-guest-bathroom-ideas.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS small-guest-bathroom-ideas.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS christmas-decorating-without-large-tree.md draft/rights gates
+PASS christmas-decorating-without-large-tree.md known schema fields
+PASS christmas-decorating-without-large-tree.md quoted timestamp
+PASS christmas-decorating-without-large-tree.md Eastern date alignment
+PASS christmas-decorating-without-large-tree.md related slug references
+PASS christmas-decorating-without-large-tree.md disclosure
+PASS christmas-decorating-without-large-tree.md internal link warmplants-artificial-olive-tree-4ft
+PASS christmas-decorating-without-large-tree.md internal link lvases-snuggle-ceramic-vase-set
+PASS christmas-decorating-without-large-tree.md internal link miulee-cream-slubby-pillow-covers
+PASS christmas-decorating-without-large-tree.md internal link 6-thoughtful-details-for-a-cozy-living-room
+PASS christmas-decorating-without-large-tree.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS cozy-reading-corner-small-living-room.md draft/rights gates
+PASS cozy-reading-corner-small-living-room.md known schema fields
+PASS cozy-reading-corner-small-living-room.md quoted timestamp
+PASS cozy-reading-corner-small-living-room.md Eastern date alignment
+PASS cozy-reading-corner-small-living-room.md related slug references
+PASS cozy-reading-corner-small-living-room.md disclosure
+PASS cozy-reading-corner-small-living-room.md internal link vasagle-c-shaped-side-table
+PASS cozy-reading-corner-small-living-room.md internal link yarra-decor-touch-control-lamp
+PASS cozy-reading-corner-small-living-room.md internal link miulee-cream-slubby-pillow-covers
+PASS cozy-reading-corner-small-living-room.md internal link 6-thoughtful-details-for-a-cozy-living-room
+PASS cozy-reading-corner-small-living-room.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS small-kitchen-coffee-station-ideas.md draft/rights gates
+PASS small-kitchen-coffee-station-ideas.md known schema fields
+PASS small-kitchen-coffee-station-ideas.md quoted timestamp
+PASS small-kitchen-coffee-station-ideas.md Eastern date alignment
+PASS small-kitchen-coffee-station-ideas.md related slug references
+PASS small-kitchen-coffee-station-ideas.md disclosure
+PASS small-kitchen-coffee-station-ideas.md internal link simple-houseware-rotating-mug-holder
+PASS small-kitchen-coffee-station-ideas.md internal link hanobe-round-wood-tray
+PASS small-kitchen-coffee-station-ideas.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS small-kitchen-coffee-station-ideas.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS organize-under-bathroom-sink.md draft/rights gates
+PASS organize-under-bathroom-sink.md known schema fields
+PASS organize-under-bathroom-sink.md quoted timestamp
+PASS organize-under-bathroom-sink.md Eastern date alignment
+PASS organize-under-bathroom-sink.md related slug references
+PASS organize-under-bathroom-sink.md disclosure
+PASS organize-under-bathroom-sink.md internal link hihegd-two-tier-bathroom-organizer
+PASS organize-under-bathroom-sink.md internal link vtopmart-clear-stackable-drawers
+PASS organize-under-bathroom-sink.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS organize-under-bathroom-sink.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS bathroom-towel-storage-no-linen-closet.md draft/rights gates
+PASS bathroom-towel-storage-no-linen-closet.md known schema fields
+PASS bathroom-towel-storage-no-linen-closet.md quoted timestamp
+PASS bathroom-towel-storage-no-linen-closet.md Eastern date alignment
+PASS bathroom-towel-storage-no-linen-closet.md related slug references
+PASS bathroom-towel-storage-no-linen-closet.md disclosure
+PASS bathroom-towel-storage-no-linen-closet.md internal link optish-over-the-door-hooks
+PASS bathroom-towel-storage-no-linen-closet.md internal link oiahomy-woven-blanket-basket
+PASS bathroom-towel-storage-no-linen-closet.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS bathroom-towel-storage-no-linen-closet.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS neutral-christmas-entryway-decor-small-homes.md draft/rights gates
+PASS neutral-christmas-entryway-decor-small-homes.md known schema fields
+PASS neutral-christmas-entryway-decor-small-homes.md quoted timestamp
+PASS neutral-christmas-entryway-decor-small-homes.md Eastern date alignment
+PASS neutral-christmas-entryway-decor-small-homes.md related slug references
+PASS neutral-christmas-entryway-decor-small-homes.md disclosure
+PASS neutral-christmas-entryway-decor-small-homes.md internal link kate-laurel-hutton-round-wood-mirror
+PASS neutral-christmas-entryway-decor-small-homes.md internal link hanobe-round-wood-tray
+PASS neutral-christmas-entryway-decor-small-homes.md internal link umbra-sticks-espresso-coat-rack
+PASS neutral-christmas-entryway-decor-small-homes.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS neutral-christmas-entryway-decor-small-homes.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS organize-kitchen-drawers-small-apartment.md draft/rights gates
+PASS organize-kitchen-drawers-small-apartment.md known schema fields
+PASS organize-kitchen-drawers-small-apartment.md quoted timestamp
+PASS organize-kitchen-drawers-small-apartment.md Eastern date alignment
+PASS organize-kitchen-drawers-small-apartment.md related slug references
+PASS organize-kitchen-drawers-small-apartment.md disclosure
+PASS organize-kitchen-drawers-small-apartment.md internal link pipishell-bamboo-drawer-organizer
+PASS organize-kitchen-drawers-small-apartment.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS organize-kitchen-drawers-small-apartment.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS simple-sunday-home-reset-routine.md draft/rights gates
+PASS simple-sunday-home-reset-routine.md known schema fields
+PASS simple-sunday-home-reset-routine.md quoted timestamp
+PASS simple-sunday-home-reset-routine.md Eastern date alignment
+PASS simple-sunday-home-reset-routine.md related slug references
+PASS simple-sunday-home-reset-routine.md disclosure
+PASS simple-sunday-home-reset-routine.md internal link hanobe-round-wood-tray
+PASS simple-sunday-home-reset-routine.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS simple-sunday-home-reset-routine.md internal link how-to-style-your-bed-with-what-you-already-own
+PASS small-bathroom-counter-organization-ideas.md draft/rights gates
+PASS small-bathroom-counter-organization-ideas.md known schema fields
+PASS small-bathroom-counter-organization-ideas.md quoted timestamp
+PASS small-bathroom-counter-organization-ideas.md Eastern date alignment
+PASS small-bathroom-counter-organization-ideas.md related slug references
+PASS small-bathroom-counter-organization-ideas.md disclosure
+PASS small-bathroom-counter-organization-ideas.md internal link zoocatia-wooden-vanity-tray
+PASS small-bathroom-counter-organization-ideas.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS small-bathroom-counter-organization-ideas.md internal link vitever-bamboo-lid-bathroom-jars
+PASS small-bathroom-counter-organization-ideas.md internal link joseph-joseph-easystore-toothbrush-holder
+PASS small-bathroom-counter-organization-ideas.md internal link vtopmart-clear-stackable-drawers
+PASS small-bathroom-counter-organization-ideas.md internal link hihegd-two-tier-bathroom-organizer
+PASS small-bathroom-counter-organization-ideas.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS small-bathroom-counter-organization-ideas.md internal link zoocatia-wooden-vanity-tray
+PASS small-bathroom-counter-organization-ideas.md internal link vitever-bamboo-lid-bathroom-jars
+PASS small-bathroom-counter-organization-ideas.md internal link joseph-joseph-easystore-toothbrush-holder
+PASS small-bathroom-counter-organization-ideas.md internal link vtopmart-clear-stackable-drawers
+PASS small-bathroom-counter-organization-ideas.md internal link hihegd-two-tier-bathroom-organizer
+PASS small-bathroom-counter-organization-ideas.md internal link 5-thoughtful-details-for-a-clutter-free-entryway
+PASS small-bathroom-counter-organization-ideas.md local image path
+PASS small-bathroom-counter-organization-ideas.md decoded WebP
+PASS small-desk-home-office-organization.md draft/rights gates
+PASS small-desk-home-office-organization.md known schema fields
+PASS small-desk-home-office-organization.md quoted timestamp
+PASS small-desk-home-office-organization.md Eastern date alignment
+PASS small-desk-home-office-organization.md related slug references
+PASS small-desk-home-office-organization.md disclosure
+PASS small-desk-home-office-organization.md internal link iris-usa-compact-desktop-organizer
+PASS small-desk-home-office-organization.md internal link vtopmart-clear-stackable-drawers
+PASS small-desk-home-office-organization.md internal link how-to-make-a-studio-apartment-feel-like-a-complete-home
+PASS small-desk-home-office-organization.md internal link renter-friendly-decorating-ideas-for-a-small-home
+PASS vasagle-c-shaped-side-table.md draft/rights gates
+PASS vasagle-c-shaped-side-table.md status/link format
+PASS vasagle-c-shaped-side-table.md local image path
+PASS vasagle-c-shaped-side-table.md decoded WebP
+PASS oxo-stainless-steel-sink-caddy.md draft/rights gates
+PASS oxo-stainless-steel-sink-caddy.md status/link format
+PASS oxo-stainless-steel-sink-caddy.md local image path
+PASS oxo-stainless-steel-sink-caddy.md decoded WebP
+PASS pipishell-bamboo-drawer-organizer.md draft/rights gates
+PASS pipishell-bamboo-drawer-organizer.md status/link format
+PASS pipishell-bamboo-drawer-organizer.md local image path
+PASS pipishell-bamboo-drawer-organizer.md decoded WebP
+PASS joseph-joseph-easystore-toothbrush-holder.md draft/rights gates
+PASS joseph-joseph-easystore-toothbrush-holder.md status/link format
+PASS joseph-joseph-easystore-toothbrush-holder.md local image path
+PASS joseph-joseph-easystore-toothbrush-holder.md decoded WebP
+PASS vitever-bamboo-lid-bathroom-jars.md draft/rights gates
+PASS vitever-bamboo-lid-bathroom-jars.md status/link format
+PASS vitever-bamboo-lid-bathroom-jars.md local image path
+PASS vitever-bamboo-lid-bathroom-jars.md decoded WebP
+PASS hihegd-two-tier-bathroom-organizer.md draft/rights gates
+PASS hihegd-two-tier-bathroom-organizer.md status/link format
+PASS hihegd-two-tier-bathroom-organizer.md local image path
+PASS hihegd-two-tier-bathroom-organizer.md decoded WebP
+PASS simple-houseware-rotating-mug-holder.md draft/rights gates
+PASS simple-houseware-rotating-mug-holder.md status/link format
+PASS simple-houseware-rotating-mug-holder.md local image path
+PASS simple-houseware-rotating-mug-holder.md decoded WebP
+PASS optish-over-the-door-hooks.md draft/rights gates
+PASS optish-over-the-door-hooks.md status/link format
+PASS optish-over-the-door-hooks.md local image path
+PASS optish-over-the-door-hooks.md decoded WebP
+PASS vtopmart-clear-stackable-drawers.md draft/rights gates
+PASS vtopmart-clear-stackable-drawers.md status/link format
+PASS vtopmart-clear-stackable-drawers.md local image path
+PASS vtopmart-clear-stackable-drawers.md decoded WebP
+PASS iris-usa-compact-desktop-organizer.md draft/rights gates
+PASS iris-usa-compact-desktop-organizer.md status/link format
+PASS iris-usa-compact-desktop-organizer.md local image path
+PASS iris-usa-compact-desktop-organizer.md decoded WebP
+PASS zoocatia-wooden-vanity-tray.md draft/rights gates
+PASS zoocatia-wooden-vanity-tray.md status/link format
+PASS zoocatia-wooden-vanity-tray.md local image path
+PASS zoocatia-wooden-vanity-tray.md decoded WebP
+PASS campaign/small-bathroom-counter-organization-ideas/visual-review-contact-sheet.jpg decoded JPEG
+PASS campaign/small-bathroom-counter-organization-ideas/pinterest/pin-04.jpg decoded JPEG
+PASS pin-04.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/pinterest/pin-03.jpg decoded JPEG
+PASS pin-03.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/pinterest/pin-02.jpg decoded JPEG
+PASS pin-02.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/pinterest/pin-01.jpg decoded JPEG
+PASS pin-01.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/facebook/post.jpg decoded JPEG
+PASS post.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/stories/01-inspiration.jpg decoded JPEG
+PASS 01-inspiration.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/stories/03-cta.jpg decoded JPEG
+PASS 03-cta.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/stories/02-detail.jpg decoded JPEG
+PASS 02-detail.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/01-cover.jpg decoded JPEG
+PASS 01-cover.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/04-toothbrush-holder.jpg decoded JPEG
+PASS 04-toothbrush-holder.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/02-wooden-tray.jpg decoded JPEG
+PASS 02-wooden-tray.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/03-bamboo-jars.jpg decoded JPEG
+PASS 03-bamboo-jars.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/06-shop-the-look.jpg decoded JPEG
+PASS 06-shop-the-look.jpg dimensions
+PASS campaign/small-bathroom-counter-organization-ideas/instagram/carousel/05-hidden-storage.jpg decoded JPEG
+PASS 05-hidden-storage.jpg dimensions
+
+239 individual structural checks passed. Not run: Astro full build, node content audit, private Cloudflare configuration, live route checks, image rights and variant accuracy review. Fourteen final hero images and 56 new Pinterest images are missing.
+
+Installer fixture tests: PASS syntax; PASS prior bathroom import and controlled article schedule update; PASS idempotent repeat; PASS refusal to overwrite locally edited article.

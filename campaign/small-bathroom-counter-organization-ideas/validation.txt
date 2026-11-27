@@ -1,0 +1,76 @@
+VALIDATION — draft overlay
+PASS Exact supplied link and URL structure: zoocatia-wooden-vanity-tray
+PASS Draft flags: zoocatia-wooden-vanity-tray
+PASS Image path and alt: zoocatia-wooden-vanity-tray
+PASS Inspected schema keys/enum/length: zoocatia-wooden-vanity-tray
+PASS Exact supplied link and URL structure: vitever-bamboo-lid-bathroom-jars
+PASS Draft flags: vitever-bamboo-lid-bathroom-jars
+PASS Image path and alt: vitever-bamboo-lid-bathroom-jars
+PASS Inspected schema keys/enum/length: vitever-bamboo-lid-bathroom-jars
+PASS Exact supplied link and URL structure: joseph-joseph-easystore-toothbrush-holder
+PASS Draft flags: joseph-joseph-easystore-toothbrush-holder
+PASS Image path and alt: joseph-joseph-easystore-toothbrush-holder
+PASS Inspected schema keys/enum/length: joseph-joseph-easystore-toothbrush-holder
+PASS Exact supplied link and URL structure: vtopmart-clear-stackable-drawers
+PASS Draft flags: vtopmart-clear-stackable-drawers
+PASS Image path and alt: vtopmart-clear-stackable-drawers
+PASS Inspected schema keys/enum/length: vtopmart-clear-stackable-drawers
+PASS Exact supplied link and URL structure: hihegd-two-tier-bathroom-organizer
+PASS Draft flags: hihegd-two-tier-bathroom-organizer
+PASS Image path and alt: hihegd-two-tier-bathroom-organizer
+PASS Inspected schema keys/enum/length: hihegd-two-tier-bathroom-organizer
+PASS Article unpublished and not queued
+PASS Related products resolve inside overlay
+PASS Affiliate disclosure precedes product links
+PASS Inline image paths resolve
+PASS Seven actionable sections
+PASS Decoded RGB/sRGB export: public/uploads/zoocatia-wooden-vanity-tray.webp
+PASS Decoded RGB/sRGB export: public/uploads/vitever-bamboo-lid-bathroom-jars.webp
+PASS Decoded RGB/sRGB export: public/uploads/joseph-joseph-easystore-toothbrush-holder.webp
+PASS Decoded RGB/sRGB export: public/uploads/vtopmart-clear-stackable-drawers.webp
+PASS Decoded RGB/sRGB export: public/uploads/hihegd-two-tier-bathroom-organizer.webp
+PASS Decoded RGB/sRGB export: public/uploads/small-bathroom-counter-organization-ideas-hero.webp
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/pinterest/pin-01.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/pinterest/pin-02.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/pinterest/pin-03.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/pinterest/pin-04.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/01-cover.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/02-wooden-tray.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/03-bamboo-jars.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/04-toothbrush-holder.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/05-hidden-storage.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/carousel/06-shop-the-look.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/stories/01-inspiration.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/stories/02-detail.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/instagram/stories/03-cta.jpg
+PASS Decoded RGB/sRGB export: campaign/small-bathroom-counter-organization-ideas/facebook/post.jpg
+PASS Required social file counts
+PASS Four distinct Pinterest files
+
+Article body word count: 1387 (approximate, includes Markdown).
+Visual contact-sheet inspection: performed; product illustrations generic, some side edges cropped in portrait compositions.
+Asset source sizes and export sizes (upscaled, not native high resolution):
+public/uploads/zoocatia-wooden-vanity-tray.webp: 504×503 → 1080×1350 (WEBP)
+public/uploads/vitever-bamboo-lid-bathroom-jars.webp: 504×503 → 1080×1350 (WEBP)
+public/uploads/joseph-joseph-easystore-toothbrush-holder.webp: 504×503 → 1080×1350 (WEBP)
+public/uploads/vtopmart-clear-stackable-drawers.webp: 504×506 → 1080×1350 (WEBP)
+public/uploads/hihegd-two-tier-bathroom-organizer.webp: 504×506 → 1080×1350 (WEBP)
+public/uploads/small-bathroom-counter-organization-ideas-hero.webp: 568×402 → 1600×900 (WEBP)
+campaign/small-bathroom-counter-organization-ideas/pinterest/pin-01.jpg: 504×506 → 1000×1500 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/pinterest/pin-02.jpg: 504×503 → 1000×1500 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/pinterest/pin-03.jpg: 504×506 → 1000×1500 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/pinterest/pin-04.jpg: 504×503 → 1000×1500 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/01-cover.jpg: 568×402 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/02-wooden-tray.jpg: 504×503 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/03-bamboo-jars.jpg: 504×503 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/04-toothbrush-holder.jpg: 504×503 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/05-hidden-storage.jpg: 504×506 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/carousel/06-shop-the-look.jpg: 504×506 → 1080×1350 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/stories/01-inspiration.jpg: 504×506 → 1080×1920 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/stories/02-detail.jpg: 504×503 → 1080×1920 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/instagram/stories/03-cta.jpg: 568×402 → 1080×1920 (JPEG)
+campaign/small-bathroom-counter-organization-ideas/facebook/post.jpg: 568×402 → 1080×1350 (JPEG)
+
+NOT RUN: Astro build, npm tests, audit-content against full local repository, live URL and attribution checks. Current runtime here does not satisfy repository Node engine; no complete repository checkout. No production deployment. No actual social upload.
+
+PASS Installer JS syntax, preview, apply, repeat apply, and conflicting-file refusal against a minimal repository fixture.
