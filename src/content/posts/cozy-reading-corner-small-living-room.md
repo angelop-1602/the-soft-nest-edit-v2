@@ -2,8 +2,9 @@
 title: How to Create a Cozy Reading Corner in a Small Living Room
 date: '2026-11-25'
 category: Living Room
-description: Make a small living room reading corner with comfortable seating, layered lighting and a compact place for books and a drink.
-published: false
+description: Make a small living room reading corner with comfortable seating,
+  layered lighting and a compact place for books and a drink.
+published: true
 featured: false
 publish_at: "2026-11-25T16:00:00Z"
 publication_approved: true
@@ -11,11 +12,13 @@ image_rights_confirmed: true
 auto_release_related_products: true
 campaign_id: cozy-reading-corner-small-living-room
 related_products:
-- vasagle-c-shaped-side-table
-- yarra-decor-touch-control-lamp
-- miulee-cream-slubby-pillow-covers
+  - vasagle-c-shaped-side-table
+  - yarra-decor-touch-control-lamp
+  - miulee-cream-slubby-pillow-covers
 image: "/uploads/cozy-reading-corner-small-living-room-hero.webp"
-image_alt: "AI-generated styling illustration: Cream reading chair, olive cushion, small side table and reading lamp"
+image_alt: "AI-generated styling illustration: Cream reading chair, olive
+  cushion, small side table and reading lamp"
+released_at: 2026-11-27T13:40:28Z
 ---
 
 A reading corner does not need its own armchair or an empty wall. Start with the seat you actually use, then arrange light, a place for a drink and a little texture within reach. The goal is a quiet place to read without interrupting the rest of the room.

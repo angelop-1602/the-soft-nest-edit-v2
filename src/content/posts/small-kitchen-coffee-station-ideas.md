@@ -2,8 +2,9 @@
 title: 7 Small Kitchen Coffee Station Ideas
 date: '2026-11-25'
 category: Home Organization
-description: Set up a compact coffee station with seven practical ideas for mugs, supplies, appliance clearance and easy daily cleanup.
-published: false
+description: Set up a compact coffee station with seven practical ideas for
+  mugs, supplies, appliance clearance and easy daily cleanup.
+published: true
 featured: false
 publish_at: "2026-11-25T19:00:00Z"
 publication_approved: true
@@ -11,10 +12,12 @@ image_rights_confirmed: true
 auto_release_related_products: true
 campaign_id: small-kitchen-coffee-station-ideas
 related_products:
-- simple-houseware-rotating-mug-holder
-- hanobe-round-wood-tray
+  - simple-houseware-rotating-mug-holder
+  - hanobe-round-wood-tray
 image: "/uploads/small-kitchen-coffee-station-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Compact coffee maker, white mug tree and dry supplies on a wooden counter"
+image_alt: "AI-generated styling illustration: Compact coffee maker, white mug
+  tree and dry supplies on a wooden counter"
+released_at: 2026-11-27T13:40:28Z
 ---
 
 A coffee station earns its place when it makes your morning routine simpler. In a small kitchen, the best arrangement may be only a coffee maker, two mugs and a container of coffee, not a dedicated cart. Choose a footprint based on the actual process of making and cleaning up a drink.

@@ -2,8 +2,9 @@
 title: How to Style a Coffee Table Without Making It Feel Cluttered
 date: '2026-11-25'
 category: Living Room
-description: Style a coffee table with a useful empty zone, a simple tray and a restrained arrangement that suits everyday living.
-published: false
+description: Style a coffee table with a useful empty zone, a simple tray and a
+  restrained arrangement that suits everyday living.
+published: true
 featured: false
 publish_at: "2026-11-25T23:00:00Z"
 publication_approved: true
@@ -11,10 +12,12 @@ image_rights_confirmed: true
 auto_release_related_products: true
 campaign_id: coffee-table-styling-without-clutter
 related_products:
-- hanobe-round-wood-tray
-- lvases-snuggle-ceramic-vase-set
+  - hanobe-round-wood-tray
+  - lvases-snuggle-ceramic-vase-set
 image: "/uploads/coffee-table-styling-without-clutter-hero.webp"
-image_alt: "AI-generated styling illustration: Wooden coffee table with a tray, ceramic vase, books and candle"
+image_alt: "AI-generated styling illustration: Wooden coffee table with a tray,
+  ceramic vase, books and candle"
+released_at: 2026-11-27T13:40:28Z
 ---
 
 A well-styled coffee table should still have room for a cup, a game or a remote control. The simplest way to make it look considered is to reserve the functional space first and decorate what remains.

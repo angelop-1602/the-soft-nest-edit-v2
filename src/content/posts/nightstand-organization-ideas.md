@@ -2,8 +2,9 @@
 title: 7 Nightstand Organization Ideas for a Peaceful Bedroom
 date: '2026-11-26'
 category: Bedroom
-description: Organize a small nightstand with seven practical ideas for lighting, charging, bedside essentials and a calmer evening routine.
-published: false
+description: Organize a small nightstand with seven practical ideas for
+  lighting, charging, bedside essentials and a calmer evening routine.
+published: true
 featured: false
 publish_at: "2026-11-26T14:00:00Z"
 publication_approved: true
@@ -11,11 +12,13 @@ image_rights_confirmed: true
 auto_release_related_products: true
 campaign_id: nightstand-organization-ideas
 related_products:
-- yarra-decor-touch-control-lamp
-- iris-usa-compact-desktop-organizer
-- hanobe-round-wood-tray
+  - yarra-decor-touch-control-lamp
+  - iris-usa-compact-desktop-organizer
+  - hanobe-round-wood-tray
 image: "/uploads/nightstand-organization-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Wooden bedside table with lamp and a small clear storage drawer"
+image_alt: "AI-generated styling illustration: Wooden bedside table with lamp
+  and a small clear storage drawer"
+released_at: 2026-11-27T13:40:28Z
 ---
 
 The nightstand is the last surface you see at night and often the first you use in the morning. Instead of decorating it to match a photo, arrange it to support the things you do before sleep and when you wake.
