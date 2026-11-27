@@ -2,17 +2,26 @@
 title: 7 Cozy Winter Living Room Ideas for After Christmas
 date: 2026-11-25
 category: Living Room
-description: Refresh your living room after Christmas with seven cozy winter decor ideas, from warm neutrals and textured cushions to soft lighting and blanket storage.
+description: Refresh your living room after Christmas with seven cozy winter
+  decor ideas, from warm neutrals and textured cushions to soft lighting and
+  blanket storage.
 image: /uploads/winter-decor-after-christmas-hero.webp
-image_alt: AI-generated neutral sofa with a knit throw, olive cushions and a wood coffee table
-published: false
+image_alt: AI-generated neutral sofa with a knit throw, olive cushions and a
+  wood coffee table
+published: true
 featured: false
 related_products:
-- bedsure-knit-throw-blanket
-- winter-ceramic-vase
-- oiahomy-woven-blanket-basket
-- miulee-corduroy-pillow-covers
-- luminara-ivory-flameless-pillar
+  - bedsure-knit-throw-blanket
+  - winter-ceramic-vase
+  - oiahomy-woven-blanket-basket
+  - miulee-corduroy-pillow-covers
+  - luminara-ivory-flameless-pillar
+campaign_id: winter-decor-after-christmas
+publish_at: "2026-11-25T11:24:26Z"
+publication_approved: true
+auto_release_related_products: true
+image_rights_confirmed: true
+released_at: "2026-11-25T11:24:26Z"
 ---
 
 Once the tree, stockings and holiday ornaments are packed away, a living room can suddenly feel bare. You do not need to fill every space again. The simplest winter decor after Christmas is a smaller, quieter collection of things you already enjoy: a comfortable throw, a few textured cushions, a little greenery and soft light.

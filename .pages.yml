@@ -61,9 +61,9 @@ content:
         label: Publish article
         type: boolean
       - name: publish_at
-        label: Scheduled release (UTC, optional)
+        label: Scheduled release (UTC for US Eastern schedule, optional)
         type: string
-        description: Use YYYY-MM-DDTHH:mm:ssZ. Leave Published off for future releases.
+        description: Use YYYY-MM-DDTHH:mm:ssZ for the intended America/New_York release time (DST applies). Leave Published off for future releases.
       - name: publication_approved
         label: I approve automatic release at the scheduled time
         type: boolean
@@ -176,7 +176,7 @@ content:
         type: boolean
         default: false
       - name: publish_at
-        label: Scheduled release (UTC, optional)
+        label: Scheduled release (UTC for US Eastern schedule, optional)
         type: string
         description: Use YYYY-MM-DDTHH:mm:ssZ for independent release. Leave blank for a linked Journal to supply the date. Keep Published off.
       - name: publication_approved

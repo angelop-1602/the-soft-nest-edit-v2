@@ -1,20 +1,27 @@
 ---
 title: 7 Small Dining Table Decor Ideas for an Elegant Everyday Home
-date: '2026-11-26'
+date: '2026-11-25'
 category: Small Spaces
-description: Discover seven small dining table decor ideas using natural textures,
-  simple centerpieces and warm accents that leave room for everyday meals.
+description: Discover seven small dining table decor ideas using natural
+  textures, simple centerpieces and warm accents that leave room for everyday
+  meals.
 image: /uploads/small-dining-table-decor-ideas-hero.webp
-image_alt: AI-generated dining table illustration with a garnet runner, woven placemats,
-  cream ceramics and beige coasters
+image_alt: AI-generated dining table illustration with a garnet runner, woven
+  placemats, cream ceramics and beige coasters
 published: true
 featured: false
 related_products:
-- solino-home-athena-red-garnet-runner
-- yangqihome-round-woven-placemats
-- lifver-beige-marble-coasters
-- hanobe-round-wood-tray
-- lvases-snuggle-ceramic-vase-set
+  - solino-home-athena-red-garnet-runner
+  - yangqihome-round-woven-placemats
+  - lifver-beige-marble-coasters
+  - hanobe-round-wood-tray
+  - lvases-snuggle-ceramic-vase-set
+campaign_id: small-dining-table-decor-ideas
+publish_at: "2026-11-25T11:24:26Z"
+publication_approved: true
+auto_release_related_products: true
+image_rights_confirmed: true
+released_at: "2026-11-25T11:24:26Z"
 ---
 
 A small dining table can look beautifully considered without becoming a display that needs to be dismantled every time you eat. Start with the pieces you use every day, leave comfortable space for plates and glasses, and choose one or two decorative details that earn their place. Natural wood, woven fibers, cream ceramics and a little olive or garnet color can make even a modest dining nook feel warm.

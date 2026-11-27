@@ -17,6 +17,11 @@ const records = ['products','posts'].flatMap(kind => readdirSync(`src/content/${
 }));
 function save(record, fields) {
   for (const [key,value] of Object.entries(fields)) record.doc.set(key,value);
+  // Quote timestamp scalars for Astro YAML parsing.
+  for (const key of ['publish_at','released_at']) {
+    const scalar=record.doc.get(key,true);
+    if (scalar && typeof scalar.value === 'string' && scalar.value !== '') scalar.type='QUOTE_DOUBLE';
+  }
   const newline=record.match[1].endsWith('\r\n')?'\r\n':'\n';
   const fm=record.doc.toString().trimEnd().replace(/\r?\n/g,newline);
   writeFileSync(record.file,record.match[1]+fm+record.match[3]+record.raw.slice(record.match[0].length));
@@ -27,7 +32,7 @@ const ids = new Set(records.filter(r=>r.kind==='products'&&publicProduct(r.data,
 const visible = r=>r.kind==='products'?publicProduct(r.data,now,imageExists):publicPost(r.data,now,imageExists,ids);
 const state = r=>!isScheduled(r.data)?(r.data.published?'Manual publication':'Draft'):r.data.released_at&&!r.data.published?'Previously released / unpublished':!r.data.publish_at&&r.kind==='products'&&r.data.publication_approved===true?(plan.release.includes(r)?'Due / ready via Journal':'Awaiting linked Journal'):!validPublishAt(r.data.publish_at)?'Invalid date':r.data.publication_approved!==true?'Awaiting approval / canceled':visible(r)?'Released in source':r.data.published?'Blocked release':plan.release.includes(r)?'Due / ready':due(r.data,now)?'Due / blocked':'Scheduled';
 const fmt = (value,zone)=> validPublishAt(value)?new Intl.DateTimeFormat('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:zone}).format(new Date(value)):'—';
-function list(){ console.table(records.filter(r=>isScheduled(r.data)).map(r=>({type:r.kind,slug:r.id,campaign:r.data.campaign_id??'',Eastern:fmt(r.data.publish_at,'America/New_York'),Manila:fmt(r.data.publish_at,'Asia/Manila'),state:state(r)})));console.log(`${plan.release.length} ready; ${plan.blocked.length} due but blocked.`); }
+function list(){ console.table(records.filter(r=>isScheduled(r.data)).map(r=>({type:r.kind,slug:r.id,campaign:r.data.campaign_id??'',Eastern:fmt(r.data.publish_at,'America/New_York'),state:state(r)})));console.log(`${plan.release.length} ready; ${plan.blocked.length} due but blocked.`); }
 function bulk(){
   const file=process.argv[3];if(!file)throw new Error('Provide a plan JSON path.');
   const p=JSON.parse(readFileSync(file,'utf8'));if(!/^[a-z0-9][a-z0-9-]{0,79}$/.test(p.campaign_id)||!Array.isArray(p.items)||!p.items.length)throw new Error('Invalid campaign plan.');
