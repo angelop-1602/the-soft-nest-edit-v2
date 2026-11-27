@@ -5,12 +5,19 @@ import Base from '../../../layouts/Base.astro';
 import ProductCard from '../../../components/ProductCard.astro';
 import { rooms } from '../../../data/rooms';
 import { productTypes } from '../../../data/product-types';
-import { getPublishedProducts } from '../../../lib/catalog';
+import { getPublishedProducts,getPublishedPosts } from '../../../lib/catalog';
+import { productSlug } from '../../../lib/publication-rules.js';
 import { roomsForProduct,typeSlugForProduct } from '../../../lib/shop-taxonomy';
 export async function getStaticPaths(){return rooms.map(room=>({params:{slug:room.slug},props:{room}}));}
 const {room}=Astro.props;
 const products=(await getPublishedProducts()).filter(product=>roomsForProduct(product.data).includes(room.name));
 const activeTypes=productTypes.map(type=>({...type,count:products.filter(p=>typeSlugForProduct(p.data)===type.slug).length})).filter(type=>type.count>0);
+const productIds=new Set(products.map(p=>p.id));
+const guides=(await getPublishedPosts()).filter(post=>post.data.related_products.some(ref=>productIds.has(productSlug(ref)))).slice(0,3);
+const roomAdvice: Record<string,string> = {
+  'living-room': 'Start with the seating arrangement rather than individual accessories. Measure the seating area before choosing a rug, and leave clear walking routes. Repeat one or two colors across cushions and throws, then use lighting near the places you read or relax. If the room already feels busy, remove a few accents before buying more.',
+  'entryway-hallway': 'Plan around what you actually carry through the door: keys, shoes, bags and coats. Keep the walking path and door swing clear, measure the available floor and wall space, and check wall construction and load limits before installing hooks or shelves. A small landing spot for everyday essentials can be more useful than another decorative object.'
+};
 ---
 <Base title={`${room.name} Decor & Accessories | Shop by Room | The Soft Nest Edit`} description={room.description} image={room.image} noindex={products.length===0}>
   <Breadcrumbs links={[{ label: "Shop", href: "/shop/" }]} current={room.name} />
@@ -24,6 +31,8 @@ const activeTypes=productTypes.map(type=>({...type,count:products.filter(p=>type
       <div class="product-grid" data-product-search-list>{products.map(product=><ProductCard product={product}/>)}</div>
       <div class="empty-state" data-no-matches hidden><h3>No products match this type yet.</h3><p>Choose All products to view the full room collection.</p></div>
     </> : <div class="empty-state"><div class="symbol" aria-hidden="true">✳</div><h3>We're curating this room.</h3><p>Our product recommendations aren't ready here yet. Browse the current Shop or discover ideas in the Journal.</p><a class="button secondary" href="/shop/">Browse all finds ↗</a></div>}
+    {products.length>0 && roomAdvice[room.slug] && <section class="note-panel" aria-label="Room planning advice"><h2>How to plan your {room.name.toLowerCase()}</h2><p>{roomAdvice[room.slug]}</p></section>}
+    {guides.length>0 && <section class="note-panel" aria-label="Related styling guides"><h2>Styling ideas from the Journal</h2><ul>{guides.map(guide=><li><a class="text-link" href={`/journal/${guide.id}/`}>{guide.data.title}</a></li>)}</ul></section>}
     <p class="room-suggestions"><strong>Ideas for this room:</strong> {room.suggestedTypes.join(' · ')}.</p>
     <div class="note-panel"><strong>Before you buy:</strong> Review the listing's current specifications, measurements, materials, and seller on Amazon. Products appearing here are editorial selections, not claims of hands-on testing.</div>
   </section>

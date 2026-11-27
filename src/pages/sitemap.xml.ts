@@ -9,7 +9,7 @@ export const prerender = true;
 export const GET: APIRoute = async () => {
  const posts=await getPublishedPosts(); const products=await getPublishedProducts();
  const links=[
- {url:'/'},{url:'/journal/'},{url:'/shop/'},{url:'/about/'},{url:'/contact/'},{url:'/affiliate-disclosure/'},{url:'/privacy/'},
+ {url:'/'},{url:'/journal/'},{url:'/shop/'},{url:'/about/'},{url:'/contact/'},{url:'/affiliate-disclosure/'},{url:'/privacy/'},{url:'/terms/'},
  ...posts.map(p=>({url:`/journal/${p.id}/`,lastmod:dateISO(p.data.updated || p.data.date)})),
  ...categories.filter(c=>posts.some(p=>p.data.category===c.name)).map(c=>({url:`/category/${c.slug}/`})),
  ...rooms.filter(room=>products.some(p=>roomsForProduct(p.data).includes(room.name))).map(room=>({url:`/shop/room/${room.slug}/`})),

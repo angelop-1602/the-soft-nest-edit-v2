@@ -2,7 +2,8 @@
 import AffiliateNote from '../../components/AffiliateNote.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Base from '../../layouts/Base.astro';
-import { getPublishedProducts } from '../../lib/catalog';
+import { getPublishedProducts,getPublishedPosts } from '../../lib/catalog';
+import { productSlug } from '../../lib/publication-rules.js';
 import ProductCard from '../../components/ProductCard.astro';
 import site from '../../data/site.json';
 import { roomsForProduct, roomSlugsForProduct } from '../../lib/shop-taxonomy';
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 }
 const {product,related}=Astro.props;
 const p=product.data;
+const guides=(await getPublishedPosts()).filter(post=>post.data.related_products.some(ref=>productSlug(ref)===product.id)).slice(0,3);
 // A prior import stored internal approval reminders in a shopper-facing field.
 // Never render photo-rights, tracking, or editorial approval instructions to customers.
 const publicConsiderations = p.considerations && !/(?:photo rights|before approving|before publishing|SiteStripe|special link|affiliate tracking|editor note)/i.test(p.considerations)
@@ -34,6 +36,7 @@ const breadcrumb={'@context':'https://schema.org','@type':'BreadcrumbList','item
       {publicConsiderations && <><h2>Good to know</h2><p>{publicConsiderations}</p></>}
     </div><div class="detail-cta"><a aria-describedby="purchase-disclosure" class="button" href={p.affiliate_url} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate-click={product.id}>View product on Amazon ↗</a><button class="button secondary" type="button" aria-label={`Save ${p.title}`} data-save={product.id} aria-pressed="false">♡ Save</button></div>
     <AffiliateNote compact id="purchase-disclosure" />
+    {guides.length>0 && <section class="note-panel" aria-label="Related styling guides"><h2>See how to style it</h2><ul>{guides.map(guide=><li><a class="text-link" href={`/journal/${guide.id}/`}>{guide.data.title}</a></li>)}</ul></section>}
     </div>
   </section>
   {related.length>0 && <section class="related-products"><div class="shell"><div class="section-head"><h2 class="section-title">A little more <em>inspiration.</em></h2><a class="text-link" href="/shop/">View all finds ↗</a></div><div class="product-grid">{related.map(r=><ProductCard product={r}/>)}</div></div></section>}
