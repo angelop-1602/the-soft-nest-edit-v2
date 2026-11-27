@@ -4,7 +4,7 @@ date: '2026-11-28'
 category: Home Organization
 description: Create a calm, clutter-free bathroom with seven practical countertop organization ideas, compact storage solutions and elegant styling tips for small spaces.
 image: /uploads/small-bathroom-counter-organization-ideas-hero.webp
-image_alt: AI-generated warm bathroom vanity with a brass faucet, wooden tray, lidded jars and olive towel
+image_alt: "AI-generated styling illustration: Oak bathroom vanity with brass faucet, bamboo-lid jars, wooden tray and olive towel"
 published: false
 featured: false
 publication_approved: true

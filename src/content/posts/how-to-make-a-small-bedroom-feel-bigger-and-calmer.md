@@ -4,7 +4,7 @@ date: 2026-11-23
 category: Bedroom
 description: "Make a small bedroom feel calmer and more spacious with bed placement, better natural light, less clutter, and a simple weekend refresh you can try at home."
 image: /uploads/bedroom-small-space-hero.webp
-image_alt: "AI-generated illustration of a compact cream bedroom with a walnut bed, open walking path, sheer curtains, and olive-green accents"
+image_alt: "AI-generated compact bedroom with cream bedding, olive accents, a wooden dresser, round mirror and a clear walkway."
 pinterest_pin_url: "https://pin.it/133BB6Mo3"
 published: true
 featured: false

@@ -14,8 +14,7 @@ campaign_id: kitchen-sink-organization-ideas
 related_products:
   - oxo-stainless-steel-sink-caddy
 image: "/uploads/kitchen-sink-organization-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Stainless-style sink caddy
-  holding a brush and sponge beside a faucet"
+image_alt: "AI-generated styling illustration: A bright kitchen sink area with a stainless faucet, a neat sink caddy, soap dispenser, scrub brush, sponge, potted greenery, and a folded striped towel."
 released_at: 2026-11-27T13:40:28Z
 ---
 

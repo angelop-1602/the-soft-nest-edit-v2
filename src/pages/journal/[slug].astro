@@ -1,5 +1,6 @@
 ---
 import EditorialImage from '../../components/EditorialImage.astro';
+import JournalImage from '../../components/JournalImage.astro';
 import { localJournalPhoto } from '../../data/editorial';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Base from '../../layouts/Base.astro';
@@ -30,7 +31,7 @@ const pinUrl=`https://www.pinterest.com/pin/create/button/?url=${encodeURICompon
 <Base title={`${p.title} | The Soft Nest Edit`} description={p.description} image={p.image} kind="article" schema={articleSchema}>
   <Breadcrumbs links={[{ label: "Journal", href: "/journal/" }, { label: p.category, href: `/category/${categorySlug(p.category)}/` }]} current={p.title} />
   <header class="article-header shell"><span class="eyebrow">{p.category} <span class="dot">·</span> {dateDisplay(p.date)}</span><h1>{p.title}</h1><p class="article-desc">{p.description}</p>{p.updated && <span class="count">Updated {dateDisplay(p.updated)}</span>}</header>
-  {p.image && <div class="article-photo">{photo ? <EditorialImage {photo} class="article-image" alt={p.image_alt || p.title} sizes="(max-width: 1150px) 92vw, 1050px" priority /> : <img class="article-image" src={p.image} alt={p.image_alt||p.title} width="1300" height="750" fetchpriority="high" decoding="async"/>}</div>}
+  {p.image && <div class="article-photo">{photo ? <EditorialImage {photo} class="article-image" alt={p.image_alt || p.title} sizes="(max-width: 1150px) 92vw, 1050px" priority /> : <JournalImage class="article-image" src={p.image} alt={p.image_alt||p.title} sizes="(max-width: 1432px) 92vw, 1320px" priority />}</div>}
   <article class="shell reading article-reading">
     <aside class="article-aside" aria-label="About this story">
       <span class="eyebrow">THE SOFT NEST EDIT / JOURNAL</span>

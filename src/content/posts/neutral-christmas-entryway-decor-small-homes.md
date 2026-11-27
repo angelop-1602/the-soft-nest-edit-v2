@@ -15,7 +15,7 @@ related_products:
 - umbra-sticks-espresso-coat-rack
 - hanobe-round-wood-tray
 image: "/uploads/neutral-christmas-entryway-decor-small-homes-hero.webp"
-image_alt: "AI-generated styling illustration: Holiday wreath, greenery, lanterns and a wooden entry console"
+image_alt: "AI-generated styling illustration: A neutral Christmas entryway with a wood console table, wreath, lantern candle, woven basket, soft ribbons, and warm festive lighting in a small home."
 ---
 
 Holiday decorating in a small entryway works best when it leaves room for the things the doorway must handle every day: shoes, keys, coats and visitors. Instead of adding furniture, work with the existing surfaces and repeat a few warm seasonal textures.

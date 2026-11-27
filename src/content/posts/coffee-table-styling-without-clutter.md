@@ -15,8 +15,7 @@ related_products:
   - hanobe-round-wood-tray
   - lvases-snuggle-ceramic-vase-set
 image: "/uploads/coffee-table-styling-without-clutter-hero.webp"
-image_alt: "AI-generated styling illustration: Wooden coffee table with a tray,
-  ceramic vase, books and candle"
+image_alt: "AI-generated styling illustration: Wooden coffee table with a round tray, ceramic vase, books and candles beside a neutral sofa"
 released_at: 2026-11-27T13:40:28Z
 ---
 

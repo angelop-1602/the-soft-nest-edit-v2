@@ -13,7 +13,7 @@ campaign_id: storage-basket-ideas-around-home
 related_products:
 - oiahomy-woven-blanket-basket
 image: "/uploads/storage-basket-ideas-around-home-hero.webp"
-image_alt: "AI-generated styling illustration: Woven basket with a cream throw beside a sofa"
+image_alt: "AI-generated styling illustration: Woven baskets on open shelves and beside a cream reading chair"
 ---
 
 A storage basket works when it has one clear purpose and sits where the objects are used. A basket that looks pretty but requires you to carry things across the room is likely to become a dumping ground. Use what you already own first, then choose sizes that suit the actual contents.

@@ -4,7 +4,7 @@ date: 2026-11-25
 category: Small Spaces
 description: "Make a studio apartment work beautifully with practical zones for sleeping, relaxing, dining and work, plus smarter furniture placement and storage."
 image: /uploads/studio-apartment-zones-hero.webp
-image_alt: "AI-generated editorial studio apartment with a cream sofa, walnut shelving divider, a compact dining table, and a softly styled sleeping corner"
+image_alt: "AI-generated studio apartment with a cream sofa, open shelving divider, separate sleeping area and compact dining and work spaces."
 pinterest_pin_url: "https://pin.it/6HLcmLsaB"
 published: true
 featured: false

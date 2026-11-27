@@ -13,7 +13,7 @@ campaign_id: simple-sunday-home-reset-routine
 related_products:
 - hanobe-round-wood-tray
 image: "/uploads/simple-sunday-home-reset-routine-hero.webp"
-image_alt: "AI-generated styling illustration: Quiet living room with a tray, mug, book and ceramic vase"
+image_alt: "AI-generated styling illustration: Tidy cream sofa, folded textiles, blanket basket and wooden coffee table tray"
 ---
 
 A Sunday reset is useful when it reduces Monday morning friction. It does not have to be a deep clean, a complicated routine or a perfectly staged house. Choose the tasks that make your own week easier and skip those that do not matter.

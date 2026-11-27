@@ -16,8 +16,7 @@ related_products:
   - yarra-decor-touch-control-lamp
   - miulee-cream-slubby-pillow-covers
 image: "/uploads/cozy-reading-corner-small-living-room-hero.webp"
-image_alt: "AI-generated styling illustration: Cream reading chair, olive
-  cushion, small side table and reading lamp"
+image_alt: "AI-generated styling illustration: Cream reading chair, olive cushion, knit throw, black-framed side table and brass floor lamp"
 released_at: 2026-11-27T13:40:28Z
 ---
 

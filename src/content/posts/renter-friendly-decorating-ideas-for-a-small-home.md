@@ -4,7 +4,7 @@ date: 2026-11-25
 category: Small Spaces
 description: "Refresh a small rental without renovating: rearrange furniture, layer textiles, protect walls, improve lighting and try a practical no-spend weekend makeover."
 image: /uploads/renter-friendly-small-home-hero.webp
-image_alt: "AI-generated warm rental living room with an ivory sofa, muted olive pillows, walnut furniture, soft lighting and daylight"
+image_alt: "AI-generated styling illustration: Freestanding oak storage console, soft textiles, baskets, plants and a table lamp"
 pinterest_pin_url: "https://pin.it/7fN33033c"
 published: true
 featured: false

@@ -4,7 +4,7 @@ date: 2026-11-21
 category: Living Room
 description: "Make your living room feel warmer with textured cushions, soft lighting, a wooden tray, sculptural vases, an olive tree and a neutral rug."
 image: /uploads/living-room-six-thoughtful-details-hero.webp
-image_alt: "AI-generated editorial living room with a cream sofa, textured pillows, warm lamp, coffee-table accents, olive tree and beige rug"
+image_alt: "AI-generated styling illustration: Cream seating, warm table lamp, round wooden coffee table, greenery and woven storage"
 pinterest_pin_url: "https://pin.it/2TkmFRAQ9"
 published: true
 featured: true

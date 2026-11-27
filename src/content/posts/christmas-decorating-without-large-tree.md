@@ -15,7 +15,7 @@ related_products:
 - miulee-cream-slubby-pillow-covers
 - warmplants-artificial-olive-tree-4ft
 image: "/uploads/christmas-decorating-without-large-tree-hero.webp"
-image_alt: "AI-generated styling illustration: Tabletop seasonal greenery and small illuminated decorative houses"
+image_alt: "AI-generated styling illustration: Seasonal console with berry branches, evergreen sprigs, ceramic vases, pinecone and candle"
 ---
 
 A large Christmas tree is not the only way to make a small home feel festive. Choose two or three places where seasonal greenery, a warm light and a quiet color palette can create atmosphere while leaving the room easy to live in.

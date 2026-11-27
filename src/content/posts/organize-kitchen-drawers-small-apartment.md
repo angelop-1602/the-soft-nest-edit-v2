@@ -13,7 +13,7 @@ campaign_id: organize-kitchen-drawers-small-apartment
 related_products:
 - pipishell-bamboo-drawer-organizer
 image: "/uploads/organize-kitchen-drawers-small-apartment-hero.webp"
-image_alt: "AI-generated styling illustration: Open kitchen drawer with bamboo dividers and neatly arranged utensils"
+image_alt: "AI-generated styling illustration: An organized kitchen drawer with a bamboo divider tray holding utensils, measuring tools, spices, and kitchen essentials in a clean bright apartment kitchen."
 ---
 
 Kitchen drawers are valuable in a small apartment because they hide the tools you use every day without occupying counter space. Start with what you cook and how you reach for it. The right layout can be made from containers you already own.

@@ -14,7 +14,7 @@ related_products:
 - iris-usa-compact-desktop-organizer
 - vtopmart-clear-stackable-drawers
 image: "/uploads/small-desk-home-office-organization-hero.webp"
-image_alt: "AI-generated styling illustration: Small desk with compact clear drawers, pencils and laptop"
+image_alt: "AI-generated styling illustration: Wooden desk with laptop, stationery organizer, brass lamp and plants"
 ---
 
 A small desk can support focused work if everything on it has a job. Begin with the space your hands and equipment actually need, rather than filling empty corners with storage. A few small changes can keep supplies accessible without turning the desk into a display shelf.

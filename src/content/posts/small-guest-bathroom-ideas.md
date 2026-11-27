@@ -16,8 +16,7 @@ related_products:
   - zoocatia-wooden-vanity-tray
   - vitever-bamboo-lid-bathroom-jars
 image: "/uploads/small-guest-bathroom-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Guest vanity with folded ivory
-  and olive towels, soap and mirror"
+image_alt: "AI-generated styling illustration: Guest bathroom with a wooden bench, soap dispenser, rolled towels and hanging robe"
 released_at: 2026-11-27T13:40:28Z
 ---
 

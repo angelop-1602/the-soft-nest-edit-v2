@@ -16,8 +16,7 @@ related_products:
   - iris-usa-compact-desktop-organizer
   - hanobe-round-wood-tray
 image: "/uploads/nightstand-organization-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Wooden bedside table with lamp
-  and a small clear storage drawer"
+image_alt: "AI-generated styling illustration: A cozy organized bedroom nightstand with a ceramic lamp, stacked books, a small tray, soft neutral bedding, and olive accents beside the bed."
 released_at: 2026-11-27T13:40:28Z
 ---
 

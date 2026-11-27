@@ -6,8 +6,7 @@ description: Discover seven small dining table decor ideas using natural
   textures, simple centerpieces and warm accents that leave room for everyday
   meals.
 image: /uploads/small-dining-table-decor-ideas-hero.webp
-image_alt: AI-generated dining table illustration with a garnet runner, woven
-  placemats, cream ceramics and beige coasters
+image_alt: "AI-generated round wooden dining table set for two with woven placemats, cream table runner, olive napkins and a floral centerpiece."
 published: true
 featured: false
 related_products:

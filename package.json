@@ -16,7 +16,9 @@
     "deploy": "npm run build && wrangler deploy",
     "import:v1": "node scripts/import-v1.mjs",
     "scheduler:list": "node scripts/publish-scheduled.mjs --list",
-    "scheduler:bulk": "node scripts/publish-scheduled.mjs --bulk"
+    "scheduler:bulk": "node scripts/publish-scheduled.mjs --bulk",
+    "predev": "node scripts/prepare-journal-images.mjs",
+    "prebuild": "node scripts/prepare-journal-images.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

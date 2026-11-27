@@ -1,0 +1,25 @@
+---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+interface Props {
+  src: string;
+  alt: string;
+  sizes: string;
+  priority?: boolean;
+  class?: string;
+}
+const {src, alt, sizes, priority = false, class: className} = Astro.props;
+type Variant = {width: number; height: number; sha256: string; srcset: string};
+let variant: Variant | undefined;
+if (/^\/uploads\/[a-z0-9-]+-hero\.webp$/.test(src)) {
+  try {
+    const index = JSON.parse(readFileSync(resolve('public/assets/journal-responsive/manifest.json'),'utf8')) as Record<string, Variant>;
+    const entry = index[src];
+    if (entry && createHash('sha256').update(readFileSync(resolve('public',src.slice(1)))).digest('hex') === entry.sha256) variant = entry;
+  } catch { /* Original remains available when variants are not generated. */ }
+}
+---
+<img src={src} srcset={variant?.srcset} sizes={variant ? sizes : undefined} alt={alt}
+  class={className} width={variant?.width ?? (priority ? 1300 : 660)} height={variant?.height ?? (priority ? 750 : 460)}
+  loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async" />

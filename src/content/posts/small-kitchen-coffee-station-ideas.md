@@ -15,8 +15,7 @@ related_products:
   - simple-houseware-rotating-mug-holder
   - hanobe-round-wood-tray
 image: "/uploads/small-kitchen-coffee-station-ideas-hero.webp"
-image_alt: "AI-generated styling illustration: Compact coffee maker, white mug
-  tree and dry supplies on a wooden counter"
+image_alt: "AI-generated styling illustration: A sunlit kitchen coffee station with an olive coffee maker, wooden mug stand, glass storage jars, a warm wood tray, and neutral styling details on a tidy countertop."
 released_at: 2026-11-27T13:40:28Z
 ---
 

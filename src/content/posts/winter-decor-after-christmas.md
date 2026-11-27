@@ -6,8 +6,7 @@ description: Refresh your living room after Christmas with seven cozy winter
   decor ideas, from warm neutrals and textured cushions to soft lighting and
   blanket storage.
 image: /uploads/winter-decor-after-christmas-hero.webp
-image_alt: AI-generated neutral sofa with a knit throw, olive cushions and a
-  wood coffee table
+image_alt: "AI-generated styling illustration: Cream sofa with olive cushions, knit throw, wooden coffee table, candles and winter greenery"
 published: true
 featured: false
 related_products:

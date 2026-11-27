@@ -14,7 +14,7 @@ related_products:
 - optish-over-the-door-hooks
 - oiahomy-woven-blanket-basket
 image: "/uploads/bathroom-towel-storage-no-linen-closet-hero.webp"
-image_alt: "AI-generated styling illustration: Folded towels on a shelf with hanging olive and ivory towels"
+image_alt: "AI-generated styling illustration: Open wooden bathroom shelves with folded ivory and olive towels and woven baskets"
 ---
 
 Without a linen closet, towels need two different homes: a dry, clean place for folded reserves and a ventilated place for towels currently in use. Trying to solve both with a single basket often makes the bathroom feel crowded.

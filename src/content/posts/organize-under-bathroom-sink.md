@@ -14,7 +14,7 @@ related_products:
 - hihegd-two-tier-bathroom-organizer
 - vtopmart-clear-stackable-drawers
 image: "/uploads/organize-under-bathroom-sink-hero.webp"
-image_alt: "AI-generated styling illustration: Open vanity cabinet with plumbing, baskets and grouped toiletries"
+image_alt: "AI-generated styling illustration: An organized under-sink bathroom vanity with clear bins, folded towels, woven baskets, toiletries, and warm neutral styling under a cream sink cabinet."
 ---
 
 The space under a bathroom sink is not a regular rectangular cabinet. Pipes, shutoff valves and door hinges can interrupt otherwise useful space. Build the storage plan around those features instead of choosing an organizer first.
